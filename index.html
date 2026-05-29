@@ -102,7 +102,7 @@
   .nav-item:hover { color: var(--text); border-left-color: var(--border); }
   .nav-item.active { color: var(--accent); border-left-color: var(--accent); }
 
-  main { padding: 36px 40px; max-width: 900px; }
+  main { padding: 36px 40px; max-width: 960px; }
 
   .page-section { display: none; }
   .page-section.active { display: block; }
@@ -111,7 +111,7 @@
     display: flex;
     align-items: baseline;
     gap: 14px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     padding-bottom: 14px;
     border-bottom: 1px solid var(--border);
   }
@@ -128,6 +128,48 @@
     color: var(--text-dim);
     letter-spacing: 0.15em;
   }
+
+  /* AMP TABS */
+  .amp-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .amp-tab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.15s;
+  }
+
+  .amp-tab:hover { color: var(--text-mid); }
+  .amp-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .amp-tab-content { display: none; }
+  .amp-tab-content.active { display: block; }
+
+  /* UPLOAD HINT */
+  .upload-hint {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border: 1px dashed #1e1e1e;
+    background: #0c0c0c;
+  }
+
+  .upload-hint strong { color: var(--warn); }
 
   /* PAGE GRID */
   .page-grid {
@@ -152,16 +194,8 @@
   }
 
   .page-cell:hover { border-color: var(--accent); background: #111; }
-
-  .page-cell.uploaded {
-    border-style: solid;
-    border-color: var(--success);
-  }
-
-  .page-cell.uploading {
-    border-color: var(--warn);
-    pointer-events: none;
-  }
+  .page-cell.uploaded { border-style: solid; border-color: var(--success); }
+  .page-cell.uploading { border-color: var(--warn); pointer-events: none; }
 
   .page-cell img {
     width: 100%;
@@ -232,6 +266,126 @@
   }
 
   input[type="file"] { display: none; }
+
+  /* PARAMETER TABLE */
+  .param-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .param-section {
+    border: 1px solid var(--border);
+  }
+
+  .param-section-header {
+    padding: 10px 16px;
+    background: #0d0d0d;
+    border-bottom: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .page-badge {
+    font-size: 9px;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    letter-spacing: 0.1em;
+  }
+
+  .param-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .param-table tr { border-bottom: 1px solid #141414; }
+  .param-table tr:last-child { border-bottom: none; }
+
+  .param-table td {
+    padding: 7px 16px;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .param-table td:first-child {
+    color: var(--text-dim);
+    font-size: 11px;
+    width: 200px;
+  }
+
+  .param-table td:last-child { color: var(--text); }
+
+  .val-highlight { color: var(--accent); font-weight: 500; }
+  .val-on { color: var(--success); }
+  .val-off { color: var(--text-dim); }
+
+  /* GEQ BARS */
+  .geq-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .geq-band {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .geq-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-mid);
+  }
+
+  .geq-bar-wrap {
+    width: 28px;
+    height: 80px;
+    background: #111;
+    border: 1px solid var(--border);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .geq-center-line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    top: 50%;
+  }
+
+  .geq-fill {
+    position: absolute;
+    width: 12px;
+    background: var(--accent);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 50%;
+  }
+
+  .geq-fill.negative {
+    bottom: auto;
+    top: 50%;
+    background: #4a9eff;
+  }
+
+  .geq-freq {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+  }
 
   /* TOAST */
   .toast {
@@ -327,7 +481,15 @@
     word-break: break-all;
   }
 
-  .url-box span { color: var(--accent2, #4a9eff); }
+  .no-params {
+    padding: 32px 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-align: center;
+    border: 1px dashed var(--border);
+  }
 
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-thumb { background: var(--border); }
@@ -412,6 +574,15 @@
         <div class="info-row"><span class="info-key">Mac 캡처</span><span class="info-val">Cmd + Shift + 4 → AX8-Edit 파라미터 영역만 선택</span></div>
         <div class="info-row"><span class="info-key">촬영 순서</span><span class="info-val">Basic → GEQ → Preamp → Power Amp → Power Sply → Speaker → Spkr Drv → Dynamics</span></div>
       </div>
+      <div class="info-block">
+        <div class="info-header">업로드 방법</div>
+        <div class="info-row"><span class="info-key">1단계</span><span class="info-val">왼쪽 사이드바에서 앰프 이름 클릭</span></div>
+        <div class="info-row"><span class="info-key">2단계</span><span class="info-val">「스크린샷」탭 선택</span></div>
+        <div class="info-row"><span class="info-key">3단계</span><span class="info-val">각 파라미터 칸을 클릭 → 파일 선택창에서 해당 PNG 선택</span></div>
+        <div class="info-row"><span class="info-key">4단계</span><span class="info-val">업로드 완료 시 초록 테두리로 변경, 썸네일 표시</span></div>
+        <div class="info-row"><span class="info-key">이미지 보기</span><span class="info-val">업로드된 칸에 마우스 올리기 → 「보기」 클릭</span></div>
+        <div class="info-row"><span class="info-key">이미지 제거</span><span class="info-val">업로드된 칸에 마우스 올리기 → 「제거」 클릭</span></div>
+      </div>
     </div>
 
     <!-- NICK -->
@@ -470,36 +641,100 @@
       </div>
     </div>
 
-    <!-- AMP PAGES -->
+    <!-- AMP PAGES (no data yet) -->
     <div id="amp_friedman_hbe" class="page-section">
       <div class="section-header"><div class="section-title">Friedman HBE</div><div class="section-sub">Hairy Brown Eye · Nick Johnston</div></div>
-      <div class="page-grid" id="grid_friedman_hbe"></div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('friedman_hbe','screenshots',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('friedman_hbe','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshots_friedman_hbe" class="amp-tab-content active">
+        <div class="upload-hint">각 칸을 <strong>클릭</strong>하여 PNG 파일을 선택하면 Supabase에 업로드됩니다</div>
+        <div class="page-grid" id="grid_friedman_hbe"></div>
+      </div>
+      <div id="tab_params_friedman_hbe" class="amp-tab-content">
+        <div class="no-params">스크린샷 업로드 후 파라미터 분석이 완료되면 여기에 표시됩니다</div>
+      </div>
     </div>
 
     <div id="amp_dirty_shirley" class="page-section">
       <div class="section-header"><div class="section-title">Dirty Shirley</div><div class="section-sub">Friedman Dirty Shirley · Nick Johnston</div></div>
-      <div class="page-grid" id="grid_dirty_shirley"></div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('dirty_shirley','screenshots',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('dirty_shirley','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshots_dirty_shirley" class="amp-tab-content active">
+        <div class="upload-hint">각 칸을 <strong>클릭</strong>하여 PNG 파일을 선택하면 Supabase에 업로드됩니다</div>
+        <div class="page-grid" id="grid_dirty_shirley"></div>
+      </div>
+      <div id="tab_params_dirty_shirley" class="amp-tab-content">
+        <div class="no-params">스크린샷 업로드 후 파라미터 분석이 완료되면 여기에 표시됩니다</div>
+      </div>
     </div>
 
     <div id="amp_two_stone" class="page-section">
       <div class="section-header"><div class="section-title">Two Stone J35</div><div class="section-sub">Two-Rock Jet 35 · John Mayer</div></div>
-      <div class="page-grid" id="grid_two_stone"></div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('two_stone','screenshots',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('two_stone','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshots_two_stone" class="amp-tab-content active">
+        <div class="upload-hint">각 칸을 <strong>클릭</strong>하여 PNG 파일을 선택하면 Supabase에 업로드됩니다</div>
+        <div class="page-grid" id="grid_two_stone"></div>
+      </div>
+      <div id="tab_params_two_stone" class="amp-tab-content">
+        <div class="no-params">스크린샷 업로드 후 파라미터 분석이 완료되면 여기에 표시됩니다</div>
+      </div>
     </div>
 
     <div id="amp_deluxe_verb" class="page-section">
       <div class="section-header"><div class="section-title">Deluxe Verb Nrm</div><div class="section-sub">Fender Deluxe Reverb · John Mayer</div></div>
-      <div class="page-grid" id="grid_deluxe_verb"></div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('deluxe_verb','screenshots',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('deluxe_verb','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshots_deluxe_verb" class="amp-tab-content active">
+        <div class="upload-hint">각 칸을 <strong>클릭</strong>하여 PNG 파일을 선택하면 Supabase에 업로드됩니다</div>
+        <div class="page-grid" id="grid_deluxe_verb"></div>
+      </div>
+      <div id="tab_params_deluxe_verb" class="amp-tab-content">
+        <div class="no-params">스크린샷 업로드 후 파라미터 분석이 완료되면 여기에 표시됩니다</div>
+      </div>
     </div>
 
+    <!-- TX STAR CLEAN — screenshots + parameter data -->
     <div id="amp_tx_star_clean" class="page-section">
-      <div class="section-header"><div class="section-title">TX Star Clean</div><div class="section-sub">Mesa Boogie Lonestar Clean · Andy Timmons</div></div>
-      <div class="page-grid" id="grid_tx_star_clean"></div>
-      <div class="url-box" id="urls_tx_star_clean"></div>
+      <div class="section-header">
+        <div class="section-title">TX Star Clean</div>
+        <div class="section-sub">Mesa Boogie Lonestar Clean · Andy Timmons</div>
+      </div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('tx_star_clean','screenshots',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('tx_star_clean','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshots_tx_star_clean" class="amp-tab-content active">
+        <div class="upload-hint">각 칸을 <strong>클릭</strong>하면 새 이미지로 교체 업로드할 수 있습니다</div>
+        <div class="page-grid" id="grid_tx_star_clean"></div>
+        <div class="url-box" id="urls_tx_star_clean"></div>
+      </div>
+      <div id="tab_params_tx_star_clean" class="amp-tab-content">
+        <div id="params_tx_star_clean"></div>
+      </div>
     </div>
 
     <div id="amp_tx_star_lead" class="page-section">
       <div class="section-header"><div class="section-title">TX Star Lead</div><div class="section-sub">Mesa Boogie Lonestar Lead · Andy Timmons</div></div>
-      <div class="page-grid" id="grid_tx_star_lead"></div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('tx_star_lead','screenshots',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('tx_star_lead','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshots_tx_star_lead" class="amp-tab-content active">
+        <div class="upload-hint">각 칸을 <strong>클릭</strong>하여 PNG 파일을 선택하면 Supabase에 업로드됩니다</div>
+        <div class="page-grid" id="grid_tx_star_lead"></div>
+      </div>
+      <div id="tab_params_tx_star_lead" class="amp-tab-content">
+        <div class="no-params">스크린샷 업로드 후 파라미터 분석이 완료되면 여기에 표시됩니다</div>
+      </div>
     </div>
 
   </main>
@@ -508,21 +743,180 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // Supabase 초기화
   const SUPABASE_URL = 'https://eujgcxoykqhvpqlkfpnl.supabase.co';
   const SUPABASE_KEY = 'sb_publishable__r4C0o-5gHX_TjoVAXzVhQ_UQUBQi97';
-  const { createClient } = supabase;
-  const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+  let sb = null;
+  try {
+    const { createClient } = supabase;
+    sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+  } catch(e) { console.warn('Supabase SDK not loaded:', e.message); }
 
   const PAGES = ['Basic','GEQ','Preamp','Power Amp','Power Sply','Speaker','Spkr Drv','Dynamics'];
   const AMPS = ['friedman_hbe','dirty_shirley','two_stone','deluxe_verb','tx_star_clean','tx_star_lead'];
 
-  // 그리드 생성
+  // Static screenshots bundled in repo
+  const STATIC_IMAGES = {
+    tx_star_clean: {
+      basic:      'screenshots/tx_star_clean/basic.png',
+      geq:        'screenshots/tx_star_clean/geq.png',
+      preamp:     'screenshots/tx_star_clean/preamp.png',
+      power_amp:  'screenshots/tx_star_clean/power_amp.png',
+      power_sply: 'screenshots/tx_star_clean/power_sply.png',
+      speaker:    'screenshots/tx_star_clean/speaker.png',
+      spkr_drv:   'screenshots/tx_star_clean/spkr_drv.png',
+      dynamics:   'screenshots/tx_star_clean/dynamics.png',
+    }
+  };
+
+  // Parameter data extracted from screenshots
+  const PARAM_DATA = {
+    tx_star_clean: [
+      {
+        page: 'Basic',
+        rows: [
+          ['Input Drive',      '5.00'],
+          ['Bass',             '5.00'],
+          ['Mid',              '5.00'],
+          ['Treb',             '5.00'],
+          ['Bright',           '0.00 dB'],
+          ['Presence',         '5.00'],
+          ['Depth',            '0.00'],
+          ['Master Volume',    '5.00'],
+          ['Input Trim',       '1.000'],
+          ['Boost',            'OFF'],
+          ['Cut',              'OFF'],
+          ['Fat',              'OFF'],
+          ['Bright Switch',    'ON'],
+          ['Bright Cap',       '120.0 pF'],
+          ['Saturation',       'Auth'],
+          ['Saturation Drive', '4.000'],
+          ['Master Vol Trim',  '1.000'],
+          ['Level (Mixer)',    '-12.0 dB'],
+          ['Balance (Mixer)',  '0.0'],
+          ['Input Select',     'Sum L+R'],
+          ['Bypass Mode',      'Thru'],
+        ]
+      },
+      {
+        page: 'GEQ',
+        type: 'geq',
+        meta: [
+          ['EQ Type',     '8 Band Var Q'],
+          ['EQ Location', 'Post Power Amp'],
+        ],
+        bands: [
+          { freq: '63',  val: 0.00 },
+          { freq: '125', val: 0.00 },
+          { freq: '250', val: 0.00 },
+          { freq: '500', val: 0.00 },
+          { freq: '1K',  val: 0.00 },
+          { freq: '2K',  val: 0.00 },
+          { freq: '4K',  val: 0.00 },
+          { freq: '8K',  val: 0.00 },
+        ]
+      },
+      {
+        page: 'Preamp',
+        rows: [
+          ['Preamp Tube Type',    '12AX7A'],
+          ['Preamp Bias',         '-0.100'],
+          ['Preamp Hardness',     '8.20'],
+          ['Triode 1 Plate Freq', '40000 Hz'],
+          ['Triode 2 Plate Freq', '40000 Hz'],
+          ['Crunch',              '3.5 %'],
+          ['Tonestack Type',      'Default'],
+          ['Tone Location',       'PRE'],
+          ['Tone Freq',           '470.0 Hz'],
+          ['Low Cut Freq',        '10.0 Hz'],
+          ['Hi Cut Freq',         '16000 Hz'],
+          ['Definition',          '0.00'],
+          ['Harmonics',           '0.000'],
+        ]
+      },
+      {
+        page: 'Power Amp',
+        rows: [
+          ['Power Tube Type',    '6L6/5881'],
+          ['Negative Feedback',  '1.70'],
+          ['PI Bias Shift',      '42.0 %'],
+          ['Pwr Tube Grid Bias', '0.600'],
+          ['Bias Excursion',     '52.0 %'],
+          ['Cathode Resistance', '0.0 %'],
+          ['Pwr Amp Hardness',   '5.80'],
+          ['Pwr Amp Bias',       '-0.100'],
+          ['Presence Freq',      '1.000'],
+          ['Depth Freq',         '250.0 Hz'],
+          ['MV Location',        'Pre-PI'],
+          ['MV Cap',             '1000 pF'],
+          ['Dynamic Damping',    '0.94'],
+        ]
+      },
+      {
+        page: 'Power Sply',
+        rows: [
+          ['Supply Sag',       '1.52'],
+          ['AC Line Freq',     '60 Hz'],
+          ['B+ Time Constant', '20.00 ms'],
+          ['Variac',           '100.0 %'],
+          ['Tremolo Freq',     '0.200 Hz'],
+          ['Tremolo Depth',    '0.0 %'],
+          ['Preamp Sag',       'ON'],
+          ['Power Type',       'DC'],
+        ]
+      },
+      {
+        page: 'Speaker',
+        rows: [
+          ['Low Res Freq',     '80.0 Hz'],
+          ['Low Res Q',        '1.787'],
+          ['Low Resonance',    '5.83'],
+          ['Hi Freq',          '1100 Hz'],
+          ['Hi Freq Slope',    '3.680'],
+          ['Hi Resonance',     '6.67'],
+          ['XFormer Low Freq', '10.0 Hz'],
+          ['XFormer Hi Freq',  '24000 Hz'],
+          ['XFormer Match',    '1.000'],
+          ['XFormer Drive',    '1.00'],
+        ]
+      },
+      {
+        page: 'Spkr Drv',
+        rows: [
+          ['Speaker Drive',    '0.00'],
+          ['Speaker Compr',    '3.00'],
+          ['Speaker Compl',    '50.0 %'],
+          ['Motor Time Const', '100.0 ms'],
+        ]
+      },
+      {
+        page: 'Dynamics',
+        rows: [
+          ['Dynamic Presence',    '0.00'],
+          ['Dynamic Depth',       '0.00'],
+          ['Preamp Dynamics',     '0.00'],
+          ['Pick Attack',         '0.0 %'],
+          ['Preamp CF Compress',  '0.0 %'],
+          ['Preamp CF Grid Clip', '50.0 %'],
+          ['Preamp CF Hardness',  '7.50'],
+          ['Out Comp Type',       'OUTPUT'],
+          ['Out Comp Amount',     '0.00'],
+          ['Out Comp Threshold',  '-40.0 dB'],
+          ['Out Comp Clarity',    '6.51'],
+          ['Character Type',      'Peaking'],
+          ['Character Freq',      '1000 Hz'],
+          ['Character Q',         '0.707'],
+          ['Character Amt',       '0.00'],
+        ]
+      },
+    ]
+  };
+
+  // Build upload grids
   AMPS.forEach(amp => {
     const grid = document.getElementById('grid_' + amp);
     if (!grid) return;
     PAGES.forEach(page => {
-      const key = page.toLowerCase().replace(/ /g,'_');
+      const key = page.toLowerCase().replace(/ /g, '_');
       const cell = document.createElement('div');
       cell.className = 'page-cell';
       cell.id = `cell_${amp}_${key}`;
@@ -546,36 +940,115 @@
     });
   });
 
-  // 페이지 로드 시 기존 이미지 불러오기
+  // Load static images first
+  Object.entries(STATIC_IMAGES).forEach(([amp, pages]) => {
+    Object.entries(pages).forEach(([key, path]) => setCell(amp, key, path));
+  });
+
+  // Render parameter tables
+  renderAllParams();
+
+  // Then try to load any Supabase uploads (override static if present)
   window.addEventListener('load', async () => {
+    if (!sb) return;
     for (const amp of AMPS) {
       const { data, error } = await sb.storage.from('ax8-screenshots').list(amp);
       if (error || !data) continue;
       data.forEach(file => {
-        const key = file.name.replace('.png','').replace('.jpg','');
+        const key = file.name.replace(/\.(png|jpg)$/i, '');
         const { data: urlData } = sb.storage.from('ax8-screenshots').getPublicUrl(`${amp}/${file.name}`);
         if (urlData) setCell(amp, key, urlData.publicUrl);
       });
     }
   });
 
+  function renderAllParams() {
+    Object.entries(PARAM_DATA).forEach(([amp, sections]) => {
+      const container = document.getElementById(`params_${amp}`);
+      if (!container) return;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'param-sections';
+
+      sections.forEach(section => {
+        const block = document.createElement('div');
+        block.className = 'param-section';
+
+        const header = document.createElement('div');
+        header.className = 'param-section-header';
+        header.innerHTML = `${section.page} <span class="page-badge">PAGE</span>`;
+        block.appendChild(header);
+
+        if (section.type === 'geq') {
+          const metaTable = document.createElement('table');
+          metaTable.className = 'param-table';
+          section.meta.forEach(([k, v]) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${k}</td><td>${formatVal(v)}</td>`;
+            metaTable.appendChild(tr);
+          });
+          block.appendChild(metaTable);
+
+          const geqGrid = document.createElement('div');
+          geqGrid.className = 'geq-grid';
+          section.bands.forEach(band => {
+            const pct = Math.abs(band.val) / 12 * 50;
+            const isNeg = band.val < 0;
+            const div = document.createElement('div');
+            div.className = 'geq-band';
+            div.innerHTML = `
+              <span class="geq-val">${band.val.toFixed(2)}</span>
+              <div class="geq-bar-wrap">
+                <div class="geq-center-line"></div>
+                <div class="geq-fill${isNeg ? ' negative' : ''}" style="height:${pct}%"></div>
+              </div>
+              <span class="geq-freq">${band.freq}</span>`;
+            geqGrid.appendChild(div);
+          });
+          block.appendChild(geqGrid);
+        } else {
+          const table = document.createElement('table');
+          table.className = 'param-table';
+          section.rows.forEach(([k, v]) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${k}</td><td>${formatVal(v)}</td>`;
+            table.appendChild(tr);
+          });
+          block.appendChild(table);
+        }
+
+        wrapper.appendChild(block);
+      });
+      container.appendChild(wrapper);
+    });
+  }
+
+  function formatVal(v) {
+    if (v === 'ON') return `<span class="val-on">ON</span>`;
+    if (v === 'OFF') return `<span class="val-off">OFF</span>`;
+    if (/^-?[\d.]+(\s*(dB|Hz|pF|ms|%))?$/.test(v.trim())) {
+      return `<span class="val-highlight">${v}</span>`;
+    }
+    return v;
+  }
+
   async function uploadImage(file, amp, key, pageLabel) {
     const cell = document.getElementById(`cell_${amp}_${key}`);
     cell.classList.add('uploading');
     showToast('업로드 중...', '');
 
-    // 해상도 체크
     const img = new Image();
-    const objUrl = URL.createObjectURL(file);
-    img.src = objUrl;
+    img.src = URL.createObjectURL(file);
     await new Promise(r => img.onload = r);
-    if (img.width < 1280) {
-      showToast('⚠ 해상도 부족 (1280px 미만)', 'error');
+    if (img.width < 1280) showToast('⚠ 해상도 부족 (1280px 미만)', 'error');
+
+    if (!sb) {
+      showToast('Supabase 연결 없음 — 업로드 불가', 'error');
+      cell.classList.remove('uploading');
+      return;
     }
 
     const ext = file.type === 'image/png' ? 'png' : 'jpg';
     const path = `${amp}/${key}.${ext}`;
-
     const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
 
     if (error) {
@@ -587,8 +1060,6 @@
     const { data } = sb.storage.from('ax8-screenshots').getPublicUrl(path);
     setCell(amp, key, data.publicUrl);
     showToast(`✓ ${pageLabel} 업로드 완료`, 'success');
-
-    // URL 박스 업데이트
     updateUrlBox(amp);
   }
 
@@ -607,28 +1078,29 @@
 
   async function removeImage(event, amp, key) {
     event.stopPropagation();
-    const exts = ['png','jpg'];
-    for (const ext of exts) {
-      await sb.storage.from('ax8-screenshots').remove([`${amp}/${key}.${ext}`]);
+    if (sb) {
+      for (const ext of ['png', 'jpg']) {
+        await sb.storage.from('ax8-screenshots').remove([`${amp}/${key}.${ext}`]);
+      }
     }
     const cell = document.getElementById(`cell_${amp}_${key}`);
     const img = cell.querySelector('img');
     if (img) img.remove();
     cell.classList.remove('uploaded');
+    if (STATIC_IMAGES[amp]?.[key]) setCell(amp, key, STATIC_IMAGES[amp][key]);
     showToast('제거 완료', '');
     updateUrlBox(amp);
   }
 
   function viewImage(event, amp, key) {
     event.stopPropagation();
-    const cell = document.getElementById(`cell_${amp}_${key}`);
-    const img = cell.querySelector('img');
+    const img = document.getElementById(`cell_${amp}_${key}`).querySelector('img');
     if (img) window.open(img.dataset.url, '_blank');
   }
 
   async function updateUrlBox(amp) {
     const box = document.getElementById(`urls_${amp}`);
-    if (!box) return;
+    if (!box || !sb) return;
     const { data } = await sb.storage.from('ax8-screenshots').list(amp);
     if (!data || data.length === 0) { box.innerHTML = ''; return; }
     let html = '<div style="margin-bottom:8px;font-size:10px;letter-spacing:0.15em;color:var(--text-dim)">CLAUDE 전달용 URL</div>';
@@ -651,7 +1123,15 @@
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     if (el) el.classList.add('active');
-    if (id.startsWith('amp_')) updateUrlBox(id.replace('amp_',''));
+    if (id.startsWith('amp_')) updateUrlBox(id.replace('amp_', ''));
+  }
+
+  function switchAmpTab(amp, tab, btn) {
+    btn.parentElement.querySelectorAll('.amp-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(`tab_screenshots_${amp}`).classList.remove('active');
+    document.getElementById(`tab_params_${amp}`).classList.remove('active');
+    document.getElementById(`tab_${tab}_${amp}`).classList.add('active');
   }
 </script>
 </body>
