@@ -14,10 +14,10 @@
     --accent: #c8a96e;
     --accent2: #4a9eff;
     --text: #e8e8e8;
-    --text-dim: #666666;
+    --text-dim: #555555;
     --text-mid: #999999;
-    --danger: #ff4444;
     --success: #44cc88;
+    --warn: #e8a040;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,10 +30,9 @@
     min-height: 100vh;
   }
 
-  /* HEADER */
   header {
     border-bottom: 1px solid var(--border);
-    padding: 24px 40px;
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,494 +50,410 @@
     color: var(--accent);
   }
 
-  .logo span { color: var(--text-dim); font-weight: 300; }
+  .logo span { color: var(--text-dim); }
 
-  .header-meta {
+  .header-right {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     color: var(--text-dim);
     letter-spacing: 0.1em;
   }
 
-  /* LAYOUT */
   .container {
     display: grid;
-    grid-template-columns: 220px 1fr;
-    min-height: calc(100vh - 65px);
+    grid-template-columns: 200px 1fr;
+    min-height: calc(100vh - 61px);
   }
 
-  /* SIDEBAR */
   aside {
     border-right: 1px solid var(--border);
-    padding: 32px 0;
+    padding: 28px 0;
     position: sticky;
-    top: 65px;
-    height: calc(100vh - 65px);
+    top: 61px;
+    height: calc(100vh - 61px);
     overflow-y: auto;
-  }
-
-  .nav-section {
-    margin-bottom: 32px;
   }
 
   .nav-label {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.25em;
     color: var(--text-dim);
-    padding: 0 24px;
-    margin-bottom: 8px;
+    padding: 0 20px;
+    margin-bottom: 6px;
     text-transform: uppercase;
   }
 
+  .nav-section { margin-bottom: 28px; }
+
   .nav-item {
     display: block;
-    padding: 8px 24px;
-    font-size: 13px;
+    padding: 7px 20px;
+    font-size: 12px;
     color: var(--text-mid);
     cursor: pointer;
     border-left: 2px solid transparent;
     transition: all 0.15s;
-    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
   }
 
   .nav-item:hover { color: var(--text); border-left-color: var(--border); }
   .nav-item.active { color: var(--accent); border-left-color: var(--accent); }
 
-  /* MAIN */
-  main {
-    padding: 40px;
-    max-width: 960px;
-  }
+  main { padding: 36px 40px; max-width: 900px; }
 
-  /* SECTION HEADER */
+  .page-section { display: none; }
+  .page-section.active { display: block; }
+
   .section-header {
     display: flex;
     align-items: baseline;
-    gap: 16px;
-    margin-bottom: 32px;
-    padding-bottom: 16px;
+    gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
     border-bottom: 1px solid var(--border);
   }
 
   .section-title {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
-    color: var(--text);
   }
 
   .section-sub {
-    font-size: 12px;
-    color: var(--text-dim);
     font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
   }
 
-  /* ARTIST CARD */
-  .artist-grid {
+  /* AMP UPLOAD GRID */
+  .amp-section {
+    margin-bottom: 40px;
+  }
+
+  .amp-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .amp-ref {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+
+  .page-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-    margin-bottom: 48px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
   }
 
-  .artist-card {
-    border: 1px solid var(--border);
-    padding: 20px;
+  .page-upload {
+    border: 1px dashed var(--border);
+    aspect-ratio: 4/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.2s;
     position: relative;
     overflow: hidden;
+    background: #0d0d0d;
   }
 
-  .artist-card::before {
-    content: '';
+  .page-upload:hover {
+    border-color: var(--accent);
+    background: #111;
+  }
+
+  .page-upload.has-image {
+    border-style: solid;
+    border-color: var(--success);
+  }
+
+  .page-upload img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     position: absolute;
     top: 0; left: 0;
-    width: 2px; height: 100%;
-    background: var(--accent);
-    transform: scaleY(0);
-    transition: transform 0.2s;
+    opacity: 0.85;
   }
 
-  .artist-card:hover { border-color: var(--accent); background: #111; }
-  .artist-card:hover::before { transform: scaleY(1); }
-  .artist-card.done { border-color: #1a2a1a; }
-  .artist-card.done::after {
-    content: 'COMPLETE';
+  .page-upload .overlay {
     position: absolute;
-    top: 12px; right: 12px;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .page-upload.has-image:hover .overlay { opacity: 1; }
+
+  .page-label {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-top: 8px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  .page-upload.has-image .page-label {
     color: var(--success);
   }
-  .artist-card.wip::after {
-    content: 'IN PROGRESS';
-    position: absolute;
-    top: 12px; right: 12px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-  }
-  .artist-card.pending::after {
-    content: 'PENDING';
-    position: absolute;
-    top: 12px; right: 12px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.15em;
+
+  .page-icon {
+    font-size: 18px;
     color: var(--text-dim);
+    position: relative;
+    z-index: 1;
   }
 
-  .artist-name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
+  .page-upload.has-image .page-icon { display: none; }
 
-  .artist-amp {
-    font-size: 12px;
-    color: var(--text-dim);
-    font-family: 'IBM Plex Mono', monospace;
-    margin-bottom: 12px;
-  }
-
-  .artist-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .tag {
+  .remove-btn {
+    background: rgba(255,68,68,0.8);
+    color: white;
+    border: none;
+    padding: 4px 10px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
-    padding: 2px 8px;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+
+  input[type="file"] { display: none; }
+
+  /* RESOLUTION GUIDE */
+  .res-guide {
+    background: #0d0d0d;
     border: 1px solid var(--border);
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
   }
 
-  /* AMP DB */
-  .amp-table {
-    width: 100%;
-    border-collapse: collapse;
+  .res-item { }
+
+  .res-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .res-val {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
-    margin-bottom: 48px;
+    color: var(--text);
   }
 
-  .amp-table th {
-    text-align: left;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text-dim);
-    font-weight: 400;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .amp-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid #161616;
+  .res-note {
+    font-size: 11px;
     color: var(--text-mid);
-    vertical-align: middle;
+    margin-top: 2px;
   }
 
-  .amp-table tr:hover td { background: #111; color: var(--text); }
-
-  .amp-name { color: var(--text); font-weight: 500; }
-  .amp-ref { color: var(--text-dim); font-size: 11px; }
-
-  .status-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 8px;
+  /* ARTIST INFO */
+  .info-block {
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
   }
-  .dot-done { background: var(--success); }
-  .dot-wip { background: var(--accent); }
-  .dot-pending { background: var(--border); }
 
-  /* GEAR INFO */
+  .info-header {
+    padding: 12px 16px;
+    background: #0d0d0d;
+    border-bottom: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .info-body { padding: 4px 0; }
+
+  .info-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    padding: 9px 16px;
+    border-bottom: 1px solid #141414;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .info-row:last-child { border-bottom: none; }
+  .info-key { font-family: 'IBM Plex Mono', monospace; color: var(--text-dim); font-size: 11px; }
+  .info-val { color: var(--text-mid); }
+
+  /* STATUS BADGE */
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    padding: 2px 8px;
+    letter-spacing: 0.15em;
+  }
+  .badge-done { color: var(--success); border: 1px solid var(--success); }
+  .badge-wip { color: var(--warn); border: 1px solid var(--warn); }
+  .badge-pending { color: var(--text-dim); border: 1px solid var(--border); }
+
+  /* GEAR */
   .gear-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 48px;
+    gap: 12px;
+    margin-bottom: 32px;
   }
 
   .gear-block {
     border: 1px solid var(--border);
-    padding: 20px;
+    padding: 16px;
   }
 
   .gear-block-title {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
+    font-size: 9px;
     letter-spacing: 0.2em;
     color: var(--text-dim);
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   .gear-item {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
     padding: 6px 0;
-    border-bottom: 1px solid #161616;
+    border-bottom: 1px solid #141414;
     font-size: 12px;
   }
 
   .gear-item:last-child { border-bottom: none; }
-  .gear-key { color: var(--text-dim); font-family: 'IBM Plex Mono', monospace; }
-  .gear-val { color: var(--text); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+  .gear-key { color: var(--text-dim); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+  .gear-val { color: var(--text-mid); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
 
-  /* UPLOAD SECTION */
-  .upload-zone {
-    border: 1px dashed var(--border);
-    padding: 40px;
-    text-align: center;
-    margin-bottom: 32px;
-    transition: border-color 0.2s;
-    cursor: pointer;
-  }
-
-  .upload-zone:hover { border-color: var(--accent); }
-
-  .upload-icon {
-    font-size: 32px;
-    margin-bottom: 12px;
-    color: var(--text-dim);
-  }
-
-  .upload-text {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--text-dim);
-    line-height: 1.8;
-  }
-
-  .upload-text strong { color: var(--accent); }
-
-  /* HOW TO USE */
-  .howto-steps {
-    display: grid;
-    gap: 12px;
-    margin-bottom: 48px;
-  }
-
-  .step {
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    gap: 16px;
-    align-items: start;
-    padding: 16px;
-    border: 1px solid var(--border);
-  }
-
-  .step-num {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--accent);
-    line-height: 1;
-  }
-
-  .step-content { font-size: 13px; color: var(--text-mid); line-height: 1.7; }
-  .step-content strong { color: var(--text); font-weight: 500; }
-
-  /* ARTIST INFO SECTION */
-  .artist-info-block {
-    border: 1px solid var(--border);
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-
-  .artist-info-header {
-    padding: 16px 20px;
-    background: #111;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .artist-info-name {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--accent);
-  }
-
-  .artist-info-body { padding: 20px; }
-
-  .info-row {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #161616;
-    font-size: 12px;
-  }
-
-  .info-row:last-child { border-bottom: none; }
-  .info-key { color: var(--text-dim); font-family: 'IBM Plex Mono', monospace; }
-  .info-val { color: var(--text); line-height: 1.6; }
-
-  /* SECTIONS VISIBILITY */
-  .page-section { display: none; }
-  .page-section.active { display: block; }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-thumb { background: var(--border); }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">AX8<span>/</span>TONE DB</div>
-  <div class="header-meta">FRACTAL AUDIO · PROFESSIONAL PRESET DATABASE</div>
+  <div class="logo">AX8 <span>/</span> TONE DB</div>
+  <div class="header-right">FRACTAL AUDIO · PROFESSIONAL PRESET DATABASE · FW 10.01</div>
 </header>
 
 <div class="container">
-
-  <!-- SIDEBAR -->
   <aside>
     <div class="nav-section">
-      <div class="nav-label">Overview</div>
-      <a class="nav-item active" onclick="showPage('overview')">Dashboard</a>
-      <a class="nav-item" onclick="showPage('gear')">장비 정보</a>
-      <a class="nav-item" onclick="showPage('howto')">사용 방법</a>
+      <div class="nav-label">System</div>
+      <div class="nav-item active" onclick="showPage('gear', this)">장비 정보</div>
+      <div class="nav-item" onclick="showPage('guide', this)">촬영 가이드</div>
     </div>
     <div class="nav-section">
       <div class="nav-label">Artists</div>
-      <a class="nav-item" onclick="showPage('nick')">Nick Johnston</a>
-      <a class="nav-item" onclick="showPage('mayer')">John Mayer</a>
-      <a class="nav-item" onclick="showPage('timmons')">Andy Timmons</a>
+      <div class="nav-item" onclick="showPage('nick', this)">Nick Johnston</div>
+      <div class="nav-item" onclick="showPage('mayer', this)">John Mayer</div>
+      <div class="nav-item" onclick="showPage('timmons', this)">Andy Timmons</div>
     </div>
     <div class="nav-section">
-      <div class="nav-label">Amp Database</div>
-      <a class="nav-item" onclick="showPage('ampdb')">앰프 기본값 DB</a>
+      <div class="nav-label">Amp DB</div>
+      <div class="nav-item" onclick="showPage('amp_friedman_hbe', this)">Friedman HBE</div>
+      <div class="nav-item" onclick="showPage('amp_dirty_shirley', this)">Dirty Shirley</div>
+      <div class="nav-item" onclick="showPage('amp_two_stone', this)">Two Stone J35</div>
+      <div class="nav-item" onclick="showPage('amp_deluxe_verb', this)">Deluxe Verb Nrm</div>
+      <div class="nav-item" onclick="showPage('amp_tx_star_clean', this)">TX Star Clean</div>
+      <div class="nav-item" onclick="showPage('amp_tx_star_lead', this)">TX Star Lead</div>
     </div>
   </aside>
 
-  <!-- MAIN CONTENT -->
   <main>
 
-    <!-- OVERVIEW -->
-    <div id="overview" class="page-section active">
-      <div class="section-header">
-        <div class="section-title">Dashboard</div>
-        <div class="section-sub">FRACTAL AX8 · FW 10.01</div>
-      </div>
-
-      <div class="artist-grid">
-        <div class="artist-card wip" onclick="showPage('nick')">
-          <div class="artist-name">Nick Johnston</div>
-          <div class="artist-amp">Friedman HBE / BE100</div>
-          <div class="artist-tags">
-            <span class="tag">LEAD</span>
-            <span class="tag">SINGLE COIL</span>
-            <span class="tag">REVERB HEAVY</span>
-          </div>
-        </div>
-        <div class="artist-card wip" onclick="showPage('mayer')">
-          <div class="artist-name">John Mayer</div>
-          <div class="artist-amp">Two-Rock / Dumble / Deluxe Reverb</div>
-          <div class="artist-tags">
-            <span class="tag">CLEAN</span>
-            <span class="tag">BLUES</span>
-            <span class="tag">TOUCH DYNAMIC</span>
-          </div>
-        </div>
-        <div class="artist-card pending" onclick="showPage('timmons')">
-          <div class="artist-name">Andy Timmons</div>
-          <div class="artist-amp">Mesa Lonestar / Stiletto</div>
-          <div class="artist-tags">
-            <span class="tag">LEAD</span>
-            <span class="tag">TUBE DRIVER</span>
-            <span class="tag">STEREO DELAY</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- GEAR -->
-    <div id="gear" class="page-section">
+    <div id="gear" class="page-section active">
       <div class="section-header">
         <div class="section-title">장비 정보</div>
-        <div class="section-sub">STUDIO & LIVE RIG</div>
+        <div class="section-sub">RIG SPECIFICATIONS</div>
       </div>
       <div class="gear-grid">
         <div class="gear-block">
           <div class="gear-block-title">Fractal Devices</div>
           <div class="gear-item"><span class="gear-key">라이브</span><span class="gear-val">AX8 (FW 10.01)</span></div>
-          <div class="gear-item"><span class="gear-key">홈레코딩</span><span class="gear-val">Axe-Fx II XL+</span></div>
+          <div class="gear-item"><span class="gear-key">레코딩</span><span class="gear-val">Axe-Fx II XL+</span></div>
         </div>
         <div class="gear-block">
-          <div class="gear-block-title">Guitars</div>
-          <div class="gear-item"><span class="gear-key">Main</span><span class="gear-val">Suhr Standard</span></div>
-          <div class="gear-item"><span class="gear-key">Pickup</span><span class="gear-val">SSH+ / V63+ (풀업→SSS)</span></div>
-          <div class="gear-item"><span class="gear-key">2nd</span><span class="gear-val">Gibson ES-339</span></div>
-          <div class="gear-item"><span class="gear-key">Config</span><span class="gear-val">험버커 x2</span></div>
-        </div>
-        <div class="gear-block">
-          <div class="gear-block-title">Monitoring</div>
+          <div class="gear-block-title">Interface / Monitor</div>
           <div class="gear-item"><span class="gear-key">Interface</span><span class="gear-val">Focusrite 6i6 (1세대)</span></div>
           <div class="gear-item"><span class="gear-key">Monitor</span><span class="gear-val">Midiplus 5" (캘리브레이션)</span></div>
           <div class="gear-item"><span class="gear-key">기준</span><span class="gear-val">스피커 캘리브레이션 기준</span></div>
         </div>
         <div class="gear-block">
-          <div class="gear-block-title">IR</div>
-          <div class="gear-item"><span class="gear-key">보유</span><span class="gear-val">York Audio (다수)</span></div>
+          <div class="gear-block-title">Guitar — Suhr Standard</div>
+          <div class="gear-item"><span class="gear-key">픽업</span><span class="gear-val">SSH+ / V63+</span></div>
+          <div class="gear-item"><span class="gear-key">톤 노브 풀업</span><span class="gear-val">SSS 코일스플릿</span></div>
+          <div class="gear-item"><span class="gear-key">임피던스</span><span class="gear-val">험버커 250k / 싱글 125k</span></div>
+        </div>
+        <div class="gear-block">
+          <div class="gear-block-title">Guitar — Gibson ES-339</div>
+          <div class="gear-item"><span class="gear-key">타입</span><span class="gear-val">세미할로우</span></div>
+          <div class="gear-item"><span class="gear-key">픽업</span><span class="gear-val">험버커 x2</span></div>
+          <div class="gear-item"><span class="gear-key">IR</span><span class="gear-val">York Audio 보유</span></div>
         </div>
       </div>
     </div>
 
-    <!-- HOW TO USE -->
-    <div id="howto" class="page-section">
+    <!-- GUIDE -->
+    <div id="guide" class="page-section">
       <div class="section-header">
-        <div class="section-title">사용 방법</div>
-        <div class="section-sub">HOW TO USE THIS DATABASE</div>
+        <div class="section-title">촬영 가이드</div>
+        <div class="section-sub">SCREENSHOT REQUIREMENTS FOR CLAUDE</div>
       </div>
-      <div class="howto-steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <div class="step-content">
-            <strong>AX8-Edit에서 앰프 선택 후 각 페이지 스크린샷 촬영</strong><br>
-            Basic → GEQ → Preamp → Power Amp → Power Sply → Speaker → Spkr Drv → Dynamics 순서
-          </div>
+      <div class="res-guide">
+        <div class="res-item">
+          <div class="res-key">최소 해상도</div>
+          <div class="res-val">1280 × 400px</div>
+          <div class="res-note">파라미터 숫자 선명히 보여야 함</div>
         </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <div class="step-content">
-            <strong>이 페이지에 스크린샷 이미지 파일로 저장</strong><br>
-            앰프별 폴더로 정리 — 파일명: 앰프명_페이지명.png
-          </div>
+        <div class="res-item">
+          <div class="res-key">권장 포맷</div>
+          <div class="res-val">PNG</div>
+          <div class="res-note">JPEG 압축 시 숫자 번짐 발생</div>
         </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <div class="step-content">
-            <strong>Claude에게 이미지 URL 또는 파일 전달</strong><br>
-            "TX Star Clean Basic 페이지 기본값 데이터화해줘" 방식으로 요청
-          </div>
+        <div class="res-item">
+          <div class="res-key">Mac 캡처</div>
+          <div class="res-val">Cmd + Shift + 4</div>
+          <div class="res-note">AX8-Edit 파라미터 영역만 선택</div>
         </div>
-        <div class="step">
-          <div class="step-num">04</div>
-          <div class="step-content">
-            <strong>Claude가 파라미터값 읽어서 데이터화 → 아티스트별 변경값 제공</strong><br>
-            기본값 대비 변경 필요한 파라미터만 정확히 알려주는 방식
-          </div>
+      </div>
+      <div class="info-block">
+        <div class="info-header">촬영 순서 — 앰프 1개당 8장</div>
+        <div class="info-body">
+          <div class="info-row"><span class="info-key">1. Basic</span><span class="info-val">Input Drive, Bass, Mid, Treb, Presence, Depth, Master Volume, Bright Switch 등</span></div>
+          <div class="info-row"><span class="info-key">2. GEQ</span><span class="info-val">63Hz ~ 8K 밴드 EQ</span></div>
+          <div class="info-row"><span class="info-key">3. Preamp</span><span class="info-val">Tube Type, Bias, Hardness, Crunch, Definition, Harmonics 등</span></div>
+          <div class="info-row"><span class="info-key">4. Power Amp</span><span class="info-val">Negative Feedback, Bias Excursion, Hardness, Tube Type 등</span></div>
+          <div class="info-row"><span class="info-key">5. Power Sply</span><span class="info-val">Supply Sag, Variac, B+ Time Constant 등</span></div>
+          <div class="info-row"><span class="info-key">6. Speaker</span><span class="info-val">Low/Hi Resonance, XFormer 설정 등</span></div>
+          <div class="info-row"><span class="info-key">7. Spkr Drv</span><span class="info-val">Speaker Drive, Comp, Motor Time Const</span></div>
+          <div class="info-row"><span class="info-key">8. Dynamics</span><span class="info-val">Dynamic Presence, Preamp CF, Character 등</span></div>
         </div>
       </div>
     </div>
@@ -547,32 +462,20 @@
     <div id="nick" class="page-section">
       <div class="section-header">
         <div class="section-title">Nick Johnston</div>
-        <div class="section-sub">TONE REFERENCE</div>
+        <div class="section-sub">TONE REFERENCE · FRIEDMAN HBE</div>
       </div>
-      <div class="artist-info-block">
-        <div class="artist-info-header">
-          <div class="artist-info-name">사운드 철학 & 핵심 장비</div>
-          <div class="tag">RESEARCH COMPLETE</div>
-        </div>
-        <div class="artist-info-body">
-          <div class="info-row"><span class="info-key">앰프 (주)</span><span class="info-val">Friedman BE100 / HBE — 리드용 / Friedman Dirty Shirley — 리듬용 (Remarkably Human 앨범 기준)</span></div>
-          <div class="info-row"><span class="info-key">앰프 (현재)</span><span class="info-val">Orange OR30, Mesa Triple Crown TC-50, Kemper (Morgan AC20 프로파일)</span></div>
-          <div class="info-row"><span class="info-key">Fractal 모델</span><span class="info-val">Friedman HBE → AX8: Friedman HBE / Dirty Shirley</span></div>
-          <div class="info-row"><span class="info-key">기타</span><span class="info-val">Schecter NJ Traditional (SSS) / Seymour Duncan Antiquity Texas Hot 픽업</span></div>
-          <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">Wampler Euphoria, Horizon Devices Precision Drive — 낮은 게인으로 앰프 부스트</span></div>
-          <div class="info-row"><span class="info-key">컴프</span><span class="info-val">Optical — SideChain Hi-Cut 259Hz, Emphasis 2.92 (Fractal 포럼 실제 데이터)</span></div>
-          <div class="info-row"><span class="info-key">딜레이</span><span class="info-val">풍성한 스테레오 딜레이 + 홀 리버브 — 공간감이 톤의 핵심</span></div>
-          <div class="info-row"><span class="info-key">사운드 철학</span><span class="info-val">앰프 직결 선호 ("pedals → straight into amp"). 어떤 앰프를 써도 닉 존스턴 사운드가 나옴 — 손과 픽업이 핵심. 싱글코일 특유의 끈적한 리드톤</span></div>
-          <div class="info-row"><span class="info-key">Fractal 팁</span><span class="info-val">Friedman HBE는 베이스 과다 → Bass 낮추고 Low Cut 필수 / Tape Drive 블록 Amp-Cab 사이 삽입 효과적</span></div>
+      <div class="info-block">
+        <div class="info-header">사운드 철학 & 핵심 장비</div>
+        <div class="info-body">
+          <div class="info-row"><span class="info-key">앰프 (핵심)</span><span class="info-val">Friedman BE100/HBE (리드) + Dirty Shirley (리듬) — Remarkably Human 앨범 기준</span></div>
+          <div class="info-row"><span class="info-key">현재 앰프</span><span class="info-val">Orange OR30, Mesa Triple Crown TC-50, Kemper (Morgan AC20 프로파일)</span></div>
+          <div class="info-row"><span class="info-key">Fractal 모델</span><span class="info-val">Friedman HBE / Dirty Shirley</span></div>
+          <div class="info-row"><span class="info-key">기타</span><span class="info-val">Schecter NJ Traditional (SSS) — Seymour Duncan Antiquity Texas Hot</span></div>
+          <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">Wampler Euphoria / Horizon Devices Precision Drive — 낮은 게인, 앰프 부스트 용도</span></div>
+          <div class="info-row"><span class="info-key">컴프</span><span class="info-val">Optical — SideChain Hi-Cut 259Hz, Emphasis 2.92 (Fractal 포럼 실측)</span></div>
+          <div class="info-row"><span class="info-key">Fractal 팁</span><span class="info-val">Friedman HBE 베이스 과다 → Bass 낮추고 Low Cut 필수 / Tape Drive 블록을 Amp-Cab 사이에 삽입</span></div>
+          <div class="info-row"><span class="info-key">사운드 철학</span><span class="info-val">앰프 직결 선호. 어떤 앰프도 닉 존스턴 소리가 남 — 손과 싱글픽업이 핵심. 끈적한 리드톤 + 풍성한 공간감</span></div>
           <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">York Audio IR (Friedman 또는 Marshall V30 계열)</span></div>
-        </div>
-      </div>
-      <div class="upload-zone">
-        <div class="upload-icon">📷</div>
-        <div class="upload-text">
-          <strong>AX8-Edit 스크린샷을 이 폴더에 저장</strong><br>
-          Friedman HBE — Basic / Preamp / Power Amp / Power Sply / Speaker / Dynamics<br>
-          파일명 예시: friedman_hbe_basic.png
         </div>
       </div>
     </div>
@@ -581,30 +484,19 @@
     <div id="mayer" class="page-section">
       <div class="section-header">
         <div class="section-title">John Mayer</div>
-        <div class="section-sub">TONE REFERENCE</div>
+        <div class="section-sub">TONE REFERENCE · TWO-ROCK / DUMBLE</div>
       </div>
-      <div class="artist-info-block">
-        <div class="artist-info-header">
-          <div class="artist-info-name">사운드 철학 & 핵심 장비</div>
-          <div class="tag">RESEARCH COMPLETE</div>
-        </div>
-        <div class="artist-info-body">
-          <div class="info-row"><span class="info-key">앰프 (핵심)</span><span class="info-val">Two-Rock JM Signature (Dumble 계열) + Fender Deluxe Reverb 블렌딩 — 앰프 두 대 이상 동시 사용</span></div>
-          <div class="info-row"><span class="info-key">Fractal 모델</span><span class="info-val">Two Stone J35 (Two-Rock) / Deluxe Verb Nrm (Fender DR) / ODS-100 계열 (Dumble)</span></div>
+      <div class="info-block">
+        <div class="info-header">사운드 철학 & 핵심 장비</div>
+        <div class="info-body">
+          <div class="info-row"><span class="info-key">앰프 (핵심)</span><span class="info-val">Two-Rock JM Signature (Dumble 계열) + Fender Deluxe Reverb — 두 대 이상 블렌딩</span></div>
+          <div class="info-row"><span class="info-key">Fractal 모델</span><span class="info-val">Two Stone J35 / Deluxe Verb Nrm / ODS-100 계열</span></div>
           <div class="info-row"><span class="info-key">기타</span><span class="info-val">Fender Strat / PRS Silver Sky — 싱글코일 SSS</span></div>
-          <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">Ibanez TS808 (게인 낮게/레벨 높게 — 앰프 부스터), Klon Centaur, Keeley Katana Boost</span></div>
-          <div class="info-row"><span class="info-key">딜레이</span><span class="info-val">Providence DLY-83 / Dotted 8th note 싱크 — 그루브의 핵심</span></div>
-          <div class="info-row"><span class="info-key">사운드 철학</span><span class="info-val">Dumble 계열 하이헤드룸 클린 앰프 + TS 계열로 앞단 밀기. 터치 다이나믹이 핵심 — 피킹 세기로 클린↔크런치 전환. 기타 볼륨 7~8 (리듬) → 10 (솔로)</span></div>
-          <div class="info-row"><span class="info-key">EQ 철학</span><span class="info-val">Bass 4~5, Mid 6~7, Treble 5~6 — 미드 중심, 고역 절제</span></div>
-          <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">F010: 1x12 Emi Open Back (JM) — AX8 팩토리 캐비넷</span></div>
-        </div>
-      </div>
-      <div class="upload-zone">
-        <div class="upload-icon">📷</div>
-        <div class="upload-text">
-          <strong>AX8-Edit 스크린샷을 이 폴더에 저장</strong><br>
-          Two Stone J35 / Deluxe Verb Nrm — 전 페이지<br>
-          파일명 예시: deluxe_verb_nrm_basic.png
+          <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">Ibanez TS808 (게인 낮게/레벨 높게), Klon Centaur, Keeley Katana Boost</span></div>
+          <div class="info-row"><span class="info-key">딜레이</span><span class="info-val">Dotted 8th note 싱크 — 그루브의 핵심</span></div>
+          <div class="info-row"><span class="info-key">사운드 철학</span><span class="info-val">Dumble 계열 하이헤드룸 클린 + TS로 앞단 밀기. 터치 다이나믹이 핵심 — 피킹 세기로 클린↔크런치 전환</span></div>
+          <div class="info-row"><span class="info-key">EQ</span><span class="info-val">Bass 4~5 / Mid 6~7 / Treble 5~6 — 미드 중심, 고역 절제</span></div>
+          <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">F010: 1x12 Emi Open Back (JM) — AX8 팩토리</span></div>
         </div>
       </div>
     </div>
@@ -613,110 +505,187 @@
     <div id="timmons" class="page-section">
       <div class="section-header">
         <div class="section-title">Andy Timmons</div>
-        <div class="section-sub">TONE REFERENCE</div>
+        <div class="section-sub">TONE REFERENCE · MESA LONESTAR</div>
       </div>
-      <div class="artist-info-block">
-        <div class="artist-info-header">
-          <div class="artist-info-name">사운드 철학 & 핵심 장비</div>
-          <div class="tag">RESEARCH COMPLETE</div>
-        </div>
-        <div class="artist-info-body">
-          <div class="info-row"><span class="info-key">앰프 (핵심)</span><span class="info-val">Mesa Boogie Lonestar Classic (클린 기반) + Mesa Stiletto (리드) — 두 앰프 스테레오 슬레이브 구성</span></div>
-          <div class="info-row"><span class="info-key">Fractal 모델</span><span class="info-val">TX Star Clean (Lonestar Clean) / TX Star Lead (Lonestar Lead)</span></div>
-          <div class="info-row"><span class="info-key">기타</span><span class="info-val">Ibanez AT100 / AT300 — 험버커(AT-1) + 싱글(Cruiser) 혼합</span></div>
-          <div class="info-row"><span class="info-key">드라이브 (핵심)</span><span class="info-val">BK Butler Tube Works Tube Driver — 게인 낮게/볼륨 높게로 클린 앰프 밀기. Xotic BB Preamp (시그니처 버전) 병행</span></div>
-          <div class="info-row"><span class="info-key">딜레이 (핵심)</span><span class="info-val">Maestro Echoplex / Electro-Harmonix Memory Man 두 대 — 375ms (L) + 500ms (R) 스테레오 이미징. Dotted 8th + Quarter 조합</span></div>
-          <div class="info-row"><span class="info-key">사운드 철학</span><span class="info-val">앰프는 완전 클린 → 드라이브 페달이 게인 전담. 스테레오 딜레이로 공간 이미징이 톤의 핵심. "노트 주변의 아우라"가 AT 톤의 정체성</span></div>
-          <div class="info-row"><span class="info-key">EQ 철학</span><span class="info-val">Bass 4~5, Mid 7~8, Treble 5~6 — 미드 풍성하고 따뜻하게</span></div>
-          <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">Mesa 2x12 Recto (Celestion V30) — SM57 오프센터 마이킹. York Audio IR (Mesa V30 계열)</span></div>
-          <div class="info-row"><span class="info-key">Fractal 팁</span><span class="info-val">TX Star Clean은 볼륨 낮게 세팅 후 Tube Driver로 밀기 / 딜레이 두 개 (Halo 타입 + 슬랩백) 조합 필수</span></div>
-        </div>
-      </div>
-      <div class="upload-zone">
-        <div class="upload-icon">📷</div>
-        <div class="upload-text">
-          <strong>AX8-Edit 스크린샷을 이 폴더에 저장</strong><br>
-          TX Star Clean / TX Star Lead — 전 페이지<br>
-          파일명 예시: tx_star_clean_basic.png
+      <div class="info-block">
+        <div class="info-header">사운드 철학 & 핵심 장비</div>
+        <div class="info-body">
+          <div class="info-row"><span class="info-key">앰프 (핵심)</span><span class="info-val">Mesa Boogie Lonestar Classic (클린) + Mesa Stiletto (리드) — 스테레오 슬레이브 구성</span></div>
+          <div class="info-row"><span class="info-key">Fractal 모델</span><span class="info-val">TX Star Clean / TX Star Lead</span></div>
+          <div class="info-row"><span class="info-key">기타</span><span class="info-val">Ibanez AT100/AT300 — AT-1 험버커 + Cruiser 싱글 혼합</span></div>
+          <div class="info-row"><span class="info-key">드라이브 (핵심)</span><span class="info-val">BK Butler Tube Works Tube Driver (게인 낮게/볼륨 높게) + Xotic BB Preamp (시그니처)</span></div>
+          <div class="info-row"><span class="info-key">딜레이 (핵심)</span><span class="info-val">375ms (L) + 500ms (R) 스테레오 이미징 — "노트 주변의 아우라"가 AT 톤의 정체성</span></div>
+          <div class="info-row"><span class="info-key">사운드 철학</span><span class="info-val">앰프 완전 클린 → 드라이브 페달이 게인 전담. 스테레오 딜레이 공간감이 톤의 핵심</span></div>
+          <div class="info-row"><span class="info-key">EQ</span><span class="info-val">Bass 4~5 / Mid 7~8 / Treble 5~6 — 미드 풍성하고 따뜻하게</span></div>
+          <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">Mesa 2x12 Recto (Celestion V30) SM57 오프센터 — York Audio IR (Mesa V30 계열)</span></div>
         </div>
       </div>
     </div>
 
-    <!-- AMP DB -->
-    <div id="ampdb" class="page-section">
+    <!-- AMP PAGES — TEMPLATE -->
+    <div id="amp_friedman_hbe" class="page-section">
       <div class="section-header">
-        <div class="section-title">앰프 기본값 DB</div>
-        <div class="section-sub">DEFAULT PARAMETER DATABASE</div>
+        <div class="section-title">Friedman HBE</div>
+        <div class="section-sub">Friedman Hairy Brown Eye · Nick Johnston</div>
       </div>
-      <table class="amp-table">
-        <thead>
-          <tr>
-            <th>상태</th>
-            <th>Fractal 모델명</th>
-            <th>실제 앰프</th>
-            <th>사용 아티스트</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="status-dot dot-wip"></span></td>
-            <td><span class="amp-name">Friedman HBE</span></td>
-            <td><span class="amp-ref">Friedman Hairy Brown Eye</span></td>
-            <td>Nick Johnston</td>
-          </tr>
-          <tr>
-            <td><span class="status-dot dot-wip"></span></td>
-            <td><span class="amp-name">Dirty Shirley</span></td>
-            <td><span class="amp-ref">Friedman Dirty Shirley</span></td>
-            <td>Nick Johnston</td>
-          </tr>
-          <tr>
-            <td><span class="status-dot dot-pending"></span></td>
-            <td><span class="amp-name">Two Stone J35</span></td>
-            <td><span class="amp-ref">Two-Rock Jet 35</span></td>
-            <td>John Mayer</td>
-          </tr>
-          <tr>
-            <td><span class="status-dot dot-pending"></span></td>
-            <td><span class="amp-name">Deluxe Verb Nrm</span></td>
-            <td><span class="amp-ref">Fender Deluxe Reverb</span></td>
-            <td>John Mayer</td>
-          </tr>
-          <tr>
-            <td><span class="status-dot dot-pending"></span></td>
-            <td><span class="amp-name">TX Star Clean</span></td>
-            <td><span class="amp-ref">Mesa Boogie Lonestar Clean</span></td>
-            <td>Andy Timmons</td>
-          </tr>
-          <tr>
-            <td><span class="status-dot dot-pending"></span></td>
-            <td><span class="amp-name">TX Star Lead</span></td>
-            <td><span class="amp-ref">Mesa Boogie Lonestar Lead</span></td>
-            <td>Andy Timmons</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="upload-zone">
-        <div class="upload-icon">📷</div>
-        <div class="upload-text">
-          <strong>스크린샷 업로드 후 Claude에게 전달하면 기본값 자동 데이터화</strong><br>
-          각 앰프 페이지별 스크린샷 → 파일명: 앰프명_페이지명.png<br>
-          예: tx_star_clean_basic.png / tx_star_clean_preamp.png
+      <div class="amp-section">
+        <div class="page-grid" id="grid_friedman_hbe">
+          <div class="page-upload" onclick="triggerUpload('friedman_hbe','basic')">
+            <span class="page-icon">＋</span>
+            <span class="page-label">Basic</span>
+            <input type="file" accept="image/*" onchange="loadImage(this,'friedman_hbe','basic')">
+            <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'friedman_hbe','basic')">제거</button></div>
+          </div>
+          <div class="page-upload" onclick="triggerUpload('friedman_hbe','geq')">
+            <span class="page-icon">＋</span>
+            <span class="page-label">GEQ</span>
+            <input type="file" accept="image/*" onchange="loadImage(this,'friedman_hbe','geq')">
+            <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'friedman_hbe','geq')">제거</button></div>
+          </div>
+          <div class="page-upload" onclick="triggerUpload('friedman_hbe','preamp')">
+            <span class="page-icon">＋</span>
+            <span class="page-label">Preamp</span>
+            <input type="file" accept="image/*" onchange="loadImage(this,'friedman_hbe','preamp')">
+            <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'friedman_hbe','preamp')">제거</button></div>
+          </div>
+          <div class="page-upload" onclick="triggerUpload('friedman_hbe','power_amp')">
+            <span class="page-icon">＋</span>
+            <span class="page-label">Power Amp</span>
+            <input type="file" accept="image/*" onchange="loadImage(this,'friedman_hbe','power_amp')">
+            <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'friedman_hbe','power_amp')">제거</button></div>
+          </div>
+          <div class="page-upload" onclick="triggerUpload('friedman_hbe','power_sply')">
+            <span class="page-icon">＋</span>
+            <span class="page-label">Power Sply</span>
+            <input type="file" accept="image/*" onchange="loadImage(this,'friedman_hbe','power_sply')">
+            <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'friedman_hbe','power_sply')">제거</button></div>
+          </div>
+          <div class="page-upload" onclick="triggerUpload('friedman_hbe','speaker')">
+            <span class="page-icon">＋</span>
+            <span class="page-label">Speaker</span>
+            <input type="file" accept="image/*" onchange="loadImage(this,'friedman_hbe','speaker')">
+            <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'friedman_hbe','speaker')">제거</button></div>
+          </div>
+          <div class="page-upload" onclick="triggerUpload('friedman_hbe','spkr_drv')">
+            <span class="page-icon">＋</span>
+            <span class="page-label">Spkr Drv</span>
+            <input type="file" accept="image/*" onchange="loadImage(this,'friedman_hbe','spkr_drv')">
+            <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'friedman_hbe','spkr_drv')">제거</button></div>
+          </div>
+          <div class="page-upload" onclick="triggerUpload('friedman_hbe','dynamics')">
+            <span class="page-icon">＋</span>
+            <span class="page-label">Dynamics</span>
+            <input type="file" accept="image/*" onchange="loadImage(this,'friedman_hbe','dynamics')">
+            <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'friedman_hbe','dynamics')">제거</button></div>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div id="amp_dirty_shirley" class="page-section">
+      <div class="section-header"><div class="section-title">Dirty Shirley</div><div class="section-sub">Friedman Dirty Shirley · Nick Johnston</div></div>
+      <div class="amp-section"><div class="page-grid" id="grid_dirty_shirley"></div></div>
+    </div>
+
+    <div id="amp_two_stone" class="page-section">
+      <div class="section-header"><div class="section-title">Two Stone J35</div><div class="section-sub">Two-Rock Jet 35 · John Mayer</div></div>
+      <div class="amp-section"><div class="page-grid" id="grid_two_stone"></div></div>
+    </div>
+
+    <div id="amp_deluxe_verb" class="page-section">
+      <div class="section-header"><div class="section-title">Deluxe Verb Nrm</div><div class="section-sub">Fender Deluxe Reverb · John Mayer</div></div>
+      <div class="amp-section"><div class="page-grid" id="grid_deluxe_verb"></div></div>
+    </div>
+
+    <div id="amp_tx_star_clean" class="page-section">
+      <div class="section-header"><div class="section-title">TX Star Clean</div><div class="section-sub">Mesa Boogie Lonestar Clean · Andy Timmons</div></div>
+      <div class="amp-section"><div class="page-grid" id="grid_tx_star_clean"></div></div>
+    </div>
+
+    <div id="amp_tx_star_lead" class="page-section">
+      <div class="section-header"><div class="section-title">TX Star Lead</div><div class="section-sub">Mesa Boogie Lonestar Lead · Andy Timmons</div></div>
+      <div class="amp-section"><div class="page-grid" id="grid_tx_star_lead"></div></div>
     </div>
 
   </main>
 </div>
 
 <script>
-  function showPage(id) {
+  const PAGES = ['Basic','GEQ','Preamp','Power Amp','Power Sply','Speaker','Spkr Drv','Dynamics'];
+  const AMPS = ['dirty_shirley','two_stone','deluxe_verb','tx_star_clean','tx_star_lead'];
+
+  // 나머지 앰프 그리드 자동 생성
+  AMPS.forEach(amp => {
+    const grid = document.getElementById('grid_' + amp);
+    if (!grid) return;
+    PAGES.forEach(page => {
+      const key = page.toLowerCase().replace(/ /g,'_');
+      grid.innerHTML += `
+        <div class="page-upload" id="cell_${amp}_${key}" onclick="triggerUpload('${amp}','${key}')">
+          <span class="page-icon">＋</span>
+          <span class="page-label">${page}</span>
+          <input type="file" accept="image/*" onchange="loadImage(this,'${amp}','${key}')">
+          <div class="overlay"><button class="remove-btn" onclick="removeImage(event,'${amp}','${key}')">제거</button></div>
+        </div>`;
+    });
+  });
+
+  function showPage(id, el) {
     document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    event.target.classList.add('active');
+    if (el) el.classList.add('active');
+  }
+
+  function triggerUpload(amp, page) {
+    const cell = document.querySelector(`#cell_${amp}_${page}, [onclick="triggerUpload('${amp}','${page}')"]`);
+    if (!cell) return;
+    const input = cell.querySelector('input[type="file"]');
+    if (input) input.click();
+  }
+
+  function loadImage(input, amp, page) {
+    if (!input.files[0]) return;
+    const file = input.files[0];
+
+    // 해상도 체크
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = function() {
+      const cell = input.closest('.page-upload');
+      cell.classList.add('has-image');
+
+      // 기존 이미지 제거
+      const existing = cell.querySelector('img');
+      if (existing) existing.remove();
+
+      const el = document.createElement('img');
+      el.src = url;
+      cell.insertBefore(el, cell.firstChild);
+
+      // 해상도 경고
+      if (img.width < 1280) {
+        cell.style.borderColor = '#e8a040';
+        cell.querySelector('.page-label').textContent = cell.querySelector('.page-label').textContent + ' ⚠';
+        cell.querySelector('.page-label').style.color = '#e8a040';
+      }
+    };
+    img.src = url;
+  }
+
+  function removeImage(event, amp, page) {
+    event.stopPropagation();
+    const cell = event.target.closest('.page-upload');
+    const img = cell.querySelector('img');
+    if (img) img.remove();
+    cell.classList.remove('has-image');
+    cell.style.borderColor = '';
+    const label = cell.querySelector('.page-label');
+    label.textContent = label.textContent.replace(' ⚠','');
+    label.style.color = '';
+    const input = cell.querySelector('input');
+    if (input) input.value = '';
   }
 </script>
-
 </body>
 </html>
