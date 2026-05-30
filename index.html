@@ -1524,8 +1524,8 @@
         <button class="amp-tab" onclick="switchAmpTab('fxdrv','params',this)">파라미터</button>
       </div>
       <div id="tab_screenshot_fxdrv" class="amp-tab-content active">
-        <div class="upload-hint">Axe-Edit에서 <strong>Drive 블록</strong> 스크린샷을 클릭해서 업로드합니다 (Drive 1, Drive 2 각 1장)</div>
-        <div class="page-grid" id="grid_fxdrv"></div>
+        <div class="upload-hint">각 드라이브 타입마다 <strong>Page 1 / Page 2</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div id="grid_fxdrv"></div>
       </div>
       <div id="tab_params_fxdrv" class="amp-tab-content">
         <div id="params_fxdrv" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
@@ -3031,10 +3031,108 @@
   /* ── FX DB 그리드 빌드 ── */
   const FXDB_PAGES = {
     fxcomp: ['Main'],
-    fxdrv:  ['Drive 1', 'Drive 2'],
     fxdly:  ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5', 'Page 6'],
     fxrvb:  ['Page 1', 'Page 2', 'Page 3', 'Page 4'],
   };
+
+  // 드라이브 타입 전체 목록 (AX8 실제 리스트)
+  const DRIVE_TYPES = [
+    'BB Pre', 'Bender Fuzz', 'Bit Crusher', 'Blackglass 7K', 'Blues OD',
+    'Esoteric ACB', 'Esoteric RCB', 'Eternal Love', 'Face Fuzz',
+    'FAS Boost', 'FAS LED-Drive', 'Fat Rat', 'FET Boost', 'FET Preamp',
+    'Full OD', 'Hard Fuzz', 'M-Zone Dist', 'Master Fuzz', 'Micro Boost',
+    'Mid Boost', 'Octave Dist', 'PI Fuzz', 'Plus Dist', 'Rat Dist',
+    'Ruckus', 'SDD Preamp', 'Shimmer Drive', 'Shred Dist', 'Super OD',
+    'T808 Mod', 'T808 OD', 'Tape Dist', 'Timothy', 'Treble Boost',
+    'Tube Drv 3-Knob', 'Tube Drv 4-Knob', 'Zen Master'
+  ];
+
+  // Drive 페이지 — 타입별 2슬롯씩
+  (function buildDrivePage() {
+    const container = document.getElementById('grid_fxdrv');
+    if (!container) return;
+
+    DRIVE_TYPES.forEach(driveName => {
+      const driveId = driveName.toLowerCase().replace(/[^a-z0-9]/g, '_');
+
+      const block = document.createElement('div');
+      block.style.cssText = 'border:1px solid var(--border); margin-bottom:16px;';
+
+      const header = document.createElement('div');
+      header.style.cssText = 'padding:9px 14px; background:#0d0d0d; border-bottom:1px solid var(--border); font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:500; color:var(--accent); letter-spacing:0.05em;';
+      header.textContent = driveName;
+      block.appendChild(header);
+
+      const grid = document.createElement('div');
+      grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:10px;';
+
+      ['1', '2'].forEach(n => {
+        const cellId  = `cell_drv_${driveId}_${n}`;
+        const inputId = `input_drv_${driveId}_${n}`;
+        const cell = document.createElement('div');
+        cell.className = 'page-cell';
+        cell.id = cellId;
+        cell.innerHTML = `
+          <span class="cell-icon">＋</span>
+          <span class="cell-label">Page ${n}</span>
+          <input type="file" accept="image/png,image/jpeg" id="${inputId}">
+          <div class="cell-overlay">
+            <button class="btn-view"   onclick="viewDrvImg(event,'${driveId}','${n}')">보기</button>
+            <button class="btn-remove" onclick="removeDrvImg(event,'${driveId}','${n}')">제거</button>
+          </div>`;
+        cell.addEventListener('click', () => document.getElementById(inputId).click());
+        document.addEventListener('change', async (e) => {
+          if (e.target.id !== inputId) return;
+          const file = e.target.files[0];
+          if (!file) return;
+          await uploadDrvImg(file, driveId, n, driveName);
+        });
+        grid.appendChild(cell);
+      });
+
+      block.appendChild(grid);
+      container.appendChild(block);
+    });
+  })();
+
+  async function uploadDrvImg(file, driveId, n, label) {
+    const cell = document.getElementById(`cell_drv_${driveId}_${n}`);
+    cell.classList.add('uploading');
+    showToast(`${label} Page ${n} 업로드 중...`, '');
+    if (!sb) { showToast('Supabase 연결 없음', 'error'); cell.classList.remove('uploading'); return; }
+    const ext = file.type === 'image/png' ? 'png' : 'jpg';
+    const path = `_drive/${driveId}_${n}.${ext}`;
+    const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
+    if (error) { showToast('실패: ' + error.message, 'error'); cell.classList.remove('uploading'); return; }
+    const { data } = sb.storage.from('ax8-screenshots').getPublicUrl(path);
+    setDrvCell(driveId, n, data.publicUrl);
+    showToast(`✓ ${label} Page ${n} 완료`, 'success');
+  }
+
+  function setDrvCell(driveId, n, url) {
+    const cell = document.getElementById(`cell_drv_${driveId}_${n}`);
+    if (!cell) return;
+    cell.classList.remove('uploading'); cell.classList.add('uploaded');
+    const ex = cell.querySelector('img'); if (ex) ex.remove();
+    const img = document.createElement('img');
+    img.src = url; img.dataset.url = url;
+    cell.insertBefore(img, cell.firstChild);
+  }
+
+  async function removeDrvImg(event, driveId, n) {
+    event.stopPropagation();
+    if (sb) for (const ext of ['png','jpg']) await sb.storage.from('ax8-screenshots').remove([`_drive/${driveId}_${n}.${ext}`]);
+    const cell = document.getElementById(`cell_drv_${driveId}_${n}`);
+    const img = cell.querySelector('img'); if (img) img.remove();
+    cell.classList.remove('uploaded');
+    showToast('제거 완료', '');
+  }
+
+  function viewDrvImg(event, driveId, n) {
+    event.stopPropagation();
+    const img = document.getElementById(`cell_drv_${driveId}_${n}`).querySelector('img');
+    if (img) window.open(img.dataset.url, '_blank');
+  }
 
   Object.entries(FXDB_PAGES).forEach(([fxId, pages]) => {
     const grid = document.getElementById(`grid_${fxId}`);
