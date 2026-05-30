@@ -3035,16 +3035,45 @@
     fxrvb:  ['Page 1', 'Page 2', 'Page 3', 'Page 4'],
   };
 
-  // 드라이브 타입 전체 목록 (AX8 실제 리스트)
+  // 드라이브 타입 전체 목록 — { name, origin } (AX8 실제 리스트)
   const DRIVE_TYPES = [
-    'BB Pre', 'Bender Fuzz', 'Bit Crusher', 'Blackglass 7K', 'Blues OD',
-    'Esoteric ACB', 'Esoteric RCB', 'Eternal Love', 'Face Fuzz',
-    'FAS Boost', 'FAS LED-Drive', 'Fat Rat', 'FET Boost', 'FET Preamp',
-    'Full OD', 'Hard Fuzz', 'M-Zone Dist', 'Master Fuzz', 'Micro Boost',
-    'Mid Boost', 'Octave Dist', 'PI Fuzz', 'Plus Dist', 'Rat Dist',
-    'Ruckus', 'SDD Preamp', 'Shimmer Drive', 'Shred Dist', 'Super OD',
-    'T808 Mod', 'T808 OD', 'Tape Dist', 'Timothy', 'Treble Boost',
-    'Tube Drv 3-Knob', 'Tube Drv 4-Knob', 'Zen Master'
+    { name: 'BB Pre',          origin: 'Xotic BB Preamp' },
+    { name: 'Bender Fuzz',     origin: 'Tonebender (클래식 퍼즈 회로)' },
+    { name: 'Bit Crusher',     origin: 'Fractal 자체 설계 (로파이 디지털 디스토션)' },
+    { name: 'Blackglass 7K',   origin: 'Darkglass Electronics Microtubes B7K' },
+    { name: 'Blues OD',        origin: 'Marshall Bluesbreaker' },
+    { name: 'Esoteric ACB',    origin: 'Xotic AC Booster' },
+    { name: 'Esoteric RCB',    origin: 'Xotic RC Booster' },
+    { name: 'Eternal Love',    origin: 'Lovepedal Eternity' },
+    { name: 'Face Fuzz',       origin: 'Dallas Arbiter Fuzz Face' },
+    { name: 'FAS Boost',       origin: 'Fractal 자체 설계 부스트' },
+    { name: 'FAS LED-Drive',   origin: 'Fractal 자체 설계 (LED 클리핑)' },
+    { name: 'Fat Rat',         origin: 'ProCo RAT 수정판 (더 풍성하고 부드럽게)' },
+    { name: 'FET Boost',       origin: 'FET 클리핑 부스터 (MXR Micro Amp 계열)' },
+    { name: 'FET Preamp',      origin: 'FET 프리앰프 회로' },
+    { name: 'Full OD',         origin: 'Fulltone Fulldrive OD' },
+    { name: 'Hard Fuzz',       origin: '60년대 스타일 하드클리핑 퍼즈 (오리지널)' },
+    { name: 'M-Zone Dist',     origin: 'Boss MetalZone MT-2' },
+    { name: 'Master Fuzz',     origin: 'Maestro Fuzztone FZ-1 (Rolling Stones 만족 퍼즈)' },
+    { name: 'Micro Boost',     origin: 'MXR Micro Amp (클린 부스트)' },
+    { name: 'Mid Boost',       origin: 'Fractal 자체 설계 미드 부스트 오버드라이브' },
+    { name: 'Octave Dist',     origin: 'Tycobrahe Octavia (옥타브 디스토션)' },
+    { name: 'PI Fuzz',         origin: 'Electro-Harmonix Big Muff Pi' },
+    { name: 'Plus Dist',       origin: 'MXR Distortion Plus' },
+    { name: 'Rat Dist',        origin: 'ProCo RAT Distortion' },
+    { name: 'Ruckus',          origin: 'Suhr Riot (다용도 하이게인)' },
+    { name: 'SDD Preamp',      origin: 'TC Electronic SDD-3000 딜레이 프리앰프 섹션' },
+    { name: 'Shimmer Drive',   origin: 'Fractal 자체 설계 (Shimmer 계열 오버드라이브)' },
+    { name: 'Shred Dist',      origin: 'Marshall Shredmaster' },
+    { name: 'Super OD',        origin: 'Boss Super Overdrive SD-1' },
+    { name: 'T808 Mod',        origin: 'Ibanez TS-808 Tube Screamer 인기 모드 버전' },
+    { name: 'T808 OD',         origin: 'Ibanez TS-808 Tube Screamer (오리지널)' },
+    { name: 'Tape Dist',       origin: '릴투릴 테이프 데크 오버드라이브 시뮬레이션' },
+    { name: 'Timothy',         origin: 'Paul Cochrane Timmy Overdrive' },
+    { name: 'Treble Boost',    origin: '클래식 트레블 부스터 (Dallas Rangemaster 계열)' },
+    { name: 'Tube Drv 3-Knob', origin: 'Chandler Tube Driver — 12AX7 내장 3노브 (BK Butler)' },
+    { name: 'Tube Drv 4-Knob', origin: 'Chandler Tube Driver — 4노브 버전 (BK Butler)' },
+    { name: 'Zen Master',      origin: 'Hermida Audio Zen Drive (Robben Ford 시그니처)' },
   ];
 
   // Drive 페이지 — 타입별 2슬롯씩
@@ -3052,15 +3081,17 @@
     const container = document.getElementById('grid_fxdrv');
     if (!container) return;
 
-    DRIVE_TYPES.forEach(driveName => {
+    DRIVE_TYPES.forEach(({ name: driveName, origin }) => {
       const driveId = driveName.toLowerCase().replace(/[^a-z0-9]/g, '_');
 
       const block = document.createElement('div');
       block.style.cssText = 'border:1px solid var(--border); margin-bottom:16px;';
 
       const header = document.createElement('div');
-      header.style.cssText = 'padding:9px 14px; background:#0d0d0d; border-bottom:1px solid var(--border); font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:500; color:var(--accent); letter-spacing:0.05em;';
-      header.textContent = driveName;
+      header.style.cssText = 'padding:9px 14px; background:#0d0d0d; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:3px;';
+      header.innerHTML = `
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; color:var(--accent)">${driveName}</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--text-dim); letter-spacing:0.05em">${origin}</span>`;
       block.appendChild(header);
 
       const grid = document.createElement('div');
@@ -3085,7 +3116,7 @@
           if (e.target.id !== inputId) return;
           const file = e.target.files[0];
           if (!file) return;
-          await uploadDrvImg(file, driveId, n, driveName);
+          await uploadDrvImg(file, driveId, n, `${driveName} Page ${n}`);
         });
         grid.appendChild(cell);
       });
