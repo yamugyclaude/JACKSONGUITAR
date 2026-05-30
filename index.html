@@ -2199,7 +2199,7 @@
 
     <!-- AMP PAGES (no data yet) -->
     <div id="amp_friedman_hbe" class="page-section">
-      <div class="section-header"><div class="section-title">Friedman HBE <span class="device-badge ax8">AX8</span></div><div class="section-sub">Hairy Brown Eye · Nick Johnston</div></div>
+      <div class="section-header"><div class="section-title">Friedman HBE <span class="device-badge fx2">Axe-Fx II XL+</span></div><div class="section-sub">Hairy Brown Eye · Nick Johnston</div></div>
       <div class="amp-tabs">
         <button class="amp-tab active" onclick="switchAmpTab('friedman_hbe','screenshots',this)">앰프 스크린샷</button>
         <button class="amp-tab" onclick="switchAmpTab('friedman_hbe','params',this)">앰프 파라미터</button>
@@ -2703,7 +2703,147 @@
           ['Character Amt',       '0.00'],
         ]
       },
-    ]
+    ],
+
+    // ── FRIEDMAN HBE (Axe-Fx II XL+ Ares v2.0 기본값) ──────────────
+    friedman_hbe: [
+      {
+        page: 'Basic',
+        rows: [
+          ['Input Drive',      '5.00'],
+          ['Bass',             '5.00'],
+          ['Mid',              '5.00'],
+          ['Treb',             '5.00'],
+          ['Bright',           '0.00 dB'],
+          ['Presence',         '5.00'],
+          ['Depth',            '5.25'],
+          ['Master Volume',    '4.00'],
+          ['Input Trim',       '1.000'],
+          ['Boost',            'OFF'],
+          ['Cut',              'OFF'],
+          ['Fat',              'OFF'],
+          ['Bright Switch',    'OFF'],
+          ['Bright Cap',       '220.0 pF'],
+          ['Saturation',       'Ideal'],
+          ['Saturation Drive', '4.000'],
+          ['Master Vol Trim',  '1.000'],
+          ['Level (Mixer)',    '-12.0 dB'],
+          ['Input Select',     'Sum L+R'],
+          ['Bypass Mode',      'Thru'],
+        ]
+      },
+      {
+        page: 'GEQ',
+        type: 'geq',
+        meta: [
+          ['EQ Type',     '8 Band Var Q'],
+          ['EQ Location', 'Post Power Amp'],
+        ],
+        bands: [
+          { freq: '63',  val: 0.00 },
+          { freq: '125', val: 0.00 },
+          { freq: '250', val: 0.00 },
+          { freq: '500', val: 0.00 },
+          { freq: '1K',  val: 0.00 },
+          { freq: '2K',  val: 0.00 },
+          { freq: '4K',  val: 0.00 },
+          { freq: '8K',  val: 0.00 },
+        ]
+      },
+      {
+        page: 'Preamp',
+        rows: [
+          ['Preamp Tube Type',    '12AX7 JJ'],
+          ['Preamp Bias',         '0.149'],
+          ['Preamp Hardness',     '6.80'],
+          ['Triode 1 Plate Freq', '40000 Hz'],
+          ['Triode 2 Plate Freq', '9999 Hz'],
+          ['Crunch',              '14.0 %'],
+          ['Tonestack Type',      'Default'],
+          ['Tone Location',       'POST'],
+          ['Tone Freq',           '600.0 Hz'],
+          ['Low Cut Freq',        '500.0 Hz'],
+          ['Hi Cut Freq',         '8400 Hz'],
+          ['Definition',          '0.00'],
+          ['Harmonics',           '0.670'],
+        ]
+      },
+      {
+        page: 'Power Amp',
+        rows: [
+          ['Power Tube Type',    'EL34/6CA7'],
+          ['Negative Feedback',  '7.00'],
+          ['PI Bias Shift',      '70.0 %'],
+          ['Pwr Tube Grid Bias', '0.500'],
+          ['Bias Excursion',     '52.0 %'],
+          ['Cathode Resistance', '0.0 %'],
+          ['Pwr Amp Hardness',   '5.50'],
+          ['Pwr Amp Bias',       '-0.100'],
+          ['Presence Freq',      '1.000'],
+          ['Depth Freq',         '200.0 Hz'],
+          ['MV Location',        'Pre-PI'],
+          ['MV Cap',             '1.0 pF'],
+          ['Dynamic Damping',    '1.60'],
+        ]
+      },
+      {
+        page: 'Power Sply',
+        rows: [
+          ['Supply Sag',       '1.40'],
+          ['AC Line Freq',     '60 Hz'],
+          ['B+ Time Constant', '7.00 ms'],
+          ['Variac',           '100.0 %'],
+          ['Tremolo Freq',     '0.200 Hz'],
+          ['Tremolo Depth',    '0.0 %'],
+          ['Preamp Sag',       'ON'],
+          ['Power Type',       'DC'],
+        ]
+      },
+      {
+        page: 'Speaker',
+        rows: [
+          ['Low Res Freq',     '115.0 Hz'],
+          ['Low Res Q',        '1.787'],
+          ['Low Resonance',    '5.83'],
+          ['Hi Freq',          '1200 Hz'],
+          ['Hi Freq Slope',    '3.680'],
+          ['Hi Resonance',     '7.50'],
+          ['XFormer Low Freq', '10.0 Hz'],
+          ['XFormer Hi Freq',  '24000 Hz'],
+          ['XFormer Match',    '1.000'],
+          ['XFormer Drive',    '1.20'],
+        ]
+      },
+      {
+        page: 'Spkr Drv',
+        rows: [
+          ['Speaker Drive',    '0.00'],
+          ['Speaker Compr',    '3.00'],
+          ['Speaker Compl',    '50.0 %'],
+          ['Motor Time Const', '100.0 ms'],
+        ]
+      },
+      {
+        page: 'Dynamics',
+        rows: [
+          ['Dynamic Presence',    '0.00'],
+          ['Dynamic Depth',       '0.00'],
+          ['Preamp Dynamics',     '0.00'],
+          ['Pick Attack',         '0.0 %'],
+          ['Preamp CF Compress',  '77.4 %'],
+          ['Preamp CF Grid Clip', '50.0 %'],
+          ['Preamp CF Hardness',  '7.50'],
+          ['Out Comp Type',       'OUTPUT'],
+          ['Out Comp Amount',     '0.00'],
+          ['Out Comp Threshold',  '-40.0 dB'],
+          ['Out Comp Clarity',    '6.51'],
+          ['Character Type',      'Peaking'],
+          ['Character Freq',      '1000 Hz'],
+          ['Character Q',         '0.707'],
+          ['Character Amt',       '0.00'],
+        ]
+      },
+    ],
   };
 
   // 컴프/드라이브 탭 제거됨 — FX DB로 통합
@@ -3191,6 +3331,50 @@
         advanced: [
           ['Slew Limit',   '0.00'],
           ['Bias',         '0.025'],
+          ['Bit Reduce',   '0'],
+          ['Sample Rate',  '48000 Hz'],
+        ],
+      },
+      timothy: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '200.0 Hz'],
+          ['High Cut',     '20000 Hz'],
+          ['Clip Type',    'Silicon'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+        advanced: [
+          ['Slew Limit',   '0.00'],
+          ['Bias',         '0.010'],
+          ['Bit Reduce',   '0'],
+          ['Sample Rate',  '48000 Hz'],
+        ],
+      },
+      esoteric_rcb: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '20.0 Hz'],
+          ['High Cut',     '18000 Hz'],
+          ['Clip Type',    'Silicon'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+        advanced: [
+          ['Slew Limit',   '0.00'],
+          ['Bias',         '0.010'],
           ['Bit Reduce',   '0'],
           ['Sample Rate',  '48000 Hz'],
         ],
