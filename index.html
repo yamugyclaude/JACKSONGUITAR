@@ -2457,16 +2457,9 @@
       const { data, error } = await sb.storage.from('ax8-screenshots').list(amp);
       if (error || !data) continue;
       data.forEach(file => {
-        const fxMatch = file.name.match(/^(comp|drive1|drive2)_(.+)\.(png|jpg)$/i);
-        if (fxMatch) {
-          const [, fxKey, key] = fxMatch;
-          const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`${amp}/${file.name}`);
-          if (u) setFxCell(fxKey, amp, key, u.publicUrl);
-        } else {
-          const key = file.name.replace(/\.(png|jpg)$/i, '');
-          const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`${amp}/${file.name}`);
-          if (u) setCell(amp, key, u.publicUrl);
-        }
+        const key = file.name.replace(/\.(png|jpg)$/i, '');
+        const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`${amp}/${file.name}`);
+        if (u) setCell(amp, key, u.publicUrl);
       });
     }
 
