@@ -1834,36 +1834,96 @@
 
       <!-- FRACTAL -->
       <div id="timmons-fractal" class="artist-tab-content">
+
         <div class="info-block">
-          <div class="info-header">Fractal 매핑 — 핵심 원칙</div>
-          <div class="info-row"><span class="info-key">앰프 모델</span><span class="info-val">TX Star Clean (Lonestar 클린) / TX Star Lead (Lonestar 리드 또는 Stiletto)</span></div>
-          <div class="info-row"><span class="info-key">기본 원칙</span><span class="info-val">앰프를 완전 클린으로 유지 → 드라이브는 전적으로 페달 블록으로</span></div>
-          <div class="info-row"><span class="info-key">드라이브 블록</span><span class="info-val">Tube Driver 또는 TS808 블록 — 게인 낮게 / 레벨 높게</span></div>
-          <div class="info-row"><span class="info-key">컴프 블록</span><span class="info-val">앰프 전단에 — 클린 부스터 겸 다이나믹 컨트롤</span></div>
-          <div class="info-row"><span class="info-key">딜레이 블록</span><span class="info-val">스테레오 딜레이 필수 — L: 375ms / R: 500ms</span></div>
-          <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">Mesa 2x12 Recto + Celestion V30 기반 IR — York Audio Mesa V30 추천</span></div>
+          <div class="info-header">핵심 원칙 — 공장초기값에서 Andy 세팅으로</div>
+          <div class="info-row"><span class="info-key">기본 구조</span><span class="info-val">앰프 완전 클린 → 컴프가 앰프를 밀어줌 → 드라이브 페달이 게인 전담 → 딜레이가 톤의 핵심</span></div>
+          <div class="info-row"><span class="info-key">출처 신뢰도</span><span class="info-val">Mesa/Boogie 공식 인터뷰(2010) + Guitar Chalk + Fractal Forum 커뮤니티 검증</span></div>
         </div>
 
         <div class="info-block">
-          <div class="info-header">TX Star Clean 앰프 세팅 포인트</div>
-          <div class="info-row"><span class="info-key">Bass</span><span class="info-val">낮게 (2~3) — Lonestar의 과도한 저역 제어</span></div>
-          <div class="info-row"><span class="info-key">Mid / Treble</span><span class="info-val">12시 기준으로 시작, 취향에 따라 조절</span></div>
-          <div class="info-row"><span class="info-key">Master Volume</span><span class="info-val">낮게 — 클린 헤드룸 유지</span></div>
-          <div class="info-row"><span class="info-key">Bright Switch</span><span class="info-val">ON — 클린 채널 에어감</span></div>
-          <div class="info-row"><span class="info-key">Power Tube</span><span class="info-val">6L6 또는 EL34 선택 — 6L6은 따뜻하고 묵직, EL34는 밝고 풍성</span></div>
+          <div class="info-header">TX Star Clean — Basic 페이지 조정값</div>
+          <div class="info-row"><span class="info-key">Input Drive</span><span class="info-val">5.00 → <strong style="color:var(--accent)">4.0</strong> — 완전 클린 헤드룸 확보</span></div>
+          <div class="info-row"><span class="info-key">Bass</span><span class="info-val">5.00 → <strong style="color:var(--accent)">2.5</strong> — "Bass 12시보다 조금 아래, 이 앰프는 저역이 많다" (Mesa 인터뷰)</span></div>
+          <div class="info-row"><span class="info-key">Mid</span><span class="info-val">5.00 → <strong style="color:var(--accent)">6.0</strong> — 12시 기준, 미드 풍성하게</span></div>
+          <div class="info-row"><span class="info-key">Treble</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.5</strong> — 12시 기준에서 약간 위</span></div>
+          <div class="info-row"><span class="info-key">Presence</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.5</strong> — 에어감 소량 추가</span></div>
+          <div class="info-row"><span class="info-key">Bright Switch</span><span class="info-val">ON → <strong style="color:var(--success)">ON 유지</strong></span></div>
+          <div class="info-row"><span class="info-key">FX Loop</span><span class="info-val">항상 켜둠 — "연결 여부와 관계없이 항상 ON. Return 노브 1시 방향" (Mesa 인터뷰)</span></div>
         </div>
 
         <div class="info-block">
-          <div class="info-header">Fractal 커뮤니티 참고 (2024)</div>
-          <div class="info-row"><span class="info-key">That Pedal Show 2024</span><span class="info-val">Andy Timmons 본인이 Fractal Axe-Fx 사용 확인 — TX Lonestar + 컴프 + HALO 딜레이 기반 8개 씬</span></div>
-          <div class="info-row"><span class="info-key">Axe-Change 프리셋</span><span class="info-val">sprpedals의 "SPR Andy Timmons FM9" — That Pedal Show 2024 리그 기반</span></div>
-          <div class="info-row"><span class="info-key">커뮤니티 팁</span><span class="info-val">앰프 완전 클린 + 컴프로 슬램 → 드라이브 페달이 전부. 씬별로 컴프/드라이브 조합 변화</span></div>
+          <div class="info-header">Compressor — Optical 1 조정값</div>
+          <div class="info-row"><span class="info-key">역할</span><span class="info-val">게인 압축 아님 — 앰프와 드라이브를 밀어주는 <strong>인풋 부스터</strong></span></div>
+          <div class="info-row"><span class="info-key">Comp</span><span class="info-val">5.00 → <strong style="color:var(--accent)">3.5</strong> — 가볍게, 다이나믹 유지</span></div>
+          <div class="info-row"><span class="info-key">Attack</span><span class="info-val">2.000ms → <strong style="color:var(--accent)">유지</strong></span></div>
+          <div class="info-row"><span class="info-key">Release</span><span class="info-val">100ms → <strong style="color:var(--accent)">80ms</strong> — 피킹 터치 살리기</span></div>
+          <div class="info-row"><span class="info-key">Level</span><span class="info-val">0.0 dB → <strong style="color:var(--accent)">+2.0 dB</strong> — 앰프 인풋 밀어주기</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Drive 1 — Tube Drv 3-Knob (BK Butler Tube Driver) 조정값</div>
+          <div class="info-row"><span class="info-key">핵심 원칙</span><span class="info-val">"Keep Drive low and turn down the tone controls" — Yek's Guide (Fractal 공식 가이드)</span></div>
+          <div class="info-row"><span class="info-key">Clip Type</span><span class="info-val">LV Tube (기본값 유지) — 12AX7 진공관 클리핑 재현</span></div>
+          <div class="info-row"><span class="info-key">Drive</span><span class="info-val">5.00 → <strong style="color:var(--accent)">3.0</strong> — 낮게. Andy 항상 Drive 낮게 사용</span></div>
+          <div class="info-row"><span class="info-key">Tone</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.5</strong> — 약간 밝게, 공간 뚫기</span></div>
+          <div class="info-row"><span class="info-key">Level</span><span class="info-val">5.00 → <strong style="color:var(--accent)">7.5</strong> — 높게. 앰프를 미는 것이 목적</span></div>
+          <div class="info-row"><span class="info-key">Low Cut</span><span class="info-val">800.0 Hz → <strong style="color:var(--accent)">유지</strong> — 원 회로 특성 그대로</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Drive 2 — T808 OD (TS-808 계열) 조정값</div>
+          <div class="info-row"><span class="info-key">핵심 원칙</span><span class="info-val">"Low Drive, High Level" — yek 추천: Drive 0.50, Level 7.0 (Fractal 공식 가이드)</span></div>
+          <div class="info-row"><span class="info-key">역할</span><span class="info-val">미드 부스터 — TS 특유의 미드 험프(mid hump)로 기타를 믹스 앞으로</span></div>
+          <div class="info-row"><span class="info-key">Clip Type</span><span class="info-val">Silicon — TS9 회로 그대로</span></div>
+          <div class="info-row"><span class="info-key">Drive</span><span class="info-val">5.00 → <strong style="color:var(--accent)">2.0</strong> — 매우 낮게. 게인 목적 아님</span></div>
+          <div class="info-row"><span class="info-key">Tone</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.0</strong> — 중립 유지</span></div>
+          <div class="info-row"><span class="info-key">Level</span><span class="info-val">5.00 → <strong style="color:var(--accent)">7.0</strong> — 높게. TS의 본질은 레벨 부스트</span></div>
+          <div class="info-row"><span class="info-key">Low Cut</span><span class="info-val">700.0 Hz → <strong style="color:var(--accent)">유지</strong> — TS9 원 회로의 입력 커패시터 특성</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Delay — Dual Delay 조정값</div>
+          <div class="info-row"><span class="info-key">Time L</span><span class="info-val">500ms → <strong style="color:var(--accent)">375ms</strong> — 확정 (스크린샷 + 인터뷰 교차 확인)</span></div>
+          <div class="info-row"><span class="info-key">Time R</span><span class="info-val">500ms → <strong style="color:var(--success)">500ms 유지</strong></span></div>
+          <div class="info-row"><span class="info-key">효과</span><span class="info-val">375+500ms 조합 = 도티드 8th + 쿼터 크로스리듬 → "노트 주변의 아우라"</span></div>
+          <div class="info-row"><span class="info-key">Feedback</span><span class="info-val">20% → <strong style="color:var(--success)">유지</strong> — 2~3번 반복</span></div>
+          <div class="info-row"><span class="info-key">Mix</span><span class="info-val">15% → <strong style="color:var(--success)">유지</strong> — 노트를 덮지 않는 수준</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Reverb — Small Spring 조정값</div>
+          <div class="info-row"><span class="info-key">근거</span><span class="info-val">Mesa Lonestar Classic 내장 스프링 리버브 = 소형 탱크, 아주 살짝</span></div>
+          <div class="info-row"><span class="info-key">Time</span><span class="info-val">2.00 sec → <strong style="color:var(--accent)">1.5 sec</strong> — 짧고 자연스럽게</span></div>
+          <div class="info-row"><span class="info-key">Size</span><span class="info-val">38.0 → <strong style="color:var(--accent)">28</strong> — 소형 탱크</span></div>
+          <div class="info-row"><span class="info-key">Mix</span><span class="info-val">20% → <strong style="color:var(--accent)">12%</strong> — 공간감만, 딜레이가 주역</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">캐비넷 — York Audio MES 212 V30</div>
+          <div class="info-row"><span class="info-key">파일</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace">YA MES 212 V30 Mix 02.wav (SM57 + M160)</span></div>
+          <div class="info-row"><span class="info-key">이유</span><span class="info-val">Andy가 녹음에 실제로 M160 사용 (Mesa/Boogie 인터뷰 2010 확인)</span></div>
+          <div class="info-row"><span class="info-key">경로</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace">MES 212 V30 v1.01 / 48k / Mixes / Mix 02.wav</span></div>
+          <div class="info-row"><span class="info-key">대안</span><span class="info-val">Mix 01 (SM57 + R-121) — 더 일반적인 출발점</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Fractal 커뮤니티 검증 (2024)</div>
+          <div class="info-row"><span class="info-key">That Pedal Show 2024</span><span class="info-val">Andy 본인 Fractal 사용 확인. TX Lonestar + 컴프 + HALO 딜레이, 8씬 구성</span></div>
+          <div class="info-row"><span class="info-key">Axe-Change</span><span class="info-val">sprpedals "SPR Andy Timmons FM9" (1,331 다운로드) — 2024 That Pedal Show 기반</span></div>
+          <div class="info-row"><span class="info-key">커뮤니티 핵심 팁</span><span class="info-val">"앰프 완전 클린 + 컴프로 슬램. 씬별 컴프/드라이브 ON/OFF 조합으로 다양한 게인 확보"</span></div>
         </div>
 
         <div class="quote-block">
           "The amp is clean and fairly quiet. A compressor really slams the amp or drive pedals to get differing flavours of gain."
-          <span class="quote-source">— Fractal Audio Forum, Andy Timmons preset thread 2024</span>
+          <span class="quote-source">— sprpedals, Fractal Audio Forum 2024 (Andy Timmons That Pedal Show 프리셋 기반)</span>
         </div>
+
+        <div class="quote-block">
+          "Keep Drive low and turn down Bass and Treble to 0, going into a crunchy amp. That's where the Tube Driver model starts to shine."
+          <span class="quote-source">— yek, Yek's Guide to the Fractal Audio Drive Models (공식 Fractal 커뮤니티 가이드)</span>
+        </div>
+
       </div>
 
       <!-- SOURCES -->
