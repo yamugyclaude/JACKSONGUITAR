@@ -1497,27 +1497,57 @@
     <div id="fx_comp" class="page-section">
       <div class="section-header">
         <div class="section-title">Compressor</div>
-        <div class="section-sub">FX DB · 아티스트별 컴프레서 세팅</div>
+        <div class="section-sub">FX DB · COMPRESSOR BLOCK</div>
       </div>
-      <div id="fxdb_comp_grid"></div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('fxcomp','screenshot',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('fxcomp','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshot_fxcomp" class="amp-tab-content active">
+        <div class="upload-hint">Axe-Edit에서 <strong>Compressor 블록</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div class="page-grid" id="grid_fxcomp" style="grid-template-columns: repeat(4,1fr)"></div>
+      </div>
+      <div id="tab_params_fxcomp" class="amp-tab-content">
+        <div id="params_fxcomp" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
+      </div>
     </div>
 
     <!-- FX DB: DRIVE 1 -->
     <div id="fx_drive1" class="page-section">
       <div class="section-header">
         <div class="section-title">Drive 1</div>
-        <div class="section-sub">FX DB · 아티스트별 드라이브 1 세팅</div>
+        <div class="section-sub">FX DB · DRIVE 1 BLOCK</div>
       </div>
-      <div id="fxdb_drive1_grid"></div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('fxdrv1','screenshot',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('fxdrv1','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshot_fxdrv1" class="amp-tab-content active">
+        <div class="upload-hint">Axe-Edit에서 <strong>Drive 1 블록</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div class="page-grid" id="grid_fxdrv1" style="grid-template-columns: repeat(4,1fr)"></div>
+      </div>
+      <div id="tab_params_fxdrv1" class="amp-tab-content">
+        <div id="params_fxdrv1" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
+      </div>
     </div>
 
     <!-- FX DB: DRIVE 2 -->
     <div id="fx_drive2" class="page-section">
       <div class="section-header">
         <div class="section-title">Drive 2</div>
-        <div class="section-sub">FX DB · 아티스트별 드라이브 2 세팅</div>
+        <div class="section-sub">FX DB · DRIVE 2 BLOCK</div>
       </div>
-      <div id="fxdb_drive2_grid"></div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('fxdrv2','screenshot',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('fxdrv2','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshot_fxdrv2" class="amp-tab-content active">
+        <div class="upload-hint">Axe-Edit에서 <strong>Drive 2 블록</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div class="page-grid" id="grid_fxdrv2" style="grid-template-columns: repeat(4,1fr)"></div>
+      </div>
+      <div id="tab_params_fxdrv2" class="amp-tab-content">
+        <div id="params_fxdrv2" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
+      </div>
     </div>
 
     <!-- FX GUIDE -->
@@ -2978,88 +3008,82 @@
     document.getElementById(`tab_${tab}_${amp}`).classList.add('active');
   }
 
-  /* ── FX DB 페이지 빌드 ── */
-  const FXDB_AMPS = [
-    { id: 'friedman_hbe',  label: 'Friedman HBE',   artist: 'Nick Johnston',  badge: 'ax8' },
-    { id: 'dirty_shirley', label: 'Dirty Shirley',  artist: 'Nick Johnston',  badge: 'ax8' },
-    { id: 'two_stone',     label: 'Two Stone J35',  artist: 'John Mayer',     badge: 'ax8' },
-    { id: 'deluxe_verb',   label: 'Deluxe Verb Nrm',artist: 'John Mayer',     badge: 'ax8' },
-    { id: 'tx_star_clean', label: 'TX Star Clean',  artist: 'Andy Timmons',   badge: 'fx2' },
-    { id: 'tx_star_lead',  label: 'TX Star Lead',   artist: 'Andy Timmons',   badge: 'fx2' },
-  ];
+  /* ── FX DB 그리드 빌드 ── */
+  const FXDB_PAGES = {
+    fxcomp: ['Main'],
+    fxdrv1: ['Drive'],
+    fxdrv2: ['Drive'],
+  };
 
-  function buildFxDbPage(fxKey, containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    FXDB_AMPS.forEach(amp => {
-      const section = document.createElement('div');
-      section.style.cssText = 'border:1px solid var(--border); margin-bottom:20px;';
-
-      // 헤더
-      const header = document.createElement('div');
-      header.style.cssText = 'padding:10px 16px; background:#0d0d0d; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px;';
-      header.innerHTML = `
-        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; color:var(--text)">${amp.label}</span>
-        <span class="device-badge ${amp.badge}">${amp.badge === 'fx2' ? 'Axe-Fx II XL+' : 'AX8'}</span>
-        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-dim); margin-left:4px">${amp.artist}</span>`;
-      section.appendChild(header);
-
-      // 업로드 힌트
-      const hint = document.createElement('div');
-      hint.className = 'upload-hint';
-      hint.style.margin = '12px 16px 8px';
-      const fxLabel = fxKey === 'comp' ? 'Compressor' : fxKey === 'drive1' ? 'Drive 1' : 'Drive 2';
-      hint.innerHTML = `Axe-Edit에서 <strong>${fxLabel} 블록</strong> 스크린샷을 클릭해서 업로드합니다`;
-      section.appendChild(hint);
-
-      // 그리드 (1칸)
-      const gridWrap = document.createElement('div');
-      gridWrap.style.padding = '0 16px 16px';
-      const grid = document.createElement('div');
-      grid.style.cssText = 'display:grid; grid-template-columns: 200px 1fr; gap:16px; align-items:start;';
-
-      // 업로드 셀
-      const cellId = `cell_${fxKey}_${amp.id}_main`;
-      const inputId = `input_${fxKey}_${amp.id}_main`;
-      const cellDiv = document.createElement('div');
-      cellDiv.className = 'page-cell';
-      cellDiv.id = cellId;
-      cellDiv.style.aspectRatio = '4/3';
-      cellDiv.innerHTML = `
+  Object.entries(FXDB_PAGES).forEach(([fxId, pages]) => {
+    const grid = document.getElementById(`grid_${fxId}`);
+    if (!grid) return;
+    pages.forEach(page => {
+      const key = page.toLowerCase();
+      const cell = document.createElement('div');
+      cell.className = 'page-cell';
+      cell.id = `cell_${fxId}_${key}`;
+      cell.innerHTML = `
         <span class="cell-icon">＋</span>
-        <span class="cell-label">Main</span>
-        <input type="file" accept="image/png,image/jpeg" id="${inputId}">
+        <span class="cell-label">${page}</span>
+        <input type="file" accept="image/png,image/jpeg" id="input_${fxId}_${key}">
         <div class="cell-overlay">
-          <button class="btn-view" onclick="viewFxImage(event,'${fxKey}','${amp.id}','main')">보기</button>
-          <button class="btn-remove" onclick="removeFxImage(event,'${fxKey}','${amp.id}','main')">제거</button>
+          <button class="btn-view" onclick="viewFxDbImage(event,'${fxId}','${key}')">보기</button>
+          <button class="btn-remove" onclick="removeFxDbImage(event,'${fxId}','${key}')">제거</button>
         </div>`;
-      cellDiv.addEventListener('click', () => document.getElementById(inputId).click());
+      cell.addEventListener('click', () => document.getElementById(`input_${fxId}_${key}`).click());
+      grid.appendChild(cell);
+
       document.addEventListener('change', async (e) => {
-        if (e.target.id !== inputId) return;
+        if (e.target.id !== `input_${fxId}_${key}`) return;
         const file = e.target.files[0];
         if (!file) return;
-        await uploadFxImage(file, fxKey, amp.id, 'main', fxLabel);
+        await uploadFxDbImage(file, fxId, key, page);
       });
-
-      // 파라미터 영역
-      const paramDiv = document.createElement('div');
-      paramDiv.id = `params_${fxKey}_${amp.id}`;
-      paramDiv.className = 'no-params';
-      paramDiv.style.height = '100%';
-      paramDiv.textContent = '업로드 후 파라미터가 여기에 표시됩니다';
-
-      grid.appendChild(cellDiv);
-      grid.appendChild(paramDiv);
-      gridWrap.appendChild(grid);
-      section.appendChild(gridWrap);
-      container.appendChild(section);
     });
+  });
+
+  async function uploadFxDbImage(file, fxId, key, label) {
+    const cell = document.getElementById(`cell_${fxId}_${key}`);
+    cell.classList.add('uploading');
+    showToast(`${label} 업로드 중...`, '');
+    if (!sb) { showToast('Supabase 연결 없음', 'error'); cell.classList.remove('uploading'); return; }
+    const ext = file.type === 'image/png' ? 'png' : 'jpg';
+    const path = `_fxdb/${fxId}_${key}.${ext}`;
+    const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
+    if (error) { showToast('실패: ' + error.message, 'error'); cell.classList.remove('uploading'); return; }
+    const { data } = sb.storage.from('ax8-screenshots').getPublicUrl(path);
+    setFxDbCell(fxId, key, data.publicUrl);
+    showToast(`✓ ${label} 업로드 완료`, 'success');
   }
 
-  buildFxDbPage('comp',   'fxdb_comp_grid');
-  buildFxDbPage('drive1', 'fxdb_drive1_grid');
-  buildFxDbPage('drive2', 'fxdb_drive2_grid');
+  function setFxDbCell(fxId, key, url) {
+    const cell = document.getElementById(`cell_${fxId}_${key}`);
+    if (!cell) return;
+    cell.classList.remove('uploading');
+    cell.classList.add('uploaded');
+    const existing = cell.querySelector('img');
+    if (existing) existing.remove();
+    const img = document.createElement('img');
+    img.src = url; img.dataset.url = url;
+    cell.insertBefore(img, cell.firstChild);
+  }
+
+  async function removeFxDbImage(event, fxId, key) {
+    event.stopPropagation();
+    if (sb) for (const ext of ['png','jpg']) await sb.storage.from('ax8-screenshots').remove([`_fxdb/${fxId}_${key}.${ext}`]);
+    const cell = document.getElementById(`cell_${fxId}_${key}`);
+    const img = cell.querySelector('img');
+    if (img) img.remove();
+    cell.classList.remove('uploaded');
+    showToast('제거 완료', '');
+  }
+
+  function viewFxDbImage(event, fxId, key) {
+    event.stopPropagation();
+    const img = document.getElementById(`cell_${fxId}_${key}`).querySelector('img');
+    if (img) window.open(img.dataset.url, '_blank');
+  }
   /* ── END FX DB ── */
 
   function switchArtistTab(artist, tab, btn) {
