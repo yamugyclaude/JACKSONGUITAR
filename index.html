@@ -3881,25 +3881,47 @@
         date: '2026-05-30',
         title: 'Andy Timmons — 기준 세팅 확정 (Axe-Fx II XL+)',
         status: 'confirmed',
-        device: 'Axe-Fx II XL+ (Ares v2.0) · Suhr Standard (DSH+ 브릿지)',
+        device: 'Axe-Fx II XL+ (Ares v2.0) · Suhr Standard (DSH+ 브릿지) · 프리셋 660번 저장',
         changes: [
+          // ── COMPRESSOR ──
           ['Optical 1 / Comp',              '5.00',   '3.5',    '다이나믹 유지하면서 인풋 부스트'],
           ['Optical 1 / Level',             '0.0 dB', '+3.0 dB','앰프 밀어주기'],
+          ['Optical 1 / Attack',            '2.000ms','2.000ms','유지'],
+          ['Optical 1 / Release',           '100ms',  '80ms',   '피킹 터치 살리기'],
+          // ── DRIVE 1 ──
           ['Tube Drv 3-Knob / Drive',       '5.00',   '4.5',    '볼륨 7~8에서도 드라이브 확보 (Andy 베이스라인)'],
           ['Tube Drv 3-Knob / Tone',        '5.00',   '6.0',    '엣지와 자연스러움 균형'],
           ['Tube Drv 3-Knob / Level',       '5.00',   '7.0',    '앰프 부스터 역할'],
+          ['Tube Drv 3-Knob / Low Cut',     '800Hz',  '800Hz',  '유지 — 원 회로 특성'],
+          ['Tube Drv 3-Knob / Clip Type',   'LV Tube','LV Tube','유지 — 12AX7 진공관 클리핑'],
+          // ── DRIVE 2 ──
           ['T808 OD / Drive',               '5.00',   '2.0',    '미드 부스터 역할만'],
+          ['T808 OD / Tone',                '5.00',   '5.0',    '중립 유지'],
           ['T808 OD / Level',               '5.00',   '7.0',    '미드 부스트 레벨'],
-          ['TX Star Clean / Bass',          '5.00',   '2.5',    'Lonestar 저역 과다 제어'],
+          ['T808 OD / Low Cut',             '700Hz',  '700Hz',  '유지 — TS9 원 회로'],
+          ['T808 OD / High Cut',            '880Hz',  '1500Hz', '고역 하모닉 열어줌 — 드라이브 엣지'],
+          ['T808 OD / Clip Type',           'Silicon','Silicon','유지 — TS9 대칭 클리핑'],
+          // ── AMP TX Star Clean ──
+          ['TX Star Clean / Input Drive',   '5.00',   '4.0',    '완전 클린 헤드룸 확보'],
+          ['TX Star Clean / Bass',          '5.00',   '2.5',    'Lonestar 저역 과다 제어 (Mesa 인터뷰)'],
           ['TX Star Clean / Mid',           '5.00',   '6.0',    '미드 풍성하게'],
           ['TX Star Clean / Treble',        '5.00',   '6.5',    '자연스러운 엣지'],
           ['TX Star Clean / Presence',      '5.00',   '5.5',    '7.0은 너무 날카로움 → 5.5로 균형'],
+          ['TX Star Clean / Bright Switch', 'ON',     'ON',     '유지'],
           ['TX Star Clean / Pick Attack',   '0.0%',   '10%',    'Dynamics — 자연스러운 어택 반응'],
           ['TX Star Clean / Preamp Dyn.',   '0.0%',   '0%',     '소리 부드럽게 만들어서 제거'],
-          ['Dual Delay / Time L',           '500ms',  '375ms',  '확정'],
+          // ── DELAY ──
+          ['Dual Delay / Time L',           '500ms',  '375ms',  '확정 — 스크린샷 + Mesa 인터뷰'],
+          ['Dual Delay / Time R',           '500ms',  '500ms',  '유지'],
+          ['Dual Delay / Feedback L→L',     '20%',    '20%',    '유지 — 2~3회 반복'],
+          ['Dual Delay / Mix',              '15%',    '15%',    '유지 — 노트 주변 아우라'],
+          // ── REVERB ──
           ['Small Spring / Time',           '2.00sec','1.5sec', 'Mesa Lonestar 소형 탱크'],
           ['Small Spring / Size',           '38.0',   '28',     '소형 스프링'],
-          ['Small Spring / Mix',            '20%',    '12%',    '딜레이가 주역'],
+          ['Small Spring / Mix',            '20%',    '12%',    '딜레이가 주역, 리버브는 공간감만'],
+          // ── CABINET ──
+          ['Cabinet / IR',                  '-',      'YA MES 212 V30 Mix 02','SM57+M160 — Andy 녹음 마이크 조합'],
+          // ── GUITAR ──
           ['기타 볼륨 노브',                '10',     '7~8',    'Andy 방식 — 볼륨 10은 솔로 부스트용'],
         ],
         feedback: '소리 좋다. 이게 기준 세팅이 될 것 같다. 자연스러우면서 엣지도 있음.',
