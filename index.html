@@ -1139,9 +1139,33 @@
         </div>
         <div class="gear-block">
           <div class="gear-block-title">Guitar — Suhr Standard</div>
-          <div class="gear-item"><span class="gear-key">픽업</span><span class="gear-val">SSH+ / V63+</span></div>
-          <div class="gear-item"><span class="gear-key">톤 노브 풀업</span><span class="gear-val">SSS 코일스플릿</span></div>
-          <div class="gear-item"><span class="gear-key">임피던스</span><span class="gear-val">험버커 250k / 싱글 125k</span></div>
+          <div class="gear-item"><span class="gear-key">Serial #</span><span class="gear-val">14712 (JST Order #14712 · 2011.05.06)</span></div>
+          <div class="gear-item"><span class="gear-key">바디</span><span class="gear-val">알더 + 3/16 퀄트 메이플 탑</span></div>
+          <div class="gear-item"><span class="gear-key">넥</span><span class="gear-val">로스티드 버즈아이 메이플 1피스 4A</span></div>
+          <div class="gear-item"><span class="gear-key">넥 프로파일</span><span class="gear-val">Soft Medium V .840-.920 / 컴파운드 10"-14"R</span></div>
+          <div class="gear-item"><span class="gear-key">너트</span><span class="gear-val">Tusq 1.650"</span></div>
+          <div class="gear-item"><span class="gear-key">프렛</span><span class="gear-val">Heavy Stainless Steel</span></div>
+          <div class="gear-item"><span class="gear-key">브릿지</span><span class="gear-val">510 2-Post Solid Saddles (스틸 블록)</span></div>
+          <div class="gear-item"><span class="gear-key">튜너</span><span class="gear-val">Sperzel Locking</span></div>
+          <div class="gear-item"><span class="gear-key">브릿지 픽업</span><span class="gear-val">JST DSH+ 험버커 (블랙) — 더블 스크류, 따뜻하고 크리미</span></div>
+          <div class="gear-item"><span class="gear-key">미들/넥 픽업</span><span class="gear-val">JST ML 싱글코일 (화이트) = V63+ 구 명칭</span></div>
+          <div class="gear-item"><span class="gear-key">일렉트로닉스</span><span class="gear-val">Volume · Tone · 5-way · Push-pull 브릿지 코일스플릿</span></div>
+          <div class="gear-item"><span class="gear-key">줄</span><span class="gear-val">.010-.046 Elixir NanoWeb (Andy Timmons과 동일)</span></div>
+          <div class="gear-item"><span class="gear-key">피니쉬</span><span class="gear-val">Trans Blue Denim/Slate · 블랙 백 · 스크레이프드 바인딩</span></div>
+          <div class="gear-item"><span class="gear-key">옵션</span><span class="gear-val">Abalone Face · Side Dots · Logo · 글로스 헤드스탁</span></div>
+          <!-- 스펙시트 원본 이미지 업로드 슬롯 -->
+          <div style="padding:10px 0">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px">딜러 오더 스펙시트 원본</div>
+            <div class="page-cell" id="cell_doc_suhr_specsheet" style="aspect-ratio:3/4;max-width:200px"
+              onclick="document.getElementById('input_doc_suhr_specsheet').click()">
+              <span class="cell-icon">＋</span>
+              <span class="cell-label">스펙시트 사진</span>
+              <input type="file" accept="image/*" id="input_doc_suhr_specsheet">
+              <div class="cell-overlay">
+                <button class="btn-view" onclick="event.stopPropagation();const i=document.getElementById('cell_doc_suhr_specsheet').querySelector('img');if(i)window.open(i.dataset.url,'_blank')">보기</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="gear-block">
           <div class="gear-block-title">Guitar — Gibson ES-339</div>
@@ -2685,8 +2709,46 @@
   // 컴프/드라이브 탭 제거됨 — FX DB로 통합
 
   // Load existing images from Supabase on page load
+  // 문서 이미지 업로드 (스펙시트 등)
+  document.addEventListener('change', async (e) => {
+    if (e.target.id !== 'input_doc_suhr_specsheet') return;
+    const file = e.target.files[0]; if (!file) return;
+    if (!sb) { showToast('❌ Supabase 연결 안됨', 'error'); return; }
+    const ext = file.type.includes('png') ? 'png' : 'jpg';
+    const path = `docs/suhr_specsheet.${ext}`;
+    const cell = document.getElementById('cell_doc_suhr_specsheet');
+    cell.classList.add('uploading');
+    showToast('스펙시트 업로드 중...', '');
+    const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
+    if (error) { showToast('실패: ' + error.message, 'error'); cell.classList.remove('uploading'); return; }
+    const { data } = sb.storage.from('ax8-screenshots').getPublicUrl(path);
+    cell.classList.remove('uploading'); cell.classList.add('uploaded');
+    const ex = cell.querySelector('img'); if (ex) ex.remove();
+    const img = document.createElement('img');
+    img.src = data.publicUrl; img.dataset.url = data.publicUrl;
+    img.style.cssText = 'width:100%;height:100%;object-fit:contain;position:absolute;top:0;left:0;background:#0d0d0d;';
+    cell.insertBefore(img, cell.firstChild);
+    showToast('✅ 스펙시트 업로드 완료', 'success');
+  });
+
   window.addEventListener('load', async () => {
     if (!sb) return;
+
+    // 0. 문서 이미지 로드
+    const { data: docData } = await sb.storage.from('ax8-screenshots').list('docs');
+    (docData || []).forEach(file => {
+      const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`docs/${file.name}`);
+      if (file.name.includes('suhr_specsheet') && u) {
+        const cell = document.getElementById('cell_doc_suhr_specsheet');
+        if (cell) {
+          cell.classList.add('uploaded');
+          const img = document.createElement('img');
+          img.src = u.publicUrl; img.dataset.url = u.publicUrl;
+          img.style.cssText = 'width:100%;height:100%;object-fit:contain;position:absolute;top:0;left:0;background:#0d0d0d;';
+          cell.insertBefore(img, cell.firstChild);
+        }
+      }
+    });
 
     // 1. 앰프 페이지 이미지 (amp/page.png 및 amp/fxkey_page.png)
     for (const amp of AMPS) {
