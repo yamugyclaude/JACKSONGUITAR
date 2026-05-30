@@ -48,6 +48,149 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
 
+  /* ── 톤 일지 ── */
+  .journal-entry {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .journal-header {
+    padding: 14px 18px;
+    background: rgba(0,0,0,0.3);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .journal-version {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .journal-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .journal-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+
+  .journal-status.testing   { background: rgba(240,165,0,0.15); color: var(--warn); border: 1px solid rgba(240,165,0,0.4); }
+  .journal-status.confirmed { background: rgba(61,214,140,0.15); color: var(--success); border: 1px solid rgba(61,214,140,0.4); }
+  .journal-status.refining  { background: rgba(74,158,255,0.15); color: #4a9eff; border: 1px solid rgba(74,158,255,0.4); }
+
+  .journal-body { padding: 16px 18px; }
+
+  .journal-section {
+    margin-bottom: 16px;
+  }
+
+  .journal-section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .journal-changes {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .journal-change {
+    display: grid;
+    grid-template-columns: 160px 80px 80px 1fr;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .journal-change:last-child { border-bottom: none; }
+  .jc-param { color: var(--text-dim); }
+  .jc-from  { color: var(--text-dim); }
+  .jc-to    { color: var(--accent); font-weight: 600; }
+  .jc-why   { color: var(--text-mid); font-size: 10px; }
+
+  .journal-feedback {
+    background: rgba(240,165,0,0.05);
+    border: 1px solid rgba(240,165,0,0.2);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  .journal-feedback.positive {
+    background: rgba(61,214,140,0.05);
+    border-color: rgba(61,214,140,0.2);
+  }
+
+  .journal-analysis {
+    background: rgba(74,158,255,0.05);
+    border: 1px solid rgba(74,158,255,0.2);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .journal-next {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .journal-next-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-mid);
+  }
+
+  .journal-next-item::before {
+    content: '→';
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .journal-empty {
+    padding: 32px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: center;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    letter-spacing: 0.1em;
+  }
+
   /* ── HEADER ── */
   header {
     height: var(--header-h);
@@ -1640,6 +1783,7 @@
         <button class="artist-tab" onclick="switchArtistTab('timmons','delay',this)">딜레이 & 레코딩</button>
         <button class="artist-tab" onclick="switchArtistTab('timmons','fractal',this)">Fractal 적용</button>
         <button class="artist-tab" onclick="switchArtistTab('timmons','sources',this)">출처</button>
+        <button class="artist-tab" onclick="switchArtistTab('timmons','journal',this)">톤 일지</button>
       </div>
 
       <!-- BIO -->
@@ -1993,6 +2137,11 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- 톤 일지 -->
+      <div id="timmons-journal" class="artist-tab-content">
+        <div id="timmons-journal-entries"></div>
       </div>
 
     </div>
@@ -3573,6 +3722,116 @@
     btn.parentElement.parentElement.querySelectorAll('.amp-tab-content').forEach(c => c.classList.remove('active'));
     document.getElementById(`tab_${device}_${fxId}`).classList.add('active');
   }
+
+  /* ── 톤 일지 데이터 ── */
+  const TONE_JOURNAL = {
+    timmons: [
+      {
+        version: 'v1',
+        date: '2026-05-30',
+        title: 'Andy Timmons — 초기 세팅',
+        status: 'testing', // testing | refining | confirmed
+        device: 'Axe-Fx II XL+ (Ares v2.0)',
+        changes: [
+          // [파라미터, 기본값, 변경값, 이유]
+          ['TX Star Clean / Bass',       '5.00', '2.5',    'Lonestar 저역 과다. Mesa 인터뷰: "Bass 12시보다 조금 아래"'],
+          ['TX Star Clean / Mid',        '5.00', '6.0',    '12시 기준. 미드 풍성하게 — 핑거톤의 핵심'],
+          ['TX Star Clean / Treble',     '5.00', '5.5',    '12시에서 약간 위'],
+          ['TX Star Clean / Presence',   '5.00', '5.5',    '에어감 소량 추가'],
+          ['TX Star Clean / Input Drive','5.00', '4.0',    '완전 클린 헤드룸 확보'],
+          ['Optical 1 / Comp',           '5.00', '3.5',    '가볍게 — 인풋 부스터 역할, 압축 최소'],
+          ['Optical 1 / Release',       '100ms', '80ms',   '피킹 터치 살리기'],
+          ['Optical 1 / Level',         '0.0 dB','+2.0 dB','앰프 인풋 밀어주기'],
+          ['Tube Drv 3-Knob / Drive',    '5.00', '3.0',    '낮게 — Yek Guide: "Keep Drive low"'],
+          ['Tube Drv 3-Knob / Tone',     '5.00', '5.5',    '살짝 밝게'],
+          ['Tube Drv 3-Knob / Level',    '5.00', '7.5',    '높게 — 앰프 부스터 목적'],
+          ['T808 OD / Drive',            '5.00', '2.0',    '매우 낮게 — 미드 부스터만'],
+          ['T808 OD / Tone',             '5.00', '5.0',    '중립'],
+          ['T808 OD / Level',            '5.00', '7.0',    'Yek Guide: "Drive 0.5, Level 7"'],
+          ['Dual Delay / Time L',       '500ms', '375ms',  '확정 — 스크린샷 + Mesa 인터뷰 교차 확인'],
+          ['Small Spring / Time',      '2.00sec','1.5sec', 'Mesa Lonestar 소형 탱크'],
+          ['Small Spring / Size',        '38.0', '28',     '소형 스프링 탱크'],
+          ['Small Spring / Mix',         '20%',  '12%',    '아주 살짝 — 딜레이가 주역'],
+        ],
+        feedback: null,   // 연주 후 피드백 (null = 아직 미입력)
+        analysis: null,   // 원인 분석
+        next: null,       // 다음 조정 계획
+      },
+    ],
+  };
+
+  /* 일지 렌더링 */
+  function renderJournal(artist) {
+    const container = document.getElementById(`${artist}-journal-entries`);
+    if (!container) return;
+    const entries = TONE_JOURNAL[artist];
+    if (!entries || entries.length === 0) {
+      container.innerHTML = '<div class="journal-empty">세팅 후 피드백을 기록하면 여기에 일지가 쌓입니다</div>';
+      return;
+    }
+    container.innerHTML = '';
+    [...entries].reverse().forEach(entry => {
+      const el = document.createElement('div');
+      el.className = 'journal-entry';
+
+      const statusLabels = { testing:'테스트 중', refining:'조정 중', confirmed:'확정' };
+
+      el.innerHTML = `
+        <div class="journal-header">
+          <span class="journal-version">${entry.version}</span>
+          <span class="journal-date">${entry.date}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text-mid)">${entry.title}</span>
+          <span class="journal-status ${entry.status}">${statusLabels[entry.status]}</span>
+        </div>
+        <div class="journal-body">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dim);margin-bottom:12px">기기: ${entry.device}</div>
+
+          <div class="journal-section">
+            <div class="journal-section-title">변경 파라미터</div>
+            <div class="journal-changes">
+              <div class="journal-change" style="color:var(--text-dim);font-size:10px;border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:4px">
+                <span>파라미터</span><span>기본값</span><span>변경값</span><span>이유</span>
+              </div>
+              ${entry.changes.map(([p,f,t,w]) => `
+                <div class="journal-change">
+                  <span class="jc-param">${p}</span>
+                  <span class="jc-from">${f}</span>
+                  <span class="jc-to">${t}</span>
+                  <span class="jc-why">${w}</span>
+                </div>`).join('')}
+            </div>
+          </div>
+
+          ${entry.feedback ? `
+          <div class="journal-section">
+            <div class="journal-section-title">피드백</div>
+            <div class="journal-feedback">${entry.feedback}</div>
+          </div>` : `
+          <div class="journal-section">
+            <div class="journal-section-title">피드백</div>
+            <div class="journal-empty" style="padding:16px">아직 연주 피드백이 없습니다. 세팅 후 느낀 점을 알려주세요.</div>
+          </div>`}
+
+          ${entry.analysis ? `
+          <div class="journal-section">
+            <div class="journal-section-title">원인 분석</div>
+            <div class="journal-analysis">${entry.analysis}</div>
+          </div>` : ''}
+
+          ${entry.next ? `
+          <div class="journal-section">
+            <div class="journal-section-title">다음 조정 계획</div>
+            <div class="journal-next">${entry.next.map(n=>`<div class="journal-next-item">${n}</div>`).join('')}</div>
+          </div>` : ''}
+        </div>`;
+      container.appendChild(el);
+    });
+  }
+
+  // 일지 탭 클릭 시 렌더링
+  document.addEventListener('DOMContentLoaded', () => {
+    renderJournal('timmons');
+  });
 
   function switchArtistTab(artist, tab, btn) {
     btn.parentElement.querySelectorAll('.artist-tab').forEach(b => b.classList.remove('active'));
