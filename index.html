@@ -1293,7 +1293,7 @@
         <button class="amp-tab" onclick="switchFxDb('fxdrv','ax8',this)">AX8 <span class="device-badge ax8" style="font-size:8px">Quantum</span></button>
       </div>
       <div id="tab_fx2_fxdrv" class="amp-tab-content active">
-        <div class="upload-hint">각 드라이브 타입마다 <strong>Page 1 / Page 2</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div class="upload-hint">각 드라이브 타입마다 <strong>Basic / Advanced</strong> 스크린샷을 클릭해서 업로드합니다</div>
         <div id="grid_fxdrv_fx2"></div>
       </div>
       <div id="tab_ax8_fxdrv" class="amp-tab-content">
@@ -1312,7 +1312,7 @@
         <button class="amp-tab" onclick="switchFxDb('fxdly','ax8',this)">AX8 <span class="device-badge ax8" style="font-size:8px">Quantum</span></button>
       </div>
       <div id="tab_fx2_fxdly" class="amp-tab-content active">
-        <div class="upload-hint">각 딜레이 타입마다 <strong>Page 1 / Page 2</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div class="upload-hint">각 딜레이 타입마다 <strong>Time/FB · Config · Tone/Duck · Mod 1 · Mod 2 · EQ</strong> (6페이지) 스크린샷을 업로드합니다</div>
         <div id="grid_fxdly_fx2"></div>
       </div>
       <div id="tab_ax8_fxdly" class="amp-tab-content">
@@ -1331,7 +1331,7 @@
         <button class="amp-tab" onclick="switchFxDb('fxrvb','ax8',this)">AX8 <span class="device-badge ax8" style="font-size:8px">Quantum</span></button>
       </div>
       <div id="tab_fx2_fxrvb" class="amp-tab-content active">
-        <div class="upload-hint">각 리버브 타입마다 <strong>Page 1 / Page 2</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div class="upload-hint">각 리버브 타입마다 <strong>Basic · Advanced · Spring · EQ · Ducker</strong> (5페이지) 스크린샷을 업로드합니다</div>
         <div id="grid_fxrvb_fx2"></div>
       </div>
       <div id="tab_ax8_fxrvb" class="amp-tab-content">
@@ -3021,7 +3021,9 @@
       const grid = document.createElement('div');
       grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:10px;';
 
+      const drivePageLabels = { '1': 'Basic', '2': 'Advanced' };
       ['1', '2'].forEach(n => {
+        const pageLabel = drivePageLabels[n];
         const cellId  = `cell_drv_${driveId}_${n}`;
         const inputId = `input_drv_${driveId}_${n}`;
         const cell = document.createElement('div');
@@ -3029,7 +3031,7 @@
         cell.id = cellId;
         cell.innerHTML = `
           <span class="cell-icon">＋</span>
-          <span class="cell-label">Page ${n}</span>
+          <span class="cell-label">${pageLabel}</span>
           <input type="file" accept="image/png,image/jpeg" id="${inputId}">
           <div class="cell-overlay">
             <button class="btn-view"   onclick="viewDrvImg(event,'${driveId}','${n}')">보기</button>
@@ -3040,7 +3042,7 @@
           if (e.target.id !== inputId) return;
           const file = e.target.files[0];
           if (!file) return;
-          await uploadDrvImg(file, driveId, n, `${driveName} Page ${n}`);
+          await uploadDrvImg(file, driveId, n, `${driveName} · ${pageLabel}`);
         });
         grid.appendChild(cell);
       });
@@ -3090,15 +3092,26 @@
   }
 
   // 컴프/딜레이/리버브 타입별 페이지 빌더
-  function buildTypedFxPage(types, containerId, storePath, slotCount) {
+  // 이펙터 페이지 이름 — 실제 Fractal 에디터 페이지명 기준
+  const FX_PAGE_LABELS = {
+    comp_fx2:   ['Main'],
+    drive_fx2:  ['Basic', 'Advanced'],
+    delay_fx2:  ['Time/FB', 'Config', 'Tone/Duck', 'Mod 1', 'Mod 2', 'EQ'],
+    reverb_fx2: ['Basic', 'Advanced', 'Spring', 'EQ', 'Ducker'],
+  };
+
+  function buildTypedFxPage(types, containerId, storePath) {
     const container = document.getElementById(containerId);
     if (!container) return;
+    const pageLabels = FX_PAGE_LABELS[storePath] || ['Main'];
+    const slotCount = pageLabels.length;
+
     types.forEach(({ name, origin }) => {
       const typeId = name.toLowerCase().replace(/[^a-z0-9]/g, '_');
       const block = document.createElement('div');
-      block.style.cssText = 'border:1px solid var(--border); margin-bottom:16px;';
+      block.style.cssText = 'border:1px solid var(--border); border-radius:6px; margin-bottom:14px; overflow:hidden;';
       const header = document.createElement('div');
-      header.style.cssText = 'padding:9px 14px; background:#0d0d0d; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:3px;';
+      header.style.cssText = 'padding:9px 14px; background:rgba(0,0,0,0.3); border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:3px;';
       header.innerHTML = `
         <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; color:var(--accent)">${name}</span>
         <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--text-dim)">${origin}</span>`;
@@ -3106,7 +3119,9 @@
       const cols = slotCount === 1 ? '200px' : `repeat(${slotCount}, 1fr)`;
       const grid = document.createElement('div');
       grid.style.cssText = `display:grid; grid-template-columns:${cols}; gap:8px; padding:10px;`;
-      for (let n = 1; n <= slotCount; n++) {
+
+      pageLabels.forEach((pageLabel, idx) => {
+        const n = idx + 1;
         const cellId  = `cell_${storePath}_${typeId}_${n}`;
         const inputId = `input_${storePath}_${typeId}_${n}`;
         const cell = document.createElement('div');
@@ -3114,7 +3129,7 @@
         cell.id = cellId;
         cell.innerHTML = `
           <span class="cell-icon">＋</span>
-          <span class="cell-label">Page ${n}</span>
+          <span class="cell-label">${pageLabel}</span>
           <input type="file" accept="image/png,image/jpeg" id="${inputId}">
           <div class="cell-overlay">
             <button class="btn-view"   onclick="viewTypedImg(event,'${storePath}','${typeId}','${n}')">보기</button>
@@ -3124,18 +3139,19 @@
         document.addEventListener('change', async (e) => {
           if (e.target.id !== inputId) return;
           const file = e.target.files[0]; if (!file) return;
-          await uploadTypedImg(file, storePath, typeId, n, `${name} Page ${n}`);
+          await uploadTypedImg(file, storePath, typeId, n, `${name} · ${pageLabel}`);
         });
         grid.appendChild(cell);
-      }
+      });
+
       block.appendChild(grid);
       container.appendChild(block);
     });
   }
 
-  buildTypedFxPage(COMP_TYPES,   'grid_fxcomp_fx2', 'comp_fx2',   1);
-  buildTypedFxPage(DELAY_TYPES,  'grid_fxdly_fx2',  'delay_fx2',  6);
-  buildTypedFxPage(REVERB_TYPES, 'grid_fxrvb_fx2',  'reverb_fx2', 4);
+  buildTypedFxPage(COMP_TYPES,   'grid_fxcomp_fx2', 'comp_fx2');
+  buildTypedFxPage(DELAY_TYPES,  'grid_fxdly_fx2',  'delay_fx2');
+  buildTypedFxPage(REVERB_TYPES, 'grid_fxrvb_fx2',  'reverb_fx2');
 
   async function uploadTypedImg(file, storePath, typeId, n, label) {
     const cell = document.getElementById(`cell_${storePath}_${typeId}_${n}`);
