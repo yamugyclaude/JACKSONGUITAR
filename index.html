@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AX8 Tone Database</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/supabase-js/2.39.3/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap');
 
@@ -2349,7 +2349,10 @@
   try {
     const { createClient } = supabase;
     sb = createClient(SUPABASE_URL, SUPABASE_KEY);
-  } catch(e) { console.warn('Supabase SDK not loaded:', e.message); }
+    console.log('✅ Supabase 연결됨');
+  } catch(e) {
+    console.error('❌ Supabase 연결 실패:', e.message);
+  }
 
   const PAGES = ['Basic','GEQ','Preamp','Power Amp','Power Sply','Speaker','Spkr Drv','Dynamics'];
   const AMPS = ['friedman_hbe','dirty_shirley','two_stone','deluxe_verb','tx_star_clean','tx_star_lead'];
@@ -2554,7 +2557,7 @@
     cell.classList.add('uploading');
     showToast(`${pageLabel} 업로드 중...`, '');
 
-    if (!sb) { showToast('📎 클로드코드 채팅창에 파일을 드래그해 주세요', ''); cell.classList.remove('uploading'); return; }
+    if (!sb) { showToast('❌ Supabase 연결 안됨 — 페이지 새로고침 후 재시도', 'error'); cell.classList.remove('uploading'); return; }
 
     const ext = file.type === 'image/png' ? 'png' : 'jpg';
     const path = `${amp}/${fxKey}_${key}.${ext}`;
@@ -2743,7 +2746,7 @@
     if (img.width < 1280) showToast('⚠ 해상도 부족 (1280px 미만)', 'error');
 
     if (!sb) {
-      showToast('📎 클로드코드 채팅창에 파일을 드래그해 주세요', '');
+      showToast('❌ Supabase 연결 안됨 — 페이지 새로고침 후 재시도', 'error');
       cell.classList.remove('uploading');
       return;
     }
@@ -2976,7 +2979,7 @@
     const cell = document.getElementById(`cell_drv_${driveId}_${n}`);
     cell.classList.add('uploading');
     showToast(`${label} Page ${n} 업로드 중...`, '');
-    if (!sb) { showToast('📎 클로드코드 채팅창에 파일을 드래그해 주세요', ''); cell.classList.remove('uploading'); return; }
+    if (!sb) { showToast('❌ Supabase 연결 안됨 — 페이지 새로고침 후 재시도', 'error'); cell.classList.remove('uploading'); return; }
     const ext = file.type === 'image/png' ? 'png' : 'jpg';
     const path = `_drive/${driveId}_${n}.${ext}`;
     const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
@@ -3063,7 +3066,7 @@
     const cell = document.getElementById(`cell_${storePath}_${typeId}_${n}`);
     cell.classList.add('uploading');
     showToast(`${label} 업로드 중...`, '');
-    if (!sb) { showToast('📎 클로드코드 채팅창에 파일을 드래그해 주세요', ''); cell.classList.remove('uploading'); return; }
+    if (!sb) { showToast('❌ Supabase 연결 안됨 — 페이지 새로고침 후 재시도', 'error'); cell.classList.remove('uploading'); return; }
     const ext = file.type === 'image/png' ? 'png' : 'jpg';
     const path = `_${storePath}/${typeId}_${n}.${ext}`;
     const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
