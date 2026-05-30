@@ -829,6 +829,120 @@
     font-size: 12px;
   }
 
+  /* IR LIBRARY PAGE */
+  .ir-pack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .ir-pack-card {
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .ir-pack-header {
+    padding: 12px 16px;
+    background: #0d0d0d;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ir-pack-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 3px;
+  }
+
+  .ir-pack-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .ir-pack-body { padding: 0; }
+
+  .ir-mic-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .ir-mic-table tr { border-bottom: 1px solid #141414; }
+  .ir-mic-table tr:last-child { border-bottom: none; }
+  .ir-mic-table td {
+    padding: 7px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+  }
+  .ir-mic-table td:first-child { color: var(--text-dim); width: 90px; }
+  .ir-mic-table td:last-child { color: var(--text-mid); }
+
+  .ir-recommend-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .ir-recommend-badge.andy { background: rgba(68,204,136,0.15); color: #44cc88; border: 1px solid rgba(68,204,136,0.4); }
+  .ir-recommend-badge.nick { background: rgba(200,169,110,0.15); color: var(--accent); border: 1px solid rgba(200,169,110,0.4); }
+  .ir-recommend-badge.mayer { background: rgba(74,158,255,0.15); color: #4a9eff; border: 1px solid rgba(74,158,255,0.4); }
+
+  .ir-path-block {
+    background: #0a0a0a;
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 2;
+    margin-bottom: 8px;
+  }
+
+  .ir-path-block .path-folder { color: var(--text-mid); }
+  .ir-path-block .path-file { color: var(--accent); }
+  .ir-path-block .path-comment { color: var(--text-dim); font-size: 10px; }
+  .ir-path-block .path-recommend { color: #44cc88; }
+
+  .mic-legend {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .mic-legend-item {
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .mic-legend-code {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .mic-legend-name {
+    font-size: 11px;
+    color: var(--text-mid);
+    margin-bottom: 2px;
+  }
+
+  .mic-legend-char {
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-thumb { background: var(--border); }
 </style>
@@ -860,6 +974,7 @@
     <div class="nav-section">
       <div class="nav-label">System</div>
       <div class="nav-item active" onclick="showPage('gear', this)">장비 정보</div>
+      <div class="nav-item" onclick="showPage('ir_library', this)">IR 라이브러리</div>
       <div class="nav-item" onclick="showPage('guide', this)">촬영 가이드</div>
     </div>
     <div class="nav-section">
@@ -913,6 +1028,242 @@
           <div class="gear-item"><span class="gear-key">IR</span><span class="gear-val">York Audio 보유</span></div>
         </div>
       </div>
+    </div>
+
+    <!-- IR LIBRARY -->
+    <div id="ir_library" class="page-section">
+      <div class="section-header">
+        <div class="section-title">IR 라이브러리</div>
+        <div class="section-sub">YORK AUDIO · IMPULSE RESPONSE GUIDE</div>
+      </div>
+
+      <div class="artist-tabs">
+        <button class="artist-tab active" onclick="switchArtistTab('ir','packs',this)">보유 팩</button>
+        <button class="artist-tab" onclick="switchArtistTab('ir','naming',this)">파일명 해독</button>
+        <button class="artist-tab" onclick="switchArtistTab('ir','usage',this)">기타리스트별 추천</button>
+        <button class="artist-tab" onclick="switchArtistTab('ir','folders',this)">폴더 구조</button>
+      </div>
+
+      <!-- 보유 팩 -->
+      <div id="ir-packs" class="artist-tab-content active">
+        <div class="info-block" style="margin-bottom:20px">
+          <div class="info-header">York Audio — 보유 팩 현황</div>
+          <div class="info-row"><span class="info-key">제조사</span><span class="info-val">York Audio (창업자: Justin York — 스튜디오/투어 기타리스트)</span></div>
+          <div class="info-row"><span class="info-key">평가</span><span class="info-val">업계 최정상급. "45,000개 IR 써본 유저도 York 먼저 알았으면 500개로 충분했을 것"</span></div>
+          <div class="info-row"><span class="info-key">Fractal 샘플레이트</span><span class="info-val">48k 폴더 사용 (폴더명에 "Fractal" 명시되어 있음)</span></div>
+          <div class="info-row"><span class="info-key">권장 타입</span><span class="info-val">Minimum Phase — 표준. 대부분의 경우 이걸 쓰면 됨</span></div>
+        </div>
+
+        <div class="ir-pack-grid">
+
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">BOGNA 412 <span class="ir-recommend-badge nick">Nick</span></div>
+              <div class="ir-pack-sub">Bogner 4x12 캐비넷 · Celestion Vintage 30</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>캐비넷</td><td>Bogner 4x12 (고게인 캐비넷의 정석)</td></tr>
+                <tr><td>스피커</td><td>Celestion Vintage 30 단일</td></tr>
+                <tr><td>특성</td><td>단단하고 포커스 있는 중역대. 하이게인에 최적</td></tr>
+                <tr><td>용도</td><td>Nick Johnston — Friedman HBE/Dirty Shirley 계열</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">FDMN 412 M25-V30 <span class="ir-recommend-badge nick">Nick ★</span></div>
+              <div class="ir-pack-sub">Friedman 4x12 캐비넷 · M25 Creamback + V30 듀얼</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>캐비넷</td><td>Friedman 4x12 — Nick Johnston 실제 사용 캐비넷!</td></tr>
+                <tr><td>스피커 1</td><td>M25 (Celestion Creamback) — 부드럽고 풍성</td></tr>
+                <tr><td>스피커 2</td><td>V30 (Celestion Vintage 30) — 포커스, 중역 강조</td></tr>
+                <tr><td>BLND 폴더</td><td>M25+V30 혼합 — 두 스피커의 중간 특성</td></tr>
+                <tr><td>용도</td><td>Nick Johnston 최우선 추천. Friedman 그 자체</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">MRSH 412 MV30-Dual <span class="ir-recommend-badge andy">Andy ★</span></div>
+              <div class="ir-pack-sub">Marshall 4x12 캐비넷 · Marshall V30 (두 스피커 위치)</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>캐비넷</td><td>Marshall 4x12 (V30 탑재)</td></tr>
+                <tr><td>MV30a</td><td>첫 번째 스피커 위치 — 보다 직접적인 사운드</td></tr>
+                <tr><td>MV30b</td><td>두 번째 스피커 위치 — 약간 다른 반응</td></tr>
+                <tr><td>BLND 폴더</td><td>MV30a + MV30b 혼합</td></tr>
+                <tr><td>용도</td><td>Andy Timmons (Mesa 팩 없으므로 V30 특성으로 근접)</td></tr>
+                <tr><td>참고</td><td>Andy 실제 캐비넷은 Mesa 2x12 Recto. V30 스피커 특성은 동일</td></tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">VLUX 210 P10R <span class="ir-recommend-badge mayer">Mayer ★</span></div>
+              <div class="ir-pack-sub">Vox 계열 2x10 캐비넷 · Alnico P10R 스피커</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>캐비넷</td><td>Vox-style 2x10 (AC30 계열)</td></tr>
+                <tr><td>스피커</td><td>Alnico P10R — 클린하고 따뜻, 빈티지 특성</td></tr>
+                <tr><td>특성</td><td>밝고 에어리한 클린. 컴프레션이 자연스러움</td></tr>
+                <tr><td>용도</td><td>John Mayer — Two-Rock/Fender 클린 뉘앙스에 근접</td></tr>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="quote-block" style="font-style:normal; font-size:12px;">
+          ⚠️ <strong style="color:var(--text)">Mesa 팩 없음</strong> — Andy Timmons 실제 캐비넷인 Mesa 2x12 Recto + V30 IR이 없습니다.
+          현재는 MRSH MV30으로 근접하지만, <strong style="color:var(--accent)">York Audio MES 212 V30</strong> 구입 시 Andy 톤에 훨씬 정확히 맞출 수 있습니다.
+          <span class="quote-source">yorkaudio.co 에서 구입 가능</span>
+        </div>
+      </div>
+
+      <!-- 파일명 해독 -->
+      <div id="ir-naming" class="artist-tab-content">
+
+        <div class="info-block">
+          <div class="info-header">파일명 구조 분석</div>
+          <div class="info-row"><span class="info-key">예시 1</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace">YA MRSH 412 MV30a 121-3.wav</span></div>
+          <div class="info-row"><span class="info-key">YA</span><span class="info-val">York Audio</span></div>
+          <div class="info-row"><span class="info-key">MRSH 412</span><span class="info-val">Marshall 4x12 캐비넷</span></div>
+          <div class="info-row"><span class="info-key">MV30a</span><span class="info-val">Marshall V30 스피커 — a 포지션</span></div>
+          <div class="info-row"><span class="info-key">121</span><span class="info-val">Royer R-121 마이크</span></div>
+          <div class="info-row"><span class="info-key">-3</span><span class="info-val">스피커 콘 위 세 번째 스윗스팟 위치 (밝고 어둠의 차이 아님!)</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">파일명 구조 분석 2</div>
+          <div class="info-row"><span class="info-key">예시 2</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace">YA MRSH 412 MV30a Mix 01.wav</span></div>
+          <div class="info-row"><span class="info-key">Mix 01</span><span class="info-val">마이크 2개 블렌딩 → SM57 + R-121 조합</span></div>
+          <div class="info-row"><span class="info-key">Mix 02</span><span class="info-val">SM57 + Beyerdynamic M160</span></div>
+          <div class="info-row"><span class="info-key">Mix 03</span><span class="info-val">MD421 + SM57</span></div>
+          <div class="info-row"><span class="info-key">Mix 10</span><span class="info-val">SM57 + SM57 (두 위치)</span></div>
+          <div class="info-row"><span class="info-key">Mix 12</span><span class="info-val">MD421 + R-121</span></div>
+          <div class="info-row"><span class="info-key">CNT</span><span class="info-val">스피커 정중앙 (Center) — 가장 직접적인 사운드</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">마이크 특성표</div>
+        </div>
+        <div class="mic-legend">
+          <div class="mic-legend-item">
+            <div class="mic-legend-code">57</div>
+            <div class="mic-legend-name">Shure SM57</div>
+            <div class="mic-legend-char">기준 마이크. 밝고 선명. 스튜디오 표준. 중역 포워드</div>
+          </div>
+          <div class="mic-legend-item">
+            <div class="mic-legend-code">121</div>
+            <div class="mic-legend-name">Royer R-121</div>
+            <div class="mic-legend-char">리본 마이크. 따뜻하고 풍성. 하이엔드 부드러움. SM57과 블렌딩 시 최고</div>
+          </div>
+          <div class="mic-legend-item">
+            <div class="mic-legend-code">160</div>
+            <div class="mic-legend-name">Beyerdynamic M160</div>
+            <div class="mic-legend-char">리본 마이크. Andy Timmons 실제 사용! Eddie Kramer, Jimi Hendrix 녹음에도 사용. 따뜻하고 자연스러운 고역</div>
+          </div>
+          <div class="mic-legend-item">
+            <div class="mic-legend-code">421</div>
+            <div class="mic-legend-name">Sennheiser MD421</div>
+            <div class="mic-legend-char">다이나믹. 미드 풍성. 바디감 강조. 클래식 록 사운드</div>
+          </div>
+          <div class="mic-legend-item">
+            <div class="mic-legend-code">e906</div>
+            <div class="mic-legend-name">Sennheiser e906</div>
+            <div class="mic-legend-char">다이나믹. 밝고 에지 있음. 라이브 스타일. 하이게인 선명도</div>
+          </div>
+          <div class="mic-legend-item">
+            <div class="mic-legend-code">C414</div>
+            <div class="mic-legend-name">AKG C414</div>
+            <div class="mic-legend-char">컨덴서. 넓고 에어리. 공간감 추가. 풀레인지 캡처</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 기타리스트별 추천 -->
+      <div id="ir-usage" class="artist-tab-content">
+
+        <div class="info-block">
+          <div class="info-header">Andy Timmons — Mesa 2x12 Recto + V30</div>
+          <div class="info-row"><span class="info-key">실제 캐비넷</span><span class="info-val">Mesa/Boogie 2x12 Rectifier + Celestion Vintage 30</span></div>
+          <div class="info-row"><span class="info-key">현재 최선</span><span class="info-val">MRSH 412 MV30 (V30 특성 동일, 캐비넷만 다름)</span></div>
+          <div class="info-row"><span class="info-key">1순위 파일</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace; color:var(--accent)">YA MRSH 412 MV30a Mix 02.wav</span></div>
+          <div class="info-row"><span class="info-key">이유</span><span class="info-val">Mix 02 = SM57 + M160 — Andy가 녹음에 실제로 M160 사용</span></div>
+          <div class="info-row"><span class="info-key">2순위 파일</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace">YA MRSH 412 MV30a Mix 01.wav (SM57 + R-121 — 가장 보편적)</span></div>
+          <div class="info-row"><span class="info-key">경로</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace; font-size:11px">MRSH 412 MV30-Dual / 48k / Minimum Phase Singles 또는 Mixes / MV30a</span></div>
+          <div class="info-row"><span class="info-key">이상적</span><span class="info-val">York Audio MES 212 V30 구입 시 Mesa 2x12 그대로 재현 가능</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Nick Johnston — Friedman + Marshall V30</div>
+          <div class="info-row"><span class="info-key">실제 캐비넷</span><span class="info-val">Friedman / Marshall 계열 4x12 + Celestion V30</span></div>
+          <div class="info-row"><span class="info-key">최선</span><span class="info-val">FDMN 412 V30 — Friedman 4x12 그 자체</span></div>
+          <div class="info-row"><span class="info-key">1순위 파일</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace; color:var(--accent)">YA FDMN 412 V30 Mix 01.wav</span></div>
+          <div class="info-row"><span class="info-key">2순위</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace">YA BOGNA 412 V30 Mix 01.wav (Bogner도 유사 성격)</span></div>
+          <div class="info-row"><span class="info-key">경로</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace; font-size:11px">FDMN 412 M25-V30 / 48k / Minimum Phase Singles / V30</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">John Mayer — Fender / Two-Rock 클린</div>
+          <div class="info-row"><span class="info-key">실제 캐비넷</span><span class="info-val">Two-Rock 1x12 또는 Fender 계열 (오픈백)</span></div>
+          <div class="info-row"><span class="info-key">현재 최선</span><span class="info-val">VLUX 210 P10R — 클린하고 에어리한 Alnico 특성</span></div>
+          <div class="info-row"><span class="info-key">1순위 파일</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace; color:var(--accent)">YA VLUX 210 P10R Mix 01.wav</span></div>
+          <div class="info-row"><span class="info-key">경로</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace; font-size:11px">VLUX 210 P10R / 48k / Mixes</span></div>
+          <div class="info-row"><span class="info-key">참고</span><span class="info-val">Two-Rock은 Celestion 기반 1x12 오픈백 — 정확한 매칭 팩이 없어 P10R이 차선책</span></div>
+        </div>
+
+      </div>
+
+      <!-- 폴더 구조 -->
+      <div id="ir-folders" class="artist-tab-content">
+
+        <div class="info-block">
+          <div class="info-header">Fractal에서 쓸 폴더 선택 가이드</div>
+          <div class="info-row"><span class="info-key">샘플레이트</span><span class="info-val">→ 48k 폴더 (AX8, Axe-Fx II XL+ 모두 48k)</span></div>
+          <div class="info-row"><span class="info-key">Phase 타입</span><span class="info-val">→ Minimum Phase 선택 (표준. Natural Phase는 멀티마이크 혼합 시 위상 문제 가능)</span></div>
+          <div class="info-row"><span class="info-key">처음 시작</span><span class="info-val">→ Mixes 폴더부터 — 이미 블렌딩된 파일이라 바로 좋은 소리</span></div>
+          <div class="info-row"><span class="info-key">세밀 조정</span><span class="info-val">→ Singles 폴더 — 마이크 하나씩 직접 선택/블렌딩</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">폴더 구조 예시 — MRSH 412 MV30 (Andy Timmons용)</div>
+        </div>
+        <div class="ir-path-block">
+          <span class="path-folder">MRSH 412 MV30-Dual /</span><br>
+          &nbsp;&nbsp;<span class="path-folder">48k (Fractal, Line 6, Neural, etc.) /  </span><span class="path-comment">← 이 폴더</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="path-folder">Minimum Phase Singles /  </span><span class="path-comment">← 단일 마이크</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-folder">MV30a /</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-file">YA MRSH 412 MV30a 57-1.wav</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-file">YA MRSH 412 MV30a 57-CNT.wav</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-file">YA MRSH 412 MV30a 121-1.wav</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-file">YA MRSH 412 MV30a 160-1.wav</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="path-folder">Mixes /  </span><span class="path-comment">← 블렌딩 파일 (처음엔 여기서 시작)</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-folder">MV30a /</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-recommend">YA MRSH 412 MV30a Mix 01.wav  ← SM57 + R-121</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-recommend">YA MRSH 412 MV30a Mix 02.wav  ← SM57 + M160 ★ Andy 추천</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-file">YA MRSH 412 MV30a Mix 03.wav  ← MD421 + SM57</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="path-folder">BLND /  </span><span class="path-comment">← MV30a + MV30b 혼합</span>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Natural Phase vs Minimum Phase — 언제 어떤 걸?</div>
+          <div class="info-row"><span class="info-key">Minimum Phase</span><span class="info-val">위상 보정됨. 깔끔하고 선명. 단독 사용 또는 Fractal 캐비넷 블록 표준. 대부분 이걸 쓰면 됨</span></div>
+          <div class="info-row"><span class="info-key">Natural Phase</span><span class="info-val">실제 마이킹 위상 그대로. 약간 더 "공기감". 단일 IR 사용 시 더 자연스러울 수 있음</span></div>
+          <div class="info-row"><span class="info-key">결론</span><span class="info-val">AX8 / Axe-Fx → Minimum Phase로 시작. 비교 청음 후 취향으로 결정</span></div>
+        </div>
+
+      </div>
+
     </div>
 
     <!-- GUIDE -->
