@@ -54,11 +54,132 @@
   .logo span { color: var(--text-dim); }
 
   .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-subtitle {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     color: var(--text-dim);
     letter-spacing: 0.1em;
   }
+
+  /* THEME PICKER */
+  .theme-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .theme-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #111;
+    border: 1px solid var(--border);
+    padding: 16px;
+    width: 260px;
+    z-index: 200;
+    display: none;
+  }
+
+  .theme-panel.open { display: block; }
+
+  .theme-panel-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .theme-presets {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .theme-preset {
+    aspect-ratio: 1;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.1s;
+    border-radius: 2px;
+  }
+
+  .theme-preset:hover { transform: scale(1.15); }
+  .theme-preset.active { border-color: var(--text); }
+
+  .theme-custom-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .theme-custom-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    flex: 1;
+    letter-spacing: 0.05em;
+  }
+
+  .theme-color-input {
+    width: 36px;
+    height: 28px;
+    border: 1px solid var(--border);
+    background: none;
+    cursor: pointer;
+    padding: 2px;
+  }
+
+  .theme-bg-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  .theme-section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    margin-top: 12px;
+  }
+
+  .bg-swatches {
+    display: flex;
+    gap: 6px;
+  }
+
+  .bg-swatch {
+    width: 28px;
+    height: 28px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+
+  .bg-swatch:hover { transform: scale(1.1); }
+  .bg-swatch.active { border-color: var(--text-mid); }
 
   .container {
     display: grid;
@@ -499,7 +620,22 @@
 
 <header>
   <div class="logo">AX8 <span>/</span> TONE DB</div>
-  <div class="header-right">FRACTAL AUDIO · PROFESSIONAL PRESET DATABASE</div>
+  <div class="header-right">
+    <span class="header-subtitle">FRACTAL AUDIO · PROFESSIONAL PRESET DATABASE</span>
+    <div style="position:relative">
+      <button class="theme-btn" onclick="toggleThemePanel(this)">◑ THEME</button>
+      <div class="theme-panel" id="themePanel">
+        <div class="theme-panel-title">Accent Color</div>
+        <div class="theme-presets" id="themePresets"></div>
+        <div class="theme-custom-row">
+          <span class="theme-custom-label">Custom</span>
+          <input type="color" class="theme-color-input" id="accentPicker" oninput="applyAccent(this.value)">
+        </div>
+        <div class="theme-section-label">Background</div>
+        <div class="bg-swatches" id="bgSwatches"></div>
+      </div>
+    </div>
+  </div>
 </header>
 
 <div class="container">
@@ -743,6 +879,119 @@
 <div class="toast" id="toast"></div>
 
 <script>
+  /* ── THEME ENGINE ── */
+  const ACCENT_PRESETS = [
+    { name: 'Gold',    color: '#c8a96e' },
+    { name: 'Cyan',    color: '#4a9eff' },
+    { name: 'Mint',    color: '#44cc88' },
+    { name: 'Rose',    color: '#ff6b8a' },
+    { name: 'Violet',  color: '#a78bfa' },
+    { name: 'Orange',  color: '#fb923c' },
+    { name: 'Ice',     color: '#67e8f9' },
+    { name: 'Lime',    color: '#a3e635' },
+    { name: 'Red',     color: '#f87171' },
+    { name: 'White',   color: '#e8e8e8' },
+  ];
+
+  const BG_PRESETS = [
+    { name: 'Black',    bg: '#0a0a0a', surface: '#111111', border: '#222222', textDim: '#555555', textMid: '#999999' },
+    { name: 'Navy',     bg: '#070d1a', surface: '#0d1525', border: '#1a2540', textDim: '#2a4070', textMid: '#6080b0' },
+    { name: 'Forest',   bg: '#060e09', surface: '#0c1810', border: '#162518', textDim: '#2a4530', textMid: '#507060' },
+    { name: 'Graphite', bg: '#141414', surface: '#1e1e1e', border: '#303030', textDim: '#505050', textMid: '#909090' },
+    { name: 'Warm',     bg: '#100c08', surface: '#1a1410', border: '#2a2018', textDim: '#504030', textMid: '#907060' },
+  ];
+
+  function buildThemePanel() {
+    const presetEl = document.getElementById('themePresets');
+    ACCENT_PRESETS.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'theme-preset';
+      div.title = p.name;
+      div.style.background = p.color;
+      div.dataset.color = p.color;
+      div.onclick = () => { applyAccent(p.color); setActivePreset(div); };
+      presetEl.appendChild(div);
+    });
+
+    const bgEl = document.getElementById('bgSwatches');
+    BG_PRESETS.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'bg-swatch';
+      div.title = p.name;
+      div.style.background = p.bg;
+      div.style.border = `2px solid ${p.border}`;
+      div.onclick = () => { applyBg(p); setActiveBg(div); };
+      bgEl.appendChild(div);
+    });
+
+    // Restore saved theme
+    const saved = JSON.parse(localStorage.getItem('ax8theme') || '{}');
+    if (saved.accent) {
+      applyAccent(saved.accent, false);
+      document.getElementById('accentPicker').value = saved.accent;
+      presetEl.querySelectorAll('.theme-preset').forEach(el => {
+        if (el.dataset.color === saved.accent) el.classList.add('active');
+      });
+    }
+    if (saved.bgKey) {
+      const bg = BG_PRESETS.find(b => b.name === saved.bgKey);
+      if (bg) {
+        applyBg(bg, false);
+        bgEl.querySelectorAll('.bg-swatch').forEach((el, i) => {
+          if (BG_PRESETS[i].name === saved.bgKey) el.classList.add('active');
+        });
+      }
+    }
+  }
+
+  function applyAccent(hex, save = true) {
+    document.documentElement.style.setProperty('--accent', hex);
+    document.documentElement.style.setProperty('--accent2', hex);
+    document.getElementById('accentPicker').value = hex;
+    if (save) {
+      const saved = JSON.parse(localStorage.getItem('ax8theme') || '{}');
+      saved.accent = hex;
+      localStorage.setItem('ax8theme', JSON.stringify(saved));
+    }
+  }
+
+  function applyBg(p, save = true) {
+    document.documentElement.style.setProperty('--bg', p.bg);
+    document.documentElement.style.setProperty('--surface', p.surface);
+    document.documentElement.style.setProperty('--border', p.border);
+    document.documentElement.style.setProperty('--text-dim', p.textDim);
+    document.documentElement.style.setProperty('--text-mid', p.textMid);
+    if (save) {
+      const saved = JSON.parse(localStorage.getItem('ax8theme') || '{}');
+      saved.bgKey = p.name;
+      localStorage.setItem('ax8theme', JSON.stringify(saved));
+    }
+  }
+
+  function setActivePreset(el) {
+    document.querySelectorAll('.theme-preset').forEach(e => e.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function setActiveBg(el) {
+    document.querySelectorAll('.bg-swatch').forEach(e => e.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function toggleThemePanel(btn) {
+    const panel = document.getElementById('themePanel');
+    panel.classList.toggle('open');
+    document.addEventListener('click', function handler(e) {
+      if (!panel.contains(e.target) && e.target !== btn) {
+        panel.classList.remove('open');
+        document.removeEventListener('click', handler);
+      }
+    }, { capture: true });
+  }
+
+  buildThemePanel();
+  /* ── END THEME ENGINE ── */
+
   const SUPABASE_URL = 'https://eujgcxoykqhvpqlkfpnl.supabase.co';
   const SUPABASE_KEY = 'sb_publishable__r4C0o-5gHX_TjoVAXzVhQ_UQUBQi97';
   let sb = null;
