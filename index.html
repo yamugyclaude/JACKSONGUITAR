@@ -2703,6 +2703,329 @@
     document.getElementById(`tab_${tab}_${amp}`).classList.add('active');
   }
 
+  /* ── FX PARAM DATA (Axe-Fx II XL+ 실측값) ── */
+  const FX_PARAM_DATA = {
+
+    // ── COMPRESSOR ──────────────────────────────
+    comp_fx2: {
+      dynamics: [
+        ['Dynamics',    '0.00'],
+        ['Attack',      '2.000 ms'],
+        ['Release',     '100.0 ms'],
+        ['Filter',      '10.00 Hz'],
+        ['Emphasis',    '0.00'],
+        ['Auto',        'ON'],
+        ['Look Ahead',  '0.000 ms'],
+        ['Mix',         '100.0 %'],
+        ['Level',       '0.0 dB'],
+        ['Bypass Mode', 'Thru'],
+      ],
+      optical_1: [
+        ['Comp',        '5.00'],
+        ['Attack',      '2.000 ms'],
+        ['Release',     '100.0 ms'],
+        ['Filter',      '10.00 Hz'],
+        ['Emphasis',    '0.00'],
+        ['Auto',        'ON'],
+        ['Look Ahead',  '0.000 ms'],
+        ['Input Level', 'Instrument'],
+        ['Mix',         '100.0 %'],
+        ['Level',       '0.0 dB'],
+        ['Bypass Mode', 'Thru'],
+      ],
+      pedal_comp_1: [
+        ['Comp',        '5.00'],
+        ['Attack',      '2.000 ms'],
+        ['Release',     '100.0 ms'],
+        ['Filter',      '10.00 Hz'],
+        ['Emphasis',    '0.00'],
+        ['Auto',        'ON'],
+        ['Look Ahead',  '0.000 ms'],
+        ['Input Level', 'Instrument'],
+        ['Mix',         '100.0 %'],
+        ['Level',       '0.0 dB'],
+        ['Bypass Mode', 'Thru'],
+      ],
+      studio_comp: [
+        ['Threshold',   '-40.0 dB'],
+        ['Ratio',       '2.000'],
+        ['Knee',        'Soft'],
+        ['Attack',      '2.000 ms'],
+        ['Release',     '100.0 ms'],
+        ['Auto',        'ON'],
+        ['Look Ahead',  '0.000 ms'],
+        ['Filter',      '10.00 Hz'],
+        ['Emphasis',    '0.00'],
+        ['Detect',      'Fast RMS'],
+        ['Sidechain',   'Block L+R'],
+        ['Makeup',      'ON'],
+        ['Mix',         '100.0 %'],
+        ['Level',       '0.0 dB'],
+        ['Bypass Mode', 'Thru'],
+      ],
+    },
+
+    // ── DRIVE ───────────────────────────────────
+    drive: {
+      bb_pre: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '720.0 Hz'],
+          ['High Cut',     '1900 Hz'],
+          ['Clip Type',    'Silicon'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+      },
+      bender_fuzz: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '300.0 Hz'],
+          ['High Cut',     '20000 Hz'],
+          ['Clip Type',    'Hard'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+      },
+      bit_crusher: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '20.0 Hz'],
+          ['High Cut',     '20000 Hz'],
+          ['Clip Type',    'Silicon'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+      },
+      blackglass_7k: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '230.0 Hz'],
+          ['High Cut',     '20000 Hz'],
+          ['Clip Type',    'Hard'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+      },
+      blues_od: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '20.0 Hz'],
+          ['High Cut',     '2200 Hz'],
+          ['Clip Type',    'Soft'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+        advanced: [
+          ['Slew Limit',   '4.77'],
+          ['Bias',         '0.010'],
+          ['Bit Reduce',   '0'],
+          ['Sample Rate',  '48000 Hz'],
+        ],
+      },
+      t808_od: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '700.0 Hz'],
+          ['High Cut',     '880.0 Hz'],
+          ['Clip Type',    'Silicon'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+        advanced: [
+          ['Slew Limit',   '4.77'],
+          ['Bias',         '0.014'],
+          ['Bit Reduce',   '0'],
+          ['Sample Rate',  '48000 Hz'],
+        ],
+      },
+      tube_drv_3_knob: {
+        basic: [
+          ['Drive',        '5.00'],
+          ['Tone',         '5.00'],
+          ['Input Select', 'L+R'],
+          ['Low Cut',      '800.0 Hz'],
+          ['High Cut',     '20000 Hz'],
+          ['Clip Type',    'LV Tube'],
+          ['Bass',         '0.00 dB'],
+          ['Mid Freq',     '636.0 Hz'],
+          ['Mid',          '0.00 dB'],
+          ['Treble',       '0.00 dB'],
+          ['Mix',          '100.0 %'],
+          ['Level',        '5.00'],
+        ],
+        advanced: [
+          ['Slew Limit',   '0.00'],
+          ['Bias',         '0.025'],
+          ['Bit Reduce',   '0'],
+          ['Sample Rate',  '48000 Hz'],
+        ],
+      },
+    },
+
+    // ── DELAY — Dual Delay ───────────────────────
+    delay_fx2: {
+      dual_delay: {
+        time_fb: [
+          ['Time L',           '500 ms'],
+          ['Tempo L',          'None'],
+          ['Feedback L→L',     '20.0 %'],
+          ['Feedback L→R',     '0.0 %'],
+          ['Level L',          '100.0 %'],
+          ['Pan L',            '-100.0'],
+          ['Master Feedback',  '100.0 %'],
+          ['Time R',           '500 ms'],
+          ['Tempo R',          'None'],
+          ['Feedback R→R',     '20.0 %'],
+          ['Feedback R→L',     '0.0 %'],
+          ['Level R',          '100.0 %'],
+          ['Pan R',            '100.0'],
+          ['R Time Ratio',     '100.0 %'],
+          ['Mstr Pan',         '0'],
+          ['Mix',              '15.0 %'],
+          ['Level',            '0.0 dB'],
+          ['Input Gain',       '100.0 %'],
+          ['Bypass Mode',      'Thru'],
+        ],
+        tone_duck: [
+          ['Drive',            '0.00'],
+          ['Bit Reduction',    '0'],
+          ['Ducker Atten',     '0.0 dB'],
+          ['Ducker Threshold', '-40.0 dB'],
+          ['Ducker Release',   '10.0 ms'],
+          ['Phase Reverse',    'None'],
+          ['Diffusion',        '0.0 %'],
+          ['Diff Time',        '50.0 %'],
+        ],
+        mod_1: [
+          ['LFO1 Rate',        '0.500 Hz'],
+          ['LFO1 Tempo',       'None'],
+          ['LFO1 Type',        'Sine'],
+          ['LFO1 Depth',       '0.0 %'],
+          ['Depth Range',      'Low'],
+          ['LFO1 Phase',       '0.0 deg'],
+          ['LFO1 Target',      'Both'],
+        ],
+        mod_2: [
+          ['LFO2 Rate',        '10.00 Hz'],
+          ['LFO2 Tempo',       'None'],
+          ['LFO2 Type',        'Log'],
+          ['LFO2 Depth',       '0.0 %'],
+          ['Depth Range',      'Low'],
+          ['LFO2 Phase',       '0.0 deg'],
+          ['LFO2 Target',      'Both'],
+        ],
+        eq: [
+          ['Low Cut',          '50.0 Hz'],
+          ['High Cut',         '10000 Hz'],
+          ['Q',                '0.700'],
+          ['Filter Slope',     '6 dB/Oct'],
+          ['Freq 1',           '400.0 Hz'],
+          ['Q 1',              '0.707'],
+          ['Gain 1',           '0.00 dB'],
+          ['Freq 2',           '800.0 Hz'],
+          ['Q 2',              '0.707'],
+          ['Gain 2',           '0.00 dB'],
+        ],
+        config: [
+          ['Config',           'Dual'],
+        ],
+      },
+    },
+
+    // ── REVERB — Small Spring ────────────────────
+    reverb_fx2: {
+      small_spring: {
+        basic: [
+          ['Quality',          'Normal'],
+          ['Time',             '2.00 sec'],
+          ['Size',             '38.0'],
+          ['Echo Density',     '2'],
+          ['Hold',             'OFF'],
+          ['PreDelay',         '0.0 ms'],
+          ['HF Time',          '0.600'],
+          ['LF Time',          '1.000'],
+          ['LF Crossover',     '400.0 Hz'],
+          ['Stereo Width',     '100.0 %'],
+          ['Mix',              '20.0 %'],
+          ['Level',            '0.0 dB'],
+          ['Input Gain',       '100.0 %'],
+          ['Bypass Mode',      'Thru'],
+        ],
+        advanced: [
+          ['Early Level',      '-40.0 dB'],
+          ['Early Diffusion',  '30.0 %'],
+          ['Early Diff Time',  '60.0 %'],
+          ['Early Decay',      '50.0 %'],
+          ['Mic Spacing',      '20.0 %'],
+          ['Late Level',       '-3.0 dB'],
+          ['Late Diffusion',   '50.0 %'],
+          ['Late Diff Time',   '40.0 %'],
+          ['Wall Diffusion',   '100.0 %'],
+          ['Mod Depth',        '0.0 %'],
+          ['Mod Rate',         '0.100 Hz'],
+        ],
+        eq: [
+          ['Low Cut',          '400.0 Hz'],
+          ['High Cut',         '2499 Hz'],
+          ['Freq 1',           '200.0 Hz'],
+          ['Q 1',              '0.707'],
+          ['Gain 1',           '0.00 dB'],
+          ['Freq 2',           '800.0 Hz'],
+          ['Q 2',              '0.707'],
+          ['Gain 2',           '0.00 dB'],
+        ],
+        ducker: [
+          ['Atten',            '0.0 dB'],
+          ['Threshold',        '0.0 dB'],
+          ['Release Time',     '1.0 ms'],
+        ],
+        spring: [
+          ['Number Springs',   '2'],
+          ['Spring Tone',      '1.67'],
+          ['Spring Drive',     '0.00'],
+        ],
+      },
+    },
+  };
+  /* ── END FX PARAM DATA ── */
+
   /* ── FX DB 그리드 빌드 ── */
   // 컴프레서 타입 목록
   // Compressor 타입 — Fractal 실제 순서
@@ -2875,6 +3198,29 @@
       });
 
       block.appendChild(grid);
+
+      // Drive 파라미터 테이블
+      const drvData = FX_PARAM_DATA?.drive?.[driveId];
+      if (drvData) {
+        const pw = document.createElement('div');
+        pw.style.cssText = 'padding:10px; border-top:1px solid var(--border);';
+        Object.entries(drvData).forEach(([sub, rows]) => {
+          const lbl = document.createElement('div');
+          lbl.style.cssText = 'font-family:"IBM Plex Mono",monospace; font-size:9px; letter-spacing:0.15em; color:var(--text-dim); text-transform:uppercase; margin:6px 0 4px;';
+          lbl.textContent = sub;
+          pw.appendChild(lbl);
+          const tbl = document.createElement('table');
+          tbl.className = 'param-table';
+          rows.forEach(([k, v]) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${k}</td><td>${formatVal(v)}</td>`;
+            tbl.appendChild(tr);
+          });
+          pw.appendChild(tbl);
+        });
+        block.appendChild(pw);
+      }
+
       container.appendChild(block);
     });
   })();
@@ -2927,6 +3273,39 @@
     reverb_fx2: ['Basic', 'Advanced', 'Spring', 'EQ', 'Ducker'],
   };
 
+  // FX 파라미터 테이블 렌더링
+  function renderFxParams(containerId, storePath, typeId, subPage) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const data = FX_PARAM_DATA?.[storePath]?.[typeId];
+    if (!data) { el.textContent = '파라미터 데이터 없음'; el.className = 'no-params'; return; }
+
+    const rows = subPage ? data[subPage] : (Array.isArray(data) ? data : null);
+    if (!rows) return;
+
+    el.innerHTML = '';
+    el.className = '';
+    const table = document.createElement('table');
+    table.className = 'param-table';
+    rows.forEach(([k, v]) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${k}</td><td>${formatVal(v)}</td>`;
+      table.appendChild(tr);
+    });
+    el.appendChild(table);
+  }
+
+  // 페이지 로드 후 FX 파라미터 렌더링
+  function renderAllFxParams() {
+    // Compressor
+    const compData = FX_PARAM_DATA?.comp_fx2;
+    if (compData) {
+      Object.keys(compData).forEach(typeId => {
+        renderFxParams(`params_comp_fx2_${typeId}_1_area`, 'comp_fx2', typeId, null);
+      });
+    }
+  }
+
   function buildTypedFxPage(types, containerId, storePath) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -2972,6 +3351,39 @@
       });
 
       block.appendChild(grid);
+
+      // 파라미터 테이블 (데이터가 있으면 표시)
+      const paramData = FX_PARAM_DATA?.[storePath]?.[typeId];
+      if (paramData) {
+        const paramWrap = document.createElement('div');
+        paramWrap.style.cssText = 'padding:10px; border-top:1px solid var(--border);';
+
+        const renderRows = (rows, subLabel) => {
+          if (!rows) return;
+          if (subLabel) {
+            const lbl = document.createElement('div');
+            lbl.style.cssText = 'font-family:"IBM Plex Mono",monospace; font-size:9px; letter-spacing:0.15em; color:var(--text-dim); text-transform:uppercase; margin:8px 0 4px;';
+            lbl.textContent = subLabel;
+            paramWrap.appendChild(lbl);
+          }
+          const tbl = document.createElement('table');
+          tbl.className = 'param-table';
+          rows.forEach(([k, v]) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${k}</td><td>${formatVal(v)}</td>`;
+            tbl.appendChild(tr);
+          });
+          paramWrap.appendChild(tbl);
+        };
+
+        if (Array.isArray(paramData)) {
+          renderRows(paramData, null);
+        } else {
+          Object.entries(paramData).forEach(([sub, rows]) => renderRows(rows, sub));
+        }
+        block.appendChild(paramWrap);
+      }
+
       container.appendChild(block);
     });
   }
