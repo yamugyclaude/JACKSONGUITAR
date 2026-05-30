@@ -2471,25 +2471,28 @@
     }
 
     // 2. FX DB — Drive (_drive/{driveId}_{n}.png)
-    const { data: drvFiles } = await sb.storage.from('ax8-screenshots').list('_drive');
+    const { data: drvFiles, error: drvErr } = await sb.storage.from('ax8-screenshots').list('_drive');
+    if (drvErr) console.error('Drive list error:', drvErr);
     (drvFiles || []).forEach(file => {
       const m = file.name.match(/^(.+)_(\d+)\.(png|jpg)$/i);
       if (!m) return;
       const [, driveId, n] = m;
       const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`_drive/${file.name}`);
-      if (u) setDrvCell(driveId, n, u.publicUrl);
+      if (u) { setDrvCell(driveId, n, u.publicUrl); console.log('✅ Drive loaded:', driveId, n); }
     });
 
     // 3. FX DB — Typed (comp_fx2, delay_fx2, reverb_fx2)
     for (const storePath of ['_comp_fx2', '_delay_fx2', '_reverb_fx2']) {
-      const { data: files } = await sb.storage.from('ax8-screenshots').list(storePath);
+      const { data: files, error: fxErr } = await sb.storage.from('ax8-screenshots').list(storePath);
+      if (fxErr) { console.error(`${storePath} list error:`, fxErr); continue; }
+      console.log(`${storePath}: ${(files||[]).length} files`);
       (files || []).forEach(file => {
         const m = file.name.match(/^(.+)_(\d+)\.(png|jpg)$/i);
         if (!m) return;
         const [, typeId, n] = m;
-        const sp = storePath.replace('_','');
+        const sp = storePath.slice(1); // '_comp_fx2' → 'comp_fx2'
         const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`${storePath}/${file.name}`);
-        if (u) setTypedCell(sp, typeId, parseInt(n), u.publicUrl);
+        if (u) { setTypedCell(sp, typeId, parseInt(n), u.publicUrl); }
       });
     }
   });
