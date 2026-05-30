@@ -1176,6 +1176,7 @@
       <div class="nav-label">System</div>
       <div class="nav-item active" onclick="showPage('gear', this)">장비 정보</div>
       <div class="nav-item" onclick="showPage('ir_library', this)">IR 라이브러리</div>
+      <div class="nav-item" onclick="showPage('fx_guide', this)">이펙터 가이드</div>
       <div class="nav-item" onclick="showPage('guide', this)">촬영 가이드</div>
     </div>
     <div class="nav-section">
@@ -1482,6 +1483,194 @@
           <div class="info-row"><span class="info-key">결론</span><span class="info-val">AX8 / Axe-Fx → Minimum Phase로 시작. 비교 청음 후 취향으로 결정</span></div>
         </div>
 
+      </div>
+
+    </div>
+
+    <!-- FX GUIDE -->
+    <div id="fx_guide" class="page-section">
+      <div class="section-header">
+        <div class="section-title">이펙터 가이드</div>
+        <div class="section-sub">AX8 / AXE-FX II · EFFECTS BLOCK REFERENCE</div>
+      </div>
+
+      <div class="artist-tabs">
+        <button class="artist-tab active" onclick="switchArtistTab('fx','comp',this)">컴프레서</button>
+        <button class="artist-tab" onclick="switchArtistTab('fx','drive',this)">드라이브</button>
+        <button class="artist-tab" onclick="switchArtistTab('fx','delay',this)">딜레이</button>
+        <button class="artist-tab" onclick="switchArtistTab('fx','reverb',this)">리버브</button>
+        <button class="artist-tab" onclick="switchArtistTab('fx','manual',this)">매뉴얼 다운로드</button>
+      </div>
+
+      <!-- 컴프레서 -->
+      <div id="fx-comp" class="artist-tab-content active">
+        <div class="info-block">
+          <div class="info-header">Compressor 블록 — TYPE 종류</div>
+          <div class="info-row"><span class="info-key">STUDIO</span><span class="info-val">고급 Feed-Forward 스테레오 컴프레서 시뮬레이션. Ratio/Threshold/Knee/Makeup 파라미터. 레코딩 스타일</span></div>
+          <div class="info-row"><span class="info-key">PEDAL 1</span><span class="info-val">클래식 스톰박스 Feedback 컴프레서. Sustain 노브로 컨트롤. 기타 페달 스타일</span></div>
+          <div class="info-row"><span class="info-key">PEDAL 2</span><span class="info-val">PEDAL 1과 동일하나 Smoother 디텍터 — 펌핑이 덜함. 보다 투명한 컴프레션</span></div>
+          <div class="info-row"><span class="info-key">DYNAMICS</span><span class="info-val">단일 노브로 컴프레션/익스팬션. 0 이하 → 컴프, 0 이상 → 익스팬드</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">공통 파라미터</div>
+          <div class="info-row"><span class="info-key">THRSH</span><span class="info-val">컴프레션이 시작되는 레벨. PEDAL 타입은 자동으로 설정됨</span></div>
+          <div class="info-row"><span class="info-key">SUSTAIN / RATIO</span><span class="info-val">PEDAL=Sustain 양, STUDIO=압축 비율 (2:1 ~ INFINITY)</span></div>
+          <div class="info-row"><span class="info-key">ATT</span><span class="info-val">Attack — 임계값 초과 후 압축 시작까지의 속도. 기타는 빠르게</span></div>
+          <div class="info-row"><span class="info-key">REL</span><span class="info-val">Release — 임계값 아래로 내려간 후 복귀 속도</span></div>
+          <div class="info-row"><span class="info-key">EMPH</span><span class="info-val">Emphasis — 사이드체인 하이 부스트/컷. 저역 펌핑 방지</span></div>
+          <div class="info-row"><span class="info-key">LEVEL</span><span class="info-val">출력 레벨</span></div>
+          <div class="info-row"><span class="info-key">AUTO</span><span class="info-val">Dynamic Attack 자동 조절 ON/OFF</span></div>
+          <div class="info-row"><span class="info-key">LOOK AHEAD</span><span class="info-val">짧은 딜레이 추가 → 빠른 트랜지언트를 놓치지 않음</span></div>
+        </div>
+        <div class="quote-block">
+          Andy Timmons 컴프레서 → <strong style="color:var(--text)">STUDIO 또는 PEDAL 1</strong><br>
+          역할: 게인 압축보다 <strong style="color:var(--accent)">인풋 레벨 부스터</strong>로 사용. LEVEL 높게 / SUSTAIN 낮게 설정.
+          <span class="quote-source">Carl Martin Andy Timmons Signature Compressor → STUDIO 타입 근접</span>
+        </div>
+      </div>
+
+      <!-- 드라이브 -->
+      <div id="fx-drive" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">Drive 블록 — 전체 TYPE 목록 (AX8 / Axe-Fx II)</div>
+          <div class="info-row"><span class="info-key">T808 OD</span><span class="info-val">Ibanez TS-808 Tube Screamer — 클래식 미드 부스트 오버드라이브</span></div>
+          <div class="info-row"><span class="info-key">T808 MOD</span><span class="info-val">TS-808 가장 인기있는 모드 버전</span></div>
+          <div class="info-row"><span class="info-key">Tube Drv 3-knob</span><span class="info-val">Chandler Tube Driver (12AX7 내장 3노브 버전) — Andy Timmons 핵심 드라이브</span></div>
+          <div class="info-row"><span class="info-key">Tube Drv 4-knob</span><span class="info-val">Chandler Tube Driver (4노브 버전)</span></div>
+          <div class="info-row"><span class="info-key">BB Pre</span><span class="info-val">Xotic BB Preamp — 클린 부스터 / 로우게인 오버드라이브</span></div>
+          <div class="info-row"><span class="info-key">Zen Master</span><span class="info-val">Hermida Zen Drive — 투명하고 따뜻한 오버드라이브</span></div>
+          <div class="info-row"><span class="info-key">Full OD</span><span class="info-val">Fulltone Fulldrive OD</span></div>
+          <div class="info-row"><span class="info-key">Blues OD</span><span class="info-val">Marshall Bluesbreaker — 부드러운 블루스 오버드라이브</span></div>
+          <div class="info-row"><span class="info-key">Super OD</span><span class="info-val">Boss Super Overdrive (SD-1)</span></div>
+          <div class="info-row"><span class="info-key">Timothy</span><span class="info-val">Paul Cochrane Timmy — 투명하고 다이나믹한 오버드라이브</span></div>
+          <div class="info-row"><span class="info-key">Eternal Love</span><span class="info-val">Lovepedal Eternity</span></div>
+          <div class="info-row"><span class="info-key">Esoteric ACB</span><span class="info-val">Xotic AC Booster</span></div>
+          <div class="info-row"><span class="info-key">Esoteric RCB</span><span class="info-val">Xotic RC Booster</span></div>
+          <div class="info-row"><span class="info-key">Ruckus</span><span class="info-val">Suhr Riot — 다용도 하이게인 디스토션</span></div>
+          <div class="info-row"><span class="info-key">Rat Dist</span><span class="info-val">ProCo Rat Distortion</span></div>
+          <div class="info-row"><span class="info-key">Fat Rat</span><span class="info-val">Rat 수정 버전 — 더 풍성하고 부드럽게</span></div>
+          <div class="info-row"><span class="info-key">Shred Dist</span><span class="info-val">Marshall Shredmaster</span></div>
+          <div class="info-row"><span class="info-key">M-Zone Dist</span><span class="info-val">Boss MetalZone — 익스트림 하이게인</span></div>
+          <div class="info-row"><span class="info-key">SDD Preamp</span><span class="info-val">SDD 디지털 딜레이 프리앰프 섹션</span></div>
+          <div class="info-row"><span class="info-key">FET Boost</span><span class="info-val">부드러운 FET 클리핑 부스터, 톤 컨트롤 포함</span></div>
+          <div class="info-row"><span class="info-key">FAS Boost</span><span class="info-val">Fractal 자체 설계 부스트 페달</span></div>
+          <div class="info-row"><span class="info-key">FAS LED-Drive</span><span class="info-val">Fractal 설계 LED 클리핑 드라이브</span></div>
+          <div class="info-row"><span class="info-key">Mid Boost</span><span class="info-val">커스텀 미드 부스트 오버드라이브</span></div>
+          <div class="info-row"><span class="info-key">Micro Boost</span><span class="info-val">MXR Micro Amp 기반 클린 부스트</span></div>
+          <div class="info-row"><span class="info-key">Treble Boost</span><span class="info-val">클래식 트레블 부스터</span></div>
+          <div class="info-row"><span class="info-key">Tape Dist</span><span class="info-val">릴투릴 테이프 오버드라이브 시뮬레이션</span></div>
+          <div class="info-row"><span class="info-key">Pi Fuzz</span><span class="info-val">Big Muff Pi Fuzz</span></div>
+          <div class="info-row"><span class="info-key">Face Fuzz</span><span class="info-val">Dallas Arbiter Fuzz Face</span></div>
+          <div class="info-row"><span class="info-key">Bender Fuzz</span><span class="info-val">Tonebender 회로 기반 퍼즈</span></div>
+          <div class="info-row"><span class="info-key">Hard Fuzz</span><span class="info-val">60년대 스타일 하드클리핑 퍼즈</span></div>
+          <div class="info-row"><span class="info-key">Master Fuzz</span><span class="info-val">Maestro Fuzztone (만족 퍼즈)</span></div>
+          <div class="info-row"><span class="info-key">Plus Dist</span><span class="info-val">MXR Distortion Plus</span></div>
+          <div class="info-row"><span class="info-key">Octave Dist</span><span class="info-val">Tycobrahe Octavia 옥타브 디스토션</span></div>
+          <div class="info-row"><span class="info-key">Bit Crusher</span><span class="info-val">로파이 디지털 디스토션</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">Drive 블록 공통 파라미터</div>
+          <div class="info-row"><span class="info-key">DRIVE</span><span class="info-val">게인/오버드라이브/디스토션 양. 높은 드라이브 → 높은 게인 앞 → 노이즈/스퀼 주의</span></div>
+          <div class="info-row"><span class="info-key">TONE</span><span class="info-val">드라이브 시뮬레이션의 하이/로우 캐릭터. 페달의 톤 노브와 동일</span></div>
+          <div class="info-row"><span class="info-key">LEVEL</span><span class="info-val">출력 레벨. 클린 드라이브도 레벨 높여서 앰프를 밀어주는 용도로 사용 가능</span></div>
+          <div class="info-row"><span class="info-key">LOW CUT</span><span class="info-val">입력 하이패스 필터 주파수. 높이면 "흐물흐물한" 디스토션 방지</span></div>
+          <div class="info-row"><span class="info-key">HIGH CUT</span><span class="info-val">출력 로우패스 필터. 낮추면 더 어두운 사운드</span></div>
+          <div class="info-row"><span class="info-key">MIX</span><span class="info-val">드라이/웻 비율. 보통 100%로 설정</span></div>
+        </div>
+        <div class="quote-block">
+          <strong style="color:var(--text)">Andy Timmons 드라이브 설정:</strong><br>
+          Drive 1 → <strong style="color:var(--accent)">Tube Drv 3-knob</strong> (BK Butler Tube Driver / JHS AT Drive) — DRIVE 낮게, LEVEL 높게<br>
+          Drive 2 → <strong style="color:var(--accent)">T808 OD</strong> (Ibanez TS-808) — DRIVE 낮게, LEVEL 높게, TONE 12시
+        </div>
+      </div>
+
+      <!-- 딜레이 -->
+      <div id="fx-delay" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">Delay 블록 — TYPE 목록</div>
+          <div class="info-row"><span class="info-key">Digital Mono</span><span class="info-val">풀레인지 프리스틴 모던 딜레이 (기본 모노)</span></div>
+          <div class="info-row"><span class="info-key">Analog Mono</span><span class="info-val">아날로그 딜레이 주파수 응답과 캐릭터</span></div>
+          <div class="info-row"><span class="info-key">Vintage Digital</span><span class="info-val">비트 감소로 로파이 바이브</span></div>
+          <div class="info-row"><span class="info-key">Deluxe Mind Guy</span><span class="info-val">클래식 딜레이 페달 재현</span></div>
+          <div class="info-row"><span class="info-key">Mono BBD</span><span class="info-val">빈티지 버킷 브리게이드 딜레이 페달 시뮬</span></div>
+          <div class="info-row"><span class="info-key">2290 w/ Mod</span><span class="info-val">TC Electronic 2290 기반 인더스트리 표준</span></div>
+          <div class="info-row"><span class="info-key">Mono Tape</span><span class="info-val">MOTOR SPEED 등 테이프 컨트롤 포함</span></div>
+          <div class="info-row"><span class="info-key">Lo-Fi Tape</span><span class="info-val">매우 로파이한 테이프 딜레이</span></div>
+          <div class="info-row"><span class="info-key">Digital Stereo</span><span class="info-val">풀레인지 프리스틴 스테레오 딜레이 (기본 스테레오)</span></div>
+          <div class="info-row"><span class="info-key">Analog Stereo</span><span class="info-val">아날로그 딜레이 스테레오</span></div>
+          <div class="info-row"><span class="info-key">Stereo Tape</span><span class="info-val">테이프 딜레이 스테레오</span></div>
+          <div class="info-row"><span class="info-key">Ambient Stereo</span><span class="info-val">울트라 와이드 에코</span></div>
+          <div class="info-row"><span class="info-key">Stereo BBD</span><span class="info-val">빈티지 BBD 스테레오</span></div>
+          <div class="info-row"><span class="info-key">Ducking Delay</span><span class="info-val">세게 칠 때 딜레이 레벨 자동 감소 — 덜 혼잡한 믹스</span></div>
+          <div class="info-row"><span class="info-key">Dual Delay</span><span class="info-val">듀얼 딜레이 (L/R 독립 타임 설정 가능)</span></div>
+          <div class="info-row"><span class="info-key">Ping-Pong Delay</span><span class="info-val">L→R→L 핑퐁 딜레이</span></div>
+          <div class="info-row"><span class="info-key">Sweep Delay</span><span class="info-val">스윕 딜레이</span></div>
+          <div class="info-row"><span class="info-key">Reverse Delay</span><span class="info-val">리버스 딜레이</span></div>
+        </div>
+        <div class="quote-block">
+          <strong style="color:var(--text)">Andy Timmons 딜레이:</strong><br>
+          TYPE → <strong style="color:var(--accent)">Digital Stereo</strong> 또는 <strong style="color:var(--accent)">Dual Delay</strong><br>
+          L: <strong style="color:var(--accent)">375ms</strong> / R: <strong style="color:var(--accent)">500ms</strong> — 서로 맞물려 도티드 8th + 쿼터 필 형성. "노트 주변의 아우라"
+        </div>
+      </div>
+
+      <!-- 리버브 -->
+      <div id="fx-reverb" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">Reverb 블록 — TYPE 목록 (40+ 변형)</div>
+          <div class="info-row"><span class="info-key">Room</span><span class="info-val">실제 방 시뮬레이션. 가장 자연스럽고 리얼한 리버브. 보컬/퍼커션에도 적합</span></div>
+          <div class="info-row"><span class="info-key">Hall</span><span class="info-val">Room보다 덜 부드럽고 응답 피크 있음. 두드러지는 리버브 원할 때</span></div>
+          <div class="info-row"><span class="info-key">Chamber</span><span class="info-val">크고 박스형 공간. 밝고 공명이 강한 리버브</span></div>
+          <div class="info-row"><span class="info-key">Plate</span><span class="info-val">빈티지 플레이트 리버브 — 부드럽고 밝은 특성</span></div>
+          <div class="info-row"><span class="info-key">Cathedral</span><span class="info-val">대성당 시뮬레이션 — 장엄하고 긴 디케이</span></div>
+          <div class="info-row"><span class="info-key">Spring</span><span class="info-val">전자기계식 스프링 리버브 시뮬레이션 — 클래식 기타 앰프 리버브</span></div>
+          <div class="info-row"><span class="info-key">Cavern</span><span class="info-val">거대한 동굴 공간. 광활하고 깊은 리버브</span></div>
+          <div class="info-row"><span class="info-key">Studio</span><span class="info-val">클래식 디지털 스튜디오 리버브 모델링</span></div>
+          <div class="info-row"><span class="info-key">Quarry</span><span class="info-val">환상적인 리버브 (채석장 공간 기반)</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">Reverb 블록 주요 파라미터</div>
+          <div class="info-row"><span class="info-key">TIME</span><span class="info-val">디케이 시간 (t60 — -60dB까지 감쇠하는 시간)</span></div>
+          <div class="info-row"><span class="info-key">PRE DELAY</span><span class="info-val">리버브 시작 전 딜레이. SIZE가 낮으면 리버브가 즉시 시작 → Pre Delay로 간격 추가</span></div>
+          <div class="info-row"><span class="info-key">SIZE</span><span class="info-val">공간 크기. 높을수록 에코 시간 길어지고 그레이니해짐</span></div>
+          <div class="info-row"><span class="info-key">MIX</span><span class="info-val">드라이/웻 비율</span></div>
+          <div class="info-row"><span class="info-key">QUALITY</span><span class="info-val">Normal (CPU 절약) / High (최고 품질)</span></div>
+          <div class="info-row"><span class="info-key">EARLY LEVEL</span><span class="info-val">초기 반사음 레벨 (Spring 타입 제외)</span></div>
+          <div class="info-row"><span class="info-key">LATE LEVEL</span><span class="info-val">리버브 테일 레벨</span></div>
+          <div class="info-row"><span class="info-key">HF / LF TIME</span><span class="info-val">고역/저역 디케이 타임 독립 설정 — 자연스러운 멀티밴드 리버브</span></div>
+          <div class="info-row"><span class="info-key">HOLD</span><span class="info-val">웻 입력 뮤트 + Time 무한대 → 패드/드론 사운드 생성 가능</span></div>
+          <div class="info-row"><span class="info-key">NUMBER SPRINGS</span><span class="info-val">Spring 타입 전용 — 스프링 개수 설정</span></div>
+          <div class="info-row"><span class="info-key">SPRING DRIVE</span><span class="info-val">Spring 타입 전용 — 스프링 회로 오버드라이브</span></div>
+        </div>
+        <div class="quote-block">
+          <strong style="color:var(--text)">Andy Timmons 리버브:</strong><br>
+          Mesa Lonestar 내장 스프링 리버브 → Fractal → <strong style="color:var(--accent)">Spring 타입</strong><br>
+          스프링 + 작은 Room 조합으로 자연스러운 공간감 형성
+        </div>
+      </div>
+
+      <!-- 매뉴얼 -->
+      <div id="fx-manual" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">공식 매뉴얼</div>
+          <div class="info-row"><span class="info-key">AX8 매뉴얼</span><span class="info-val"><a href="https://www.fractalaudio.com/downloads/manuals/AX8/AX8-Owners-Manual.pdf" target="_blank" style="color:var(--accent)">AX8 Owner's Manual v6.0.1 (공식 다운로드)</a></span></div>
+          <div class="info-row"><span class="info-key">로컬 저장</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace">~/Desktop/잭슨웹/AX8-Owners-Manual.pdf</span></div>
+          <div class="info-row"><span class="info-key">Axe-Fx II 매뉴얼</span><span class="info-val"><a href="https://www.fractalaudio.com/downloads/manuals/axe-fx-2/Axe-Fx-II-Owners-Manual.pdf" target="_blank" style="color:var(--accent)">Axe-Fx II Owner's Manual (공식)</a></span></div>
+          <div class="info-row"><span class="info-key">로컬 저장</span><span class="info-val" style="font-family:'IBM Plex Mono',monospace">~/Desktop/잭슨웹/Axe-Fx-II-Owners-Manual.pdf</span></div>
+          <div class="info-row"><span class="info-key">Blocks Guide</span><span class="info-val"><a href="https://www.fractalaudio.com/downloads/manuals/axe-fx-2/Axe-Fx-II-Blocks-Guide.pdf" target="_blank" style="color:var(--accent)">Axe-Fx II Blocks Guide (이펙터 파라미터 상세)</a></span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">AX8 주요 사양</div>
+          <div class="info-row"><span class="info-key">샘플레이트</span><span class="info-val">48 kHz (IR 로드 시 48k 폴더 사용)</span></div>
+          <div class="info-row"><span class="info-key">비트 뎁스</span><span class="info-val">24-bit A/D 변환</span></div>
+          <div class="info-row"><span class="info-key">다이나믹 레인지</span><span class="info-val">> 110 dB</span></div>
+          <div class="info-row"><span class="info-key">앰프 모델</span><span class="info-val">222+ Quantum 앰프 모델</span></div>
+          <div class="info-row"><span class="info-key">Delay 블록</span><span class="info-val">2개 (+ Multi-Delay 2개 추가)</span></div>
+          <div class="info-row"><span class="info-key">Drive 블록</span><span class="info-val">2개 (Drive 1, Drive 2)</span></div>
+          <div class="info-row"><span class="info-key">Compressor 블록</span><span class="info-val">1개</span></div>
+          <div class="info-row"><span class="info-key">Reverb 블록</span><span class="info-val">1개 (40+ 타입)</span></div>
+          <div class="info-row"><span class="info-key">Scene</span><span class="info-val">프리셋당 8개 씬 — 블록 바이패스/레벨 독립 저장</span></div>
+        </div>
       </div>
 
     </div>
