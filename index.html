@@ -1505,8 +1505,8 @@
         <button class="amp-tab" onclick="switchAmpTab('fxcomp','params',this)">파라미터</button>
       </div>
       <div id="tab_screenshot_fxcomp" class="amp-tab-content active">
-        <div class="upload-hint">Axe-Edit에서 <strong>Compressor 블록</strong> 스크린샷을 클릭해서 업로드합니다</div>
-        <div class="page-grid" id="grid_fxcomp" style="grid-template-columns: repeat(4,1fr)"></div>
+        <div class="upload-hint">각 컴프레서 타입마다 <strong>Page 1</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div id="grid_fxcomp"></div>
       </div>
       <div id="tab_params_fxcomp" class="amp-tab-content">
         <div id="params_fxcomp" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
@@ -1543,8 +1543,8 @@
         <button class="amp-tab" onclick="switchAmpTab('fxdly','params',this)">파라미터</button>
       </div>
       <div id="tab_screenshot_fxdly" class="amp-tab-content active">
-        <div class="upload-hint">Axe-Edit에서 <strong>Delay 블록</strong> 각 페이지 스크린샷을 클릭해서 업로드합니다</div>
-        <div class="page-grid" id="grid_fxdly"></div>
+        <div class="upload-hint">각 딜레이 타입마다 <strong>Page 1 / Page 2</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div id="grid_fxdly"></div>
       </div>
       <div id="tab_params_fxdly" class="amp-tab-content">
         <div id="params_fxdly" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
@@ -1562,8 +1562,8 @@
         <button class="amp-tab" onclick="switchAmpTab('fxrvb','params',this)">파라미터</button>
       </div>
       <div id="tab_screenshot_fxrvb" class="amp-tab-content active">
-        <div class="upload-hint">Axe-Edit에서 <strong>Reverb 블록</strong> 각 페이지 스크린샷을 클릭해서 업로드합니다</div>
-        <div class="page-grid" id="grid_fxrvb"></div>
+        <div class="upload-hint">각 리버브 타입마다 <strong>Page 1 / Page 2</strong> 스크린샷을 클릭해서 업로드합니다</div>
+        <div id="grid_fxrvb"></div>
       </div>
       <div id="tab_params_fxrvb" class="amp-tab-content">
         <div id="params_fxrvb" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
@@ -3029,11 +3029,48 @@
   }
 
   /* ── FX DB 그리드 빌드 ── */
-  const FXDB_PAGES = {
-    fxcomp: ['Main'],
-    fxdly:  ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5', 'Page 6'],
-    fxrvb:  ['Page 1', 'Page 2', 'Page 3', 'Page 4'],
-  };
+  // 컴프레서 타입 목록
+  const COMP_TYPES = [
+    { name: 'Studio',   origin: '고급 Feed-Forward 스테레오 컴프레서 — 스튜디오 랙 타입 (dbx, SSL 계열)' },
+    { name: 'Pedal 1',  origin: '클래식 스톰박스 Feedback 컴프레서 — MXR Dynacomp, Ross Compressor 계열' },
+    { name: 'Pedal 2',  origin: 'Pedal 1과 동일하나 Smoother 디텍터 — 펌핑 적고 투명한 컴프레션' },
+    { name: 'Dynamics', origin: 'Fractal 자체 설계 — 단일 노브로 컴프레션(−) / 익스팬션(+) 전환' },
+  ];
+
+  // 딜레이 타입 목록
+  const DELAY_TYPES = [
+    { name: 'Digital Mono',    origin: '풀레인지 프리스틴 모던 딜레이 (기본 모노)' },
+    { name: 'Analog Mono',     origin: '아날로그 딜레이 주파수 응답 시뮬레이션' },
+    { name: 'Vintage Digital', origin: '비트 감소(bit-depth reduction)로 로파이 바이브' },
+    { name: 'Deluxe Mind Guy', origin: 'Electro-Harmonix Deluxe Memory Man 클래식 딜레이 페달' },
+    { name: 'Mono BBD',        origin: 'Boss DM-2 계열 빈티지 버킷 브리게이드(BBD) 딜레이 페달' },
+    { name: '2290 w/ Mod',     origin: 'TC Electronic 2290 — 인더스트리 표준 디지털 딜레이 랙' },
+    { name: 'Mono Tape',       origin: '테이프 딜레이 — Motor Speed 등 테이프 물리 컨트롤 포함' },
+    { name: 'Lo-Fi Tape',      origin: '매우 로파이한 테이프 딜레이 시뮬레이션' },
+    { name: 'Digital Stereo',  origin: '풀레인지 프리스틴 스테레오 딜레이 (기본 스테레오)' },
+    { name: 'Analog Stereo',   origin: '아날로그 딜레이 스테레오 버전' },
+    { name: 'Stereo Tape',     origin: '테이프 딜레이 스테레오 버전' },
+    { name: 'Ambient Stereo',  origin: 'Ultra-wide 에코 — 광활한 앰비언트 공간감' },
+    { name: 'Stereo BBD',      origin: '빈티지 BBD 딜레이 스테레오 버전' },
+    { name: 'Ducking Delay',   origin: '세게 칠수록 딜레이 레벨 자동 감소 — 혼잡하지 않은 믹스' },
+    { name: 'Dual Delay',      origin: 'L/R 독립 딜레이 타임 설정 — Andy Timmons 375ms/500ms 스테레오' },
+    { name: 'Ping-Pong Delay', origin: 'L→R→L 핑퐁 딜레이' },
+    { name: 'Sweep Delay',     origin: 'LFO로 딜레이 타임을 스윕하는 모듈레이션 딜레이' },
+    { name: 'Reverse Delay',   origin: '리버스 테이프 딜레이 효과' },
+  ];
+
+  // 리버브 타입 목록
+  const REVERB_TYPES = [
+    { name: 'Room',      origin: '실제 방 시뮬레이션 — 가장 자연스럽고 리얼한 리버브' },
+    { name: 'Hall',      origin: '콘서트 홀 — Room보다 덜 부드럽고 응답 피크 있음' },
+    { name: 'Chamber',   origin: '크고 박스형 체임버 — 밝고 공명이 강한 리버브' },
+    { name: 'Plate',     origin: '빈티지 플레이트 리버브 시뮬레이션 — EMT 140 계열, 부드럽고 밝음' },
+    { name: 'Cathedral', origin: '대성당 시뮬레이션 — 장엄하고 매우 긴 디케이' },
+    { name: 'Spring',    origin: '전자기계식 스프링 리버브 — Fender 앰프 내장 리버브 탱크 시뮬' },
+    { name: 'Cavern',    origin: '거대한 동굴 공간 — 광활하고 매우 깊은 리버브' },
+    { name: 'Studio',    origin: '클래식 디지털 스튜디오 리버브 (Lexicon 480L 계열)' },
+    { name: 'Quarry',    origin: '채석장 공간 기반 독특한 리버브 캐릭터' },
+  ];
 
   // 드라이브 타입 전체 목록 — { name, origin } (AX8 실제 리스트)
   const DRIVE_TYPES = [
@@ -3165,73 +3202,90 @@
     if (img) window.open(img.dataset.url, '_blank');
   }
 
-  Object.entries(FXDB_PAGES).forEach(([fxId, pages]) => {
-    const grid = document.getElementById(`grid_${fxId}`);
-    if (!grid) return;
-    pages.forEach(page => {
-      const key = page.toLowerCase();
-      const cell = document.createElement('div');
-      cell.className = 'page-cell';
-      cell.id = `cell_${fxId}_${key}`;
-      cell.innerHTML = `
-        <span class="cell-icon">＋</span>
-        <span class="cell-label">${page}</span>
-        <input type="file" accept="image/png,image/jpeg" id="input_${fxId}_${key}">
-        <div class="cell-overlay">
-          <button class="btn-view" onclick="viewFxDbImage(event,'${fxId}','${key}')">보기</button>
-          <button class="btn-remove" onclick="removeFxDbImage(event,'${fxId}','${key}')">제거</button>
-        </div>`;
-      cell.addEventListener('click', () => document.getElementById(`input_${fxId}_${key}`).click());
-      grid.appendChild(cell);
-
-      document.addEventListener('change', async (e) => {
-        if (e.target.id !== `input_${fxId}_${key}`) return;
-        const file = e.target.files[0];
-        if (!file) return;
-        await uploadFxDbImage(file, fxId, key, page);
-      });
+  // 컴프/딜레이/리버브 타입별 페이지 빌더
+  function buildTypedFxPage(types, containerId, storePath, slotCount) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    types.forEach(({ name, origin }) => {
+      const typeId = name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      const block = document.createElement('div');
+      block.style.cssText = 'border:1px solid var(--border); margin-bottom:16px;';
+      const header = document.createElement('div');
+      header.style.cssText = 'padding:9px 14px; background:#0d0d0d; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:3px;';
+      header.innerHTML = `
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; color:var(--accent)">${name}</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--text-dim)">${origin}</span>`;
+      block.appendChild(header);
+      const cols = slotCount === 1 ? '200px' : `repeat(${slotCount}, 1fr)`;
+      const grid = document.createElement('div');
+      grid.style.cssText = `display:grid; grid-template-columns:${cols}; gap:8px; padding:10px;`;
+      for (let n = 1; n <= slotCount; n++) {
+        const cellId  = `cell_${storePath}_${typeId}_${n}`;
+        const inputId = `input_${storePath}_${typeId}_${n}`;
+        const cell = document.createElement('div');
+        cell.className = 'page-cell';
+        cell.id = cellId;
+        cell.innerHTML = `
+          <span class="cell-icon">＋</span>
+          <span class="cell-label">Page ${n}</span>
+          <input type="file" accept="image/png,image/jpeg" id="${inputId}">
+          <div class="cell-overlay">
+            <button class="btn-view"   onclick="viewTypedImg(event,'${storePath}','${typeId}','${n}')">보기</button>
+            <button class="btn-remove" onclick="removeTypedImg(event,'${storePath}','${typeId}','${n}')">제거</button>
+          </div>`;
+        cell.addEventListener('click', () => document.getElementById(inputId).click());
+        document.addEventListener('change', async (e) => {
+          if (e.target.id !== inputId) return;
+          const file = e.target.files[0]; if (!file) return;
+          await uploadTypedImg(file, storePath, typeId, n, `${name} Page ${n}`);
+        });
+        grid.appendChild(cell);
+      }
+      block.appendChild(grid);
+      container.appendChild(block);
     });
-  });
+  }
 
-  async function uploadFxDbImage(file, fxId, key, label) {
-    const cell = document.getElementById(`cell_${fxId}_${key}`);
+  buildTypedFxPage(COMP_TYPES,   'grid_fxcomp', 'comp',   1);
+  buildTypedFxPage(DELAY_TYPES,  'grid_fxdly',  'delay',  2);
+  buildTypedFxPage(REVERB_TYPES, 'grid_fxrvb',  'reverb', 2);
+
+  async function uploadTypedImg(file, storePath, typeId, n, label) {
+    const cell = document.getElementById(`cell_${storePath}_${typeId}_${n}`);
     cell.classList.add('uploading');
     showToast(`${label} 업로드 중...`, '');
     if (!sb) { showToast('Supabase 연결 없음', 'error'); cell.classList.remove('uploading'); return; }
     const ext = file.type === 'image/png' ? 'png' : 'jpg';
-    const path = `_fxdb/${fxId}_${key}.${ext}`;
+    const path = `_${storePath}/${typeId}_${n}.${ext}`;
     const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
     if (error) { showToast('실패: ' + error.message, 'error'); cell.classList.remove('uploading'); return; }
     const { data } = sb.storage.from('ax8-screenshots').getPublicUrl(path);
-    setFxDbCell(fxId, key, data.publicUrl);
-    showToast(`✓ ${label} 업로드 완료`, 'success');
+    setTypedCell(storePath, typeId, n, data.publicUrl);
+    showToast(`✓ ${label} 완료`, 'success');
   }
 
-  function setFxDbCell(fxId, key, url) {
-    const cell = document.getElementById(`cell_${fxId}_${key}`);
+  function setTypedCell(storePath, typeId, n, url) {
+    const cell = document.getElementById(`cell_${storePath}_${typeId}_${n}`);
     if (!cell) return;
-    cell.classList.remove('uploading');
-    cell.classList.add('uploaded');
-    const existing = cell.querySelector('img');
-    if (existing) existing.remove();
+    cell.classList.remove('uploading'); cell.classList.add('uploaded');
+    const ex = cell.querySelector('img'); if (ex) ex.remove();
     const img = document.createElement('img');
     img.src = url; img.dataset.url = url;
     cell.insertBefore(img, cell.firstChild);
   }
 
-  async function removeFxDbImage(event, fxId, key) {
+  async function removeTypedImg(event, storePath, typeId, n) {
     event.stopPropagation();
-    if (sb) for (const ext of ['png','jpg']) await sb.storage.from('ax8-screenshots').remove([`_fxdb/${fxId}_${key}.${ext}`]);
-    const cell = document.getElementById(`cell_${fxId}_${key}`);
-    const img = cell.querySelector('img');
-    if (img) img.remove();
+    if (sb) for (const ext of ['png','jpg']) await sb.storage.from('ax8-screenshots').remove([`_${storePath}/${typeId}_${n}.${ext}`]);
+    const cell = document.getElementById(`cell_${storePath}_${typeId}_${n}`);
+    const img = cell.querySelector('img'); if (img) img.remove();
     cell.classList.remove('uploaded');
     showToast('제거 완료', '');
   }
 
-  function viewFxDbImage(event, fxId, key) {
+  function viewTypedImg(event, storePath, typeId, n) {
     event.stopPropagation();
-    const img = document.getElementById(`cell_${fxId}_${key}`).querySelector('img');
+    const img = document.getElementById(`cell_${storePath}_${typeId}_${n}`).querySelector('img');
     if (img) window.open(img.dataset.url, '_blank');
   }
   /* ── END FX DB ── */
