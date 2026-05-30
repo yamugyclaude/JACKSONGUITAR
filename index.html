@@ -1197,8 +1197,9 @@
     <div class="nav-section">
       <div class="nav-label">FX DB</div>
       <div class="nav-item" onclick="showPage('fx_comp', this)">Compressor</div>
-      <div class="nav-item" onclick="showPage('fx_drive1', this)">Drive 1</div>
-      <div class="nav-item" onclick="showPage('fx_drive2', this)">Drive 2</div>
+      <div class="nav-item" onclick="showPage('fx_drive', this)">Drive</div>
+      <div class="nav-item" onclick="showPage('fx_delay', this)">Delay</div>
+      <div class="nav-item" onclick="showPage('fx_reverb', this)">Reverb</div>
     </div>
   </aside>
 
@@ -1512,41 +1513,60 @@
       </div>
     </div>
 
-    <!-- FX DB: DRIVE 1 -->
-    <div id="fx_drive1" class="page-section">
+    <!-- FX DB: DRIVE -->
+    <div id="fx_drive" class="page-section">
       <div class="section-header">
-        <div class="section-title">Drive 1</div>
-        <div class="section-sub">FX DB · DRIVE 1 BLOCK</div>
+        <div class="section-title">Drive</div>
+        <div class="section-sub">FX DB · DRIVE BLOCK</div>
       </div>
       <div class="amp-tabs">
-        <button class="amp-tab active" onclick="switchAmpTab('fxdrv1','screenshot',this)">스크린샷</button>
-        <button class="amp-tab" onclick="switchAmpTab('fxdrv1','params',this)">파라미터</button>
+        <button class="amp-tab active" onclick="switchAmpTab('fxdrv','screenshot',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('fxdrv','params',this)">파라미터</button>
       </div>
-      <div id="tab_screenshot_fxdrv1" class="amp-tab-content active">
-        <div class="upload-hint">Axe-Edit에서 <strong>Drive 1 블록</strong> 스크린샷을 클릭해서 업로드합니다</div>
-        <div class="page-grid" id="grid_fxdrv1" style="grid-template-columns: repeat(4,1fr)"></div>
+      <div id="tab_screenshot_fxdrv" class="amp-tab-content active">
+        <div class="upload-hint">Axe-Edit에서 <strong>Drive 블록</strong> 스크린샷을 클릭해서 업로드합니다 (Drive 1, Drive 2 각 1장)</div>
+        <div class="page-grid" id="grid_fxdrv"></div>
       </div>
-      <div id="tab_params_fxdrv1" class="amp-tab-content">
-        <div id="params_fxdrv1" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
+      <div id="tab_params_fxdrv" class="amp-tab-content">
+        <div id="params_fxdrv" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
       </div>
     </div>
 
-    <!-- FX DB: DRIVE 2 -->
-    <div id="fx_drive2" class="page-section">
+    <!-- FX DB: DELAY -->
+    <div id="fx_delay" class="page-section">
       <div class="section-header">
-        <div class="section-title">Drive 2</div>
-        <div class="section-sub">FX DB · DRIVE 2 BLOCK</div>
+        <div class="section-title">Delay</div>
+        <div class="section-sub">FX DB · DELAY BLOCK</div>
       </div>
       <div class="amp-tabs">
-        <button class="amp-tab active" onclick="switchAmpTab('fxdrv2','screenshot',this)">스크린샷</button>
-        <button class="amp-tab" onclick="switchAmpTab('fxdrv2','params',this)">파라미터</button>
+        <button class="amp-tab active" onclick="switchAmpTab('fxdly','screenshot',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('fxdly','params',this)">파라미터</button>
       </div>
-      <div id="tab_screenshot_fxdrv2" class="amp-tab-content active">
-        <div class="upload-hint">Axe-Edit에서 <strong>Drive 2 블록</strong> 스크린샷을 클릭해서 업로드합니다</div>
-        <div class="page-grid" id="grid_fxdrv2" style="grid-template-columns: repeat(4,1fr)"></div>
+      <div id="tab_screenshot_fxdly" class="amp-tab-content active">
+        <div class="upload-hint">Axe-Edit에서 <strong>Delay 블록</strong> 각 페이지 스크린샷을 클릭해서 업로드합니다</div>
+        <div class="page-grid" id="grid_fxdly"></div>
       </div>
-      <div id="tab_params_fxdrv2" class="amp-tab-content">
-        <div id="params_fxdrv2" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
+      <div id="tab_params_fxdly" class="amp-tab-content">
+        <div id="params_fxdly" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
+      </div>
+    </div>
+
+    <!-- FX DB: REVERB -->
+    <div id="fx_reverb" class="page-section">
+      <div class="section-header">
+        <div class="section-title">Reverb</div>
+        <div class="section-sub">FX DB · REVERB BLOCK</div>
+      </div>
+      <div class="amp-tabs">
+        <button class="amp-tab active" onclick="switchAmpTab('fxrvb','screenshot',this)">스크린샷</button>
+        <button class="amp-tab" onclick="switchAmpTab('fxrvb','params',this)">파라미터</button>
+      </div>
+      <div id="tab_screenshot_fxrvb" class="amp-tab-content active">
+        <div class="upload-hint">Axe-Edit에서 <strong>Reverb 블록</strong> 각 페이지 스크린샷을 클릭해서 업로드합니다</div>
+        <div class="page-grid" id="grid_fxrvb"></div>
+      </div>
+      <div id="tab_params_fxrvb" class="amp-tab-content">
+        <div id="params_fxrvb" class="no-params">업로드 후 파라미터가 여기에 표시됩니다</div>
       </div>
     </div>
 
@@ -3011,8 +3031,9 @@
   /* ── FX DB 그리드 빌드 ── */
   const FXDB_PAGES = {
     fxcomp: ['Main'],
-    fxdrv1: ['Drive'],
-    fxdrv2: ['Drive'],
+    fxdrv:  ['Drive 1', 'Drive 2'],
+    fxdly:  ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5', 'Page 6'],
+    fxrvb:  ['Page 1', 'Page 2', 'Page 3', 'Page 4'],
   };
 
   Object.entries(FXDB_PAGES).forEach(([fxId, pages]) => {
