@@ -2639,26 +2639,48 @@
     if (img) window.open(img.dataset.url, '_blank');
   }
 
-  // Load existing FX images from Supabase
+  // Load existing images from Supabase on page load
   window.addEventListener('load', async () => {
     if (!sb) return;
+
+    // 1. 앰프 페이지 이미지 (amp/page.png 및 amp/fxkey_page.png)
     for (const amp of AMPS) {
       const { data, error } = await sb.storage.from('ax8-screenshots').list(amp);
       if (error || !data) continue;
       data.forEach(file => {
-        // FX 파일 패턴: {fxKey}_{page}.{ext}
-        const match = file.name.match(/^(comp|drive1|drive2)_(.+)\.(png|jpg)$/i);
-        if (match) {
-          const [, fxKey, key] = match;
-          const { data: urlData } = sb.storage.from('ax8-screenshots').getPublicUrl(`${amp}/${file.name}`);
-          if (urlData) setFxCell(fxKey, amp, key, urlData.publicUrl);
-        }
-        // 기존 앰프 파일
-        else {
+        const fxMatch = file.name.match(/^(comp|drive1|drive2)_(.+)\.(png|jpg)$/i);
+        if (fxMatch) {
+          const [, fxKey, key] = fxMatch;
+          const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`${amp}/${file.name}`);
+          if (u) setFxCell(fxKey, amp, key, u.publicUrl);
+        } else {
           const key = file.name.replace(/\.(png|jpg)$/i, '');
-          const { data: urlData } = sb.storage.from('ax8-screenshots').getPublicUrl(`${amp}/${file.name}`);
-          if (urlData) setCell(amp, key, urlData.publicUrl);
+          const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`${amp}/${file.name}`);
+          if (u) setCell(amp, key, u.publicUrl);
         }
+      });
+    }
+
+    // 2. FX DB — Drive (_drive/{driveId}_{n}.png)
+    const { data: drvFiles } = await sb.storage.from('ax8-screenshots').list('_drive');
+    (drvFiles || []).forEach(file => {
+      const m = file.name.match(/^(.+)_(\d+)\.(png|jpg)$/i);
+      if (!m) return;
+      const [, driveId, n] = m;
+      const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`_drive/${file.name}`);
+      if (u) setDrvCell(driveId, n, u.publicUrl);
+    });
+
+    // 3. FX DB — Typed (comp_fx2, delay_fx2, reverb_fx2)
+    for (const storePath of ['_comp_fx2', '_delay_fx2', '_reverb_fx2']) {
+      const { data: files } = await sb.storage.from('ax8-screenshots').list(storePath);
+      (files || []).forEach(file => {
+        const m = file.name.match(/^(.+)_(\d+)\.(png|jpg)$/i);
+        if (!m) return;
+        const [, typeId, n] = m;
+        const sp = storePath.replace('_','');
+        const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`${storePath}/${file.name}`);
+        if (u) setTypedCell(sp, typeId, parseInt(n), u.publicUrl);
       });
     }
   });
