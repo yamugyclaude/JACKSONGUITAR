@@ -2470,19 +2470,19 @@
       });
     }
 
-    // 2. FX DB — Drive (_drive/{driveId}_{n}.png)
-    const { data: drvFiles, error: drvErr } = await sb.storage.from('ax8-screenshots').list('_drive');
+    // 2. FX DB — Drive (drive/{driveId}_{n}.png)
+    const { data: drvFiles, error: drvErr } = await sb.storage.from('ax8-screenshots').list('drive');
     if (drvErr) console.error('Drive list error:', drvErr);
     (drvFiles || []).forEach(file => {
       const m = file.name.match(/^(.+)_(\d+)\.(png|jpg)$/i);
       if (!m) return;
       const [, driveId, n] = m;
-      const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`_drive/${file.name}`);
+      const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`drive/${file.name}`);
       if (u) { setDrvCell(driveId, n, u.publicUrl); console.log('✅ Drive loaded:', driveId, n); }
     });
 
     // 3. FX DB — Typed (comp_fx2, delay_fx2, reverb_fx2)
-    for (const storePath of ['_comp_fx2', '_delay_fx2', '_reverb_fx2']) {
+    for (const storePath of ['comp_fx2', 'delay_fx2', 'reverb_fx2']) {
       const { data: files, error: fxErr } = await sb.storage.from('ax8-screenshots').list(storePath);
       if (fxErr) { console.error(`${storePath} list error:`, fxErr); continue; }
       console.log(`${storePath}: ${(files||[]).length} files`);
@@ -2490,7 +2490,7 @@
         const m = file.name.match(/^(.+)_(\d+)\.(png|jpg)$/i);
         if (!m) return;
         const [, typeId, n] = m;
-        const sp = storePath.slice(1); // '_comp_fx2' → 'comp_fx2'
+        const sp = storePath; // 이미 underscore 없음
         const { data: u } = sb.storage.from('ax8-screenshots').getPublicUrl(`${storePath}/${file.name}`);
         if (u) { setTypedCell(sp, typeId, parseInt(n), u.publicUrl); }
       });
@@ -2892,7 +2892,7 @@
     showToast(`${label} Page ${n} 업로드 중...`, '');
     if (!sb) { showToast('❌ Supabase 연결 안됨 — 페이지 새로고침 후 재시도', 'error'); cell.classList.remove('uploading'); return; }
     const ext = file.type === 'image/png' ? 'png' : 'jpg';
-    const path = `_drive/${driveId}_${n}.${ext}`;
+    const path = `drive/${driveId}_${n}.${ext}`;
     const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
     if (error) { showToast('실패: ' + error.message, 'error'); cell.classList.remove('uploading'); return; }
     const { data } = sb.storage.from('ax8-screenshots').getPublicUrl(path);
@@ -2912,7 +2912,7 @@
 
   async function removeDrvImg(event, driveId, n) {
     event.stopPropagation();
-    if (sb) for (const ext of ['png','jpg']) await sb.storage.from('ax8-screenshots').remove([`_drive/${driveId}_${n}.${ext}`]);
+    if (sb) for (const ext of ['png','jpg']) await sb.storage.from('ax8-screenshots').remove([`drive/${driveId}_${n}.${ext}`]);
     const cell = document.getElementById(`cell_drv_${driveId}_${n}`);
     const img = cell.querySelector('img'); if (img) img.remove();
     cell.classList.remove('uploaded');
@@ -2993,7 +2993,7 @@
     showToast(`${label} 업로드 중...`, '');
     if (!sb) { showToast('❌ Supabase 연결 안됨 — 페이지 새로고침 후 재시도', 'error'); cell.classList.remove('uploading'); return; }
     const ext = file.type === 'image/png' ? 'png' : 'jpg';
-    const path = `_${storePath}/${typeId}_${n}.${ext}`;
+    const path = `${storePath}/${typeId}_${n}.${ext}`;
     const { error } = await sb.storage.from('ax8-screenshots').upload(path, file, { upsert: true });
     if (error) { showToast('실패: ' + error.message, 'error'); cell.classList.remove('uploading'); return; }
     const { data } = sb.storage.from('ax8-screenshots').getPublicUrl(path);
@@ -3013,7 +3013,7 @@
 
   async function removeTypedImg(event, storePath, typeId, n) {
     event.stopPropagation();
-    if (sb) for (const ext of ['png','jpg']) await sb.storage.from('ax8-screenshots').remove([`_${storePath}/${typeId}_${n}.${ext}`]);
+    if (sb) for (const ext of ['png','jpg']) await sb.storage.from('ax8-screenshots').remove([`${storePath}/${typeId}_${n}.${ext}`]);
     const cell = document.getElementById(`cell_${storePath}_${typeId}_${n}`);
     const img = cell.querySelector('img'); if (img) img.remove();
     cell.classList.remove('uploaded');
