@@ -424,6 +424,12 @@
   .page-cell:hover { border-color: var(--accent); background: #111; }
   .page-cell.uploaded { border-style: solid; border-color: var(--success); }
   .page-cell.uploading { border-color: var(--warn); pointer-events: none; }
+  .page-cell.drag-over {
+    border-color: var(--accent);
+    border-style: solid;
+    background: rgba(200,169,110,0.08);
+    transform: scale(1.02);
+  }
 
   .page-cell img {
     width: 100%;
@@ -3289,6 +3295,81 @@
     if (img) window.open(img.dataset.url, '_blank');
   }
   /* ── END FX DB ── */
+
+  /* ── DRAG & DROP ── */
+  // 이벤트 위임 방식으로 모든 .page-cell에 드래그 앤 드롭 적용
+  document.addEventListener('dragover', e => {
+    const cell = e.target.closest('.page-cell');
+    if (!cell || cell.classList.contains('uploading')) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+    cell.classList.add('drag-over');
+  });
+
+  document.addEventListener('dragleave', e => {
+    const cell = e.target.closest('.page-cell');
+    if (cell) cell.classList.remove('drag-over');
+  });
+
+  document.addEventListener('drop', async e => {
+    const cell = e.target.closest('.page-cell');
+    if (!cell || cell.classList.contains('uploading')) return;
+    e.preventDefault();
+    cell.classList.remove('drag-over');
+
+    const file = e.dataTransfer.files[0];
+    if (!file || !file.type.match(/image\/(png|jpeg)/)) {
+      showToast('PNG 또는 JPG 파일만 가능합니다', 'error');
+      return;
+    }
+
+    // cell ID에서 업로드 타입 판별
+    const id = cell.id; // 예: cell_tx_star_clean_basic / cell_drv_t808_od_1 / cell_comp_fx2_studio_1
+
+    if (id.startsWith('cell_drv_')) {
+      // Drive FX DB: cell_drv_{driveId}_{n}
+      const parts = id.replace('cell_drv_', '').match(/^(.+)_(\d)$/);
+      if (parts) await uploadDrvImg(file, parts[1], parts[2], `${parts[1]} Page ${parts[2]}`);
+
+    } else if (id.startsWith('cell_comp_fx2_') || id.startsWith('cell_delay_fx2_') || id.startsWith('cell_reverb_fx2_')) {
+      // Typed FX DB: cell_{storePath}_{typeId}_{n}
+      const match = id.match(/^cell_([^_]+_fx2)_(.+)_(\d+)$/);
+      if (match) await uploadTypedImg(file, match[1], match[2], parseInt(match[3]), `${match[2]} Page ${match[3]}`);
+
+    } else if (id.startsWith('cell_')) {
+      // Amp grid: cell_{amp}_{page} 또는 cell_{fxKey}_{amp}_{page}
+      // FX amp tab: cell_{fxKey}_{amp}_{page}
+      const withoutPrefix = id.replace('cell_', '');
+      const fxKeys = ['comp','drive1','drive2'];
+      let handled = false;
+      for (const fxKey of fxKeys) {
+        if (withoutPrefix.startsWith(fxKey + '_')) {
+          const rest = withoutPrefix.replace(fxKey + '_', '');
+          const lastUnderscore = rest.lastIndexOf('_');
+          const amp = rest.substring(0, lastUnderscore);
+          const key = rest.substring(lastUnderscore + 1);
+          await uploadFxImage(file, fxKey, amp, key, fxKey);
+          handled = true; break;
+        }
+      }
+      if (!handled) {
+        // 일반 앰프 셀: cell_{amp}_{page}
+        const firstUnderscore = withoutPrefix.indexOf('_');
+        // amp ID는 여러 세그먼트 가능 (tx_star_clean_basic)
+        // AMPS 배열에서 매칭
+        const amp = AMPS.find(a => withoutPrefix.startsWith(a + '_'));
+        if (amp) {
+          const key = withoutPrefix.replace(amp + '_', '');
+          const input = document.getElementById(`input_${amp}_${key}`);
+          if (input) {
+            // DataTransfer를 통해 file을 input에 전달 불가 → 직접 업로드
+            await uploadImage(file, amp, key, key.replace(/_/g,' '));
+          }
+        }
+      }
+    }
+  });
+  /* ── END DRAG & DROP ── */
 
   function switchFxDb(fxId, device, btn) {
     btn.parentElement.querySelectorAll('.amp-tab').forEach(b => b.classList.remove('active'));
