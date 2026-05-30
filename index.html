@@ -1194,6 +1194,12 @@
       <div class="nav-item" onclick="showPage('amp_tx_star_clean', this)">TX Star Clean</div>
       <div class="nav-item" onclick="showPage('amp_tx_star_lead', this)">TX Star Lead</div>
     </div>
+    <div class="nav-section">
+      <div class="nav-label">FX DB</div>
+      <div class="nav-item" onclick="showPage('fx_comp', this)">Compressor</div>
+      <div class="nav-item" onclick="showPage('fx_drive1', this)">Drive 1</div>
+      <div class="nav-item" onclick="showPage('fx_drive2', this)">Drive 2</div>
+    </div>
   </aside>
 
   <main>
@@ -1485,6 +1491,33 @@
 
       </div>
 
+    </div>
+
+    <!-- FX DB: COMPRESSOR -->
+    <div id="fx_comp" class="page-section">
+      <div class="section-header">
+        <div class="section-title">Compressor</div>
+        <div class="section-sub">FX DB · 아티스트별 컴프레서 세팅</div>
+      </div>
+      <div id="fxdb_comp_grid"></div>
+    </div>
+
+    <!-- FX DB: DRIVE 1 -->
+    <div id="fx_drive1" class="page-section">
+      <div class="section-header">
+        <div class="section-title">Drive 1</div>
+        <div class="section-sub">FX DB · 아티스트별 드라이브 1 세팅</div>
+      </div>
+      <div id="fxdb_drive1_grid"></div>
+    </div>
+
+    <!-- FX DB: DRIVE 2 -->
+    <div id="fx_drive2" class="page-section">
+      <div class="section-header">
+        <div class="section-title">Drive 2</div>
+        <div class="section-sub">FX DB · 아티스트별 드라이브 2 세팅</div>
+      </div>
+      <div id="fxdb_drive2_grid"></div>
     </div>
 
     <!-- FX GUIDE -->
@@ -2944,6 +2977,90 @@
     btn.parentElement.parentElement.querySelectorAll('.amp-tab-content').forEach(c => c.classList.remove('active'));
     document.getElementById(`tab_${tab}_${amp}`).classList.add('active');
   }
+
+  /* ── FX DB 페이지 빌드 ── */
+  const FXDB_AMPS = [
+    { id: 'friedman_hbe',  label: 'Friedman HBE',   artist: 'Nick Johnston',  badge: 'ax8' },
+    { id: 'dirty_shirley', label: 'Dirty Shirley',  artist: 'Nick Johnston',  badge: 'ax8' },
+    { id: 'two_stone',     label: 'Two Stone J35',  artist: 'John Mayer',     badge: 'ax8' },
+    { id: 'deluxe_verb',   label: 'Deluxe Verb Nrm',artist: 'John Mayer',     badge: 'ax8' },
+    { id: 'tx_star_clean', label: 'TX Star Clean',  artist: 'Andy Timmons',   badge: 'fx2' },
+    { id: 'tx_star_lead',  label: 'TX Star Lead',   artist: 'Andy Timmons',   badge: 'fx2' },
+  ];
+
+  function buildFxDbPage(fxKey, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    FXDB_AMPS.forEach(amp => {
+      const section = document.createElement('div');
+      section.style.cssText = 'border:1px solid var(--border); margin-bottom:20px;';
+
+      // 헤더
+      const header = document.createElement('div');
+      header.style.cssText = 'padding:10px 16px; background:#0d0d0d; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px;';
+      header.innerHTML = `
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; color:var(--text)">${amp.label}</span>
+        <span class="device-badge ${amp.badge}">${amp.badge === 'fx2' ? 'Axe-Fx II XL+' : 'AX8'}</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-dim); margin-left:4px">${amp.artist}</span>`;
+      section.appendChild(header);
+
+      // 업로드 힌트
+      const hint = document.createElement('div');
+      hint.className = 'upload-hint';
+      hint.style.margin = '12px 16px 8px';
+      const fxLabel = fxKey === 'comp' ? 'Compressor' : fxKey === 'drive1' ? 'Drive 1' : 'Drive 2';
+      hint.innerHTML = `Axe-Edit에서 <strong>${fxLabel} 블록</strong> 스크린샷을 클릭해서 업로드합니다`;
+      section.appendChild(hint);
+
+      // 그리드 (1칸)
+      const gridWrap = document.createElement('div');
+      gridWrap.style.padding = '0 16px 16px';
+      const grid = document.createElement('div');
+      grid.style.cssText = 'display:grid; grid-template-columns: 200px 1fr; gap:16px; align-items:start;';
+
+      // 업로드 셀
+      const cellId = `cell_${fxKey}_${amp.id}_main`;
+      const inputId = `input_${fxKey}_${amp.id}_main`;
+      const cellDiv = document.createElement('div');
+      cellDiv.className = 'page-cell';
+      cellDiv.id = cellId;
+      cellDiv.style.aspectRatio = '4/3';
+      cellDiv.innerHTML = `
+        <span class="cell-icon">＋</span>
+        <span class="cell-label">Main</span>
+        <input type="file" accept="image/png,image/jpeg" id="${inputId}">
+        <div class="cell-overlay">
+          <button class="btn-view" onclick="viewFxImage(event,'${fxKey}','${amp.id}','main')">보기</button>
+          <button class="btn-remove" onclick="removeFxImage(event,'${fxKey}','${amp.id}','main')">제거</button>
+        </div>`;
+      cellDiv.addEventListener('click', () => document.getElementById(inputId).click());
+      document.addEventListener('change', async (e) => {
+        if (e.target.id !== inputId) return;
+        const file = e.target.files[0];
+        if (!file) return;
+        await uploadFxImage(file, fxKey, amp.id, 'main', fxLabel);
+      });
+
+      // 파라미터 영역
+      const paramDiv = document.createElement('div');
+      paramDiv.id = `params_${fxKey}_${amp.id}`;
+      paramDiv.className = 'no-params';
+      paramDiv.style.height = '100%';
+      paramDiv.textContent = '업로드 후 파라미터가 여기에 표시됩니다';
+
+      grid.appendChild(cellDiv);
+      grid.appendChild(paramDiv);
+      gridWrap.appendChild(grid);
+      section.appendChild(gridWrap);
+      container.appendChild(section);
+    });
+  }
+
+  buildFxDbPage('comp',   'fxdb_comp_grid');
+  buildFxDbPage('drive1', 'fxdb_drive1_grid');
+  buildFxDbPage('drive2', 'fxdb_drive2_grid');
+  /* ── END FX DB ── */
 
   function switchArtistTab(artist, tab, btn) {
     btn.parentElement.querySelectorAll('.artist-tab').forEach(b => b.classList.remove('active'));
