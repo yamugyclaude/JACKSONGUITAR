@@ -1849,6 +1849,13 @@
           <div class="info-row"><span class="info-key">Character Amt</span><span class="info-val">0.00 → <strong style="color:var(--accent)">3.00</strong> — 피킹 강도에 따라 미드 반응</span></div>
         </div>
         <div class="info-block">
+          <div class="info-header">Compressor — Pedal Comp 1 (Xotic SP 역할)</div>
+          <div class="info-row"><span class="info-key">Comp</span><span class="info-val">5.00 → <strong style="color:var(--accent)">3.00</strong> — 투명하게. HBE 자체 압축 77%이므로 최소화</span></div>
+          <div class="info-row"><span class="info-key">Attack</span><span class="info-val">2.000ms → <strong style="color:var(--accent)">1.000ms</strong> — FET 컴프 빠른 어택</span></div>
+          <div class="info-row"><span class="info-key">Release</span><span class="info-val">100ms → <strong style="color:var(--accent)">80ms</strong></span></div>
+          <div class="info-row"><span class="info-key">Level</span><span class="info-val">0.0 dB → <strong style="color:var(--accent)">+1.5 dB</strong></span></div>
+        </div>
+        <div class="info-block">
           <div class="info-header">Drive 1 — Timothy (Wampler Euphoria 역할)</div>
           <div class="info-row"><span class="info-key">Drive</span><span class="info-val">5.00 → <strong style="color:var(--accent)">1.00</strong> — 텍스처만</span></div>
           <div class="info-row"><span class="info-key">Tone</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.50</strong></span></div>
@@ -4108,6 +4115,12 @@
         status: 'confirmed',
         device: 'Axe-Fx II XL+ (Ares v2.0) · 프리셋 659번 · Suhr Standard (DSH+ 코일스플릿)',
         changes: [
+          // ── COMPRESSOR ──
+          ['Pedal Comp 1 / Comp',           '5.00',   '3.00',   'Xotic SP 방식 — 투명하게. HBE 내부압축 77% 이미 있음'],
+          ['Pedal Comp 1 / Attack',         '2.000ms','1.000ms','FET 컴프 특성 — 빠른 어택'],
+          ['Pedal Comp 1 / Release',        '100ms',  '80ms',   '자연스럽게'],
+          ['Pedal Comp 1 / Level',          '0.0 dB', '+1.5 dB','최소 레벨 보강'],
+          ['Pedal Comp 1 / Auto',           'ON',     'ON',     '유지'],
           // ── AMP ──
           ['Friedman HBE / Input Drive',   '5.00',   '4.00',   '하이게인 앰프 — 낮은 인풋으로 클린 헤드룸 확보'],
           ['Friedman HBE / Bass',           '5.00',   '4.50',   'HBE 저역 과다 제어'],
