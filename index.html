@@ -1788,16 +1788,91 @@
         <div class="section-title">Nick Johnston</div>
         <div class="section-sub">FRIEDMAN HBE / DIRTY SHIRLEY</div>
       </div>
-      <div class="info-block">
-        <div class="info-header">사운드 철학 & 핵심 장비</div>
-        <div class="info-row"><span class="info-key">앰프 (핵심)</span><span class="info-val">Friedman BE100/HBE (리드) + Dirty Shirley (리듬)</span></div>
-        <div class="info-row"><span class="info-key">현재 앰프</span><span class="info-val">Orange OR30, Mesa Triple Crown TC-50, Kemper (Morgan AC20)</span></div>
-        <div class="info-row"><span class="info-key">기타</span><span class="info-val">Schecter NJ Traditional SSS — Duncan Antiquity Texas Hot</span></div>
-        <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">Wampler Euphoria / Horizon Devices Precision Drive — 낮은 게인, 앰프 부스트</span></div>
-        <div class="info-row"><span class="info-key">컴프</span><span class="info-val">Optical — SideChain Hi-Cut 259Hz, Emphasis 2.92</span></div>
-        <div class="info-row"><span class="info-key">Fractal 팁</span><span class="info-val">HBE 베이스 과다 → Bass 낮추고 Low Cut 필수 / Tape Drive 블록을 Amp-Cab 사이 삽입</span></div>
-        <div class="info-row"><span class="info-key">사운드 철학</span><span class="info-val">앰프 직결 선호. 손과 싱글픽업이 핵심. 끈적한 리드톤 + 풍성한 공간감</span></div>
-        <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">York Audio IR (Friedman 또는 Marshall V30 계열)</span></div>
+
+      <div class="artist-tabs">
+        <button class="artist-tab active" onclick="switchArtistTab('nick','info',this)">정보</button>
+        <button class="artist-tab" onclick="switchArtistTab('nick','fractal',this)">Fractal 적용</button>
+        <button class="artist-tab" onclick="switchArtistTab('nick','journal',this)">톤 일지</button>
+      </div>
+
+      <div id="nick-info" class="artist-tab-content active">
+        <div class="info-block">
+          <div class="info-header">사운드 철학 & 핵심 장비</div>
+          <div class="info-row"><span class="info-key">앰프 (리드)</span><span class="info-val">Friedman BE100/HBE — Remarkably Human 앨범 사용</span></div>
+          <div class="info-row"><span class="info-key">앰프 (리듬)</span><span class="info-val">Friedman Dirty Shirley</span></div>
+          <div class="info-row"><span class="info-key">기타</span><span class="info-val">Schecter NJ USA Traditional — Seymour Duncan Antiquity Texas Hot (SSS 싱글코일)</span></div>
+          <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">Wampler Euphoria (투명 OD) + Horizon Devices Precision Drive (타이트 부스터)</span></div>
+          <div class="info-row"><span class="info-key">컴프</span><span class="info-val">Xotic SP Compressor — FET/OTA 타입, 투명하고 자연스러움</span></div>
+          <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">York Audio FDMN 412 V30 — Friedman 4x12 그 자체</span></div>
+          <div class="info-row"><span class="info-key">픽업 핵심</span><span class="info-val">싱글코일 SSS — 고음의 맑고 투명한 성격이 HBE 톤의 핵심</span></div>
+        </div>
+      </div>
+
+      <div id="nick-fractal" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">시그널 체인</div>
+          <div class="signal-chain">
+            <span class="signal-node guitar">Suhr Standard (코일스플릿)</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node pedal">Pedal Comp 1</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node pedal">Timothy (Drive 1)</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node amp">Friedman HBE</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node pedal">Tape Dist (Drive 2, Post-Amp)</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node cab">FDMN 412 V30</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node pedal">Delay → Reverb</span>
+          </div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">Friedman HBE — Basic 조정값</div>
+          <div class="info-row"><span class="info-key">Input Drive</span><span class="info-val">5.00 → <strong style="color:var(--accent)">4.00</strong></span></div>
+          <div class="info-row"><span class="info-key">Bass</span><span class="info-val">5.00 → <strong style="color:var(--accent)">4.50</strong> — HBE 저역 과다 제어</span></div>
+          <div class="info-row"><span class="info-key">Mid</span><span class="info-val">5.00 → <strong style="color:var(--accent)">6.50</strong> — Nick 싱잉 미드</span></div>
+          <div class="info-row"><span class="info-key">Treb</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.50</strong></span></div>
+          <div class="info-row"><span class="info-key">Presence</span><span class="info-val">5.00 → <strong style="color:var(--accent)">4.00</strong> — EL34 특성 + DSH+ 험버커 보정</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">Friedman HBE — GEQ (탁한 느낌 해결)</div>
+          <div class="info-row"><span class="info-key">63 Hz</span><span class="info-val">0.00 → <strong style="color:var(--accent)">-2.0 dB</strong></span></div>
+          <div class="info-row"><span class="info-key">125 Hz</span><span class="info-val">0.00 → <strong style="color:var(--accent)">-3.0 dB</strong></span></div>
+          <div class="info-row"><span class="info-key">250 Hz</span><span class="info-val">0.00 → <strong style="color:var(--accent)">-2.0 dB</strong></span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">Friedman HBE — Dynamics 조정값</div>
+          <div class="info-row"><span class="info-key">Out Comp Type</span><span class="info-val">Output → <strong style="color:var(--accent)">FEEDBACK</strong> — 피킹 세기 → 드라이브 반응</span></div>
+          <div class="info-row"><span class="info-key">Character Type</span><span class="info-val">Peaking → <strong style="color:var(--accent)">Dynamic</strong></span></div>
+          <div class="info-row"><span class="info-key">Character Freq</span><span class="info-val">1000 Hz → <strong style="color:var(--accent)">595.3 Hz</strong></span></div>
+          <div class="info-row"><span class="info-key">Character Amt</span><span class="info-val">0.00 → <strong style="color:var(--accent)">3.00</strong> — 피킹 강도에 따라 미드 반응</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">Drive 1 — Timothy (Wampler Euphoria 역할)</div>
+          <div class="info-row"><span class="info-key">Drive</span><span class="info-val">5.00 → <strong style="color:var(--accent)">1.00</strong> — 텍스처만</span></div>
+          <div class="info-row"><span class="info-key">Tone</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.50</strong></span></div>
+          <div class="info-row"><span class="info-key">High Cut</span><span class="info-val">20000 Hz → <strong style="color:var(--accent)">9999 Hz</strong></span></div>
+          <div class="info-row"><span class="info-key">Level</span><span class="info-val">5.00 → <strong style="color:var(--accent)">7.50</strong> — HBE 부스터</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">Drive 2 — Tape Dist (Amp-Cab 사이, Post-Amp)</div>
+          <div class="info-row"><span class="info-key">위치</span><span class="info-val">앰프 뒤 → 캡 앞 — 빈티지 테이프 새추레이션 추가</span></div>
+          <div class="info-row"><span class="info-key">Drive</span><span class="info-val"><strong style="color:var(--accent)">3.00</strong></span></div>
+          <div class="info-row"><span class="info-key">Tone</span><span class="info-val"><strong style="color:var(--accent)">5.00</strong></span></div>
+          <div class="info-row"><span class="info-key">High Cut</span><span class="info-val"><strong style="color:var(--accent)">2000 Hz</strong> — 고역 자연스럽게 롤오프</span></div>
+          <div class="info-row"><span class="info-key">Level</span><span class="info-val"><strong style="color:var(--accent)">7.00</strong></span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">기타 설정</div>
+          <div class="info-row"><span class="info-key">픽업 모드</span><span class="info-val">DSH+ 코일스플릿 (Push-pull) — 싱글코일 SSS 모드 사용 권장</span></div>
+          <div class="info-row"><span class="info-key">기타 볼륨</span><span class="info-val">8~9 베이스라인 / 10 = 솔로 부스트</span></div>
+          <div class="info-row"><span class="info-key">캐비넷 IR</span><span class="info-val">YA FDMN 412 V30 Mix 01.wav (SM57 + R-121)</span></div>
+        </div>
+      </div>
+
+      <div id="nick-journal" class="artist-tab-content">
+        <div id="nick-journal-entries"></div>
       </div>
     </div>
 
@@ -4025,6 +4100,51 @@
 
   /* ── 톤 일지 데이터 ── */
   const TONE_JOURNAL = {
+    nick: [
+      {
+        version: 'v1',
+        date: '2026-05-31',
+        title: 'Nick Johnston — 기준 세팅 (Axe-Fx II XL+)',
+        status: 'confirmed',
+        device: 'Axe-Fx II XL+ (Ares v2.0) · Suhr Standard (DSH+ 코일스플릿)',
+        changes: [
+          // ── AMP ──
+          ['Friedman HBE / Input Drive',   '5.00',   '4.00',   '하이게인 앰프 — 낮은 인풋으로 클린 헤드룸 확보'],
+          ['Friedman HBE / Bass',           '5.00',   '4.50',   'HBE 저역 과다 제어'],
+          ['Friedman HBE / Mid',            '5.00',   '6.50',   'Nick 특유의 싱잉 미드'],
+          ['Friedman HBE / Treb',           '5.00',   '5.50',   '자연스러운 고역'],
+          ['Friedman HBE / Presence',       '5.00',   '4.00',   'EL34 밝음 + DSH+ 험버커 보정'],
+          ['Friedman HBE / Preamp Crunch',  '14.0%',  '7.0%',   '고음 버징 제거'],
+          // ── GEQ ──
+          ['Friedman HBE / GEQ 63Hz',       '0.00',   '-2.0 dB','저중역 탁한 느낌 제거 (스피커 모니터링 확인)'],
+          ['Friedman HBE / GEQ 125Hz',      '0.00',   '-3.0 dB','저중역 탁한 느낌 제거'],
+          ['Friedman HBE / GEQ 250Hz',      '0.00',   '-2.0 dB','저중역 탁한 느낌 제거'],
+          // ── DYNAMICS ──
+          ['Friedman HBE / Out Comp Type',  'Output', 'FEEDBACK','피킹 세기 → 드라이브 반응 (Andy 세션에서 발견)'],
+          ['Friedman HBE / Character Type', 'Peaking','Dynamic', '피킹 강도에 따라 미드 반응'],
+          ['Friedman HBE / Char Freq',      '1000Hz', '595.3Hz', '기타 핵심 미드 주파수'],
+          ['Friedman HBE / Char Amt',       '0.00',   '3.00',   '피킹 강도 → 미드 강조'],
+          // ── DRIVE 1 ──
+          ['Timothy / Drive',               '5.00',   '1.00',   'Wampler Euphoria 방식 — 텍스처만'],
+          ['Timothy / Tone',                '5.00',   '5.50',   '자연스럽게'],
+          ['Timothy / High Cut',            '20000Hz','9999Hz',  '살짝 부드럽게'],
+          ['Timothy / Level',               '5.00',   '7.50',   'HBE 부스터'],
+          // ── DRIVE 2 (POST-AMP) ──
+          ['Tape Dist / 위치',              'Pre-Amp','Post-Amp','앰프-캡 사이 — 테이프 새추레이션'],
+          ['Tape Dist / Drive',             '-',      '3.00',   '빈티지 워밍'],
+          ['Tape Dist / High Cut',          '-',      '2000Hz', '고역 자연스럽게 롤오프'],
+          ['Tape Dist / Level',             '-',      '7.00',   '레벨 유지'],
+        ],
+        feedback: '탁한 저중역 GEQ 컷으로 해결. 전체적으로 정리된 느낌.',
+        analysis: null,
+        next: [
+          '코일스플릿(SSS 모드)으로 Nick 고음 성격 재확인',
+          'Dirty Shirley 리듬 앰프 세팅 작업',
+          '딜레이/리버브 Nick 버전 미세조정',
+          '프리셋 저장번호 확인 필요',
+        ],
+      },
+    ],
     timmons: [
       {
         version: 'v1',
@@ -4245,6 +4365,7 @@
   // 일지 탭 클릭 시 렌더링
   document.addEventListener('DOMContentLoaded', () => {
     renderJournal('timmons');
+    renderJournal('nick');
   });
 
   function switchArtistTab(artist, tab, btn) {
