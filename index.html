@@ -1451,16 +1451,95 @@
     <div id="nick" class="page-section">
       <div class="section-header">
         <div class="section-title">Nick Johnston</div>
-        <div class="section-sub">FRIEDMAN HBE / DIRTY SHIRLEY</div>
+        <div class="section-sub">CANADIAN INSTRUMENTAL GUITARIST</div>
       </div>
 
       <div class="artist-tabs">
-        <button class="artist-tab active" onclick="switchArtistTab('nick','info',this)">정보</button>
+        <button class="artist-tab active" onclick="switchArtistTab('nick','bio',this)">바이오</button>
+        <button class="artist-tab" onclick="switchArtistTab('nick','guitar',this)">기타</button>
+        <button class="artist-tab" onclick="switchArtistTab('nick','technique',this)">연주 테크닉</button>
+        <button class="artist-tab" onclick="switchArtistTab('nick','info',this)">장비</button>
         <button class="artist-tab" onclick="switchArtistTab('nick','fractal',this)">Fractal 적용</button>
         <button class="artist-tab" onclick="switchArtistTab('nick','journal',this)">톤 일지</button>
       </div>
 
-      <div id="nick-info" class="artist-tab-content active">
+      <!-- BIO -->
+      <div id="nick-bio" class="artist-tab-content active">
+        <div class="info-block">
+          <div class="info-header">프로필</div>
+          <div class="info-row"><span class="info-key">생년월일</span><span class="info-val">1987년 6월 18일 / 캐나다 온타리오주 록우드 출생</span></div>
+          <div class="info-row"><span class="info-key">국적</span><span class="info-val">캐나다 🇨🇦</span></div>
+          <div class="info-row"><span class="info-key">거주</span><span class="info-val">토론토</span></div>
+          <div class="info-row"><span class="info-key">장르</span><span class="info-val">인스트루멘탈 록, 프로그레시브, 블루스, 재즈 퓨전</span></div>
+          <div class="info-row"><span class="info-key">활동</span><span class="info-val">2011~현재 솔로 / Archival · Osmanthus 밴드</span></div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-year">2011</div><div class="timeline-content"><strong>데뷔 앨범 <em>Public Display of Infection</em></strong> 자비 발표. 인스트루멘탈 록의 신예로 주목.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2013</div><div class="timeline-content"><strong><em>In a Locked Room on the Moon</em></strong> — Paul Gilbert, Guthrie Govan 게스트 솔로 참여. 구성력 성숙.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2014</div><div class="timeline-content"><strong><em>Atomic Mind</em></strong> 발표.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2016</div><div class="timeline-content"><strong><em>Remarkably Human</em></strong> — Schecter 시그니처 기타 출시. 앨범 전체를 Friedman 앰프로 녹음. 대표작.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2019</div><div class="timeline-content"><strong><em>Wide Eyes in the Dark</em></strong> — Between the Buried and Me, The Contortionist와 북미 투어.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-content"><strong><em>Young Language</em></strong> 발표.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-content"><strong><em>Child of Bliss</em></strong> — 6번째 솔로 앨범.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2025</div><div class="timeline-content">메탈 밴드 <strong>Mastodon</strong> 투어 기타리스트로 발탁.</div></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">음악적 영향</div>
+          <div class="info-row"><span class="info-key">기타리스트</span><span class="info-val">Stevie Ray Vaughan · Eddie Van Halen · Yngwie Malmsteen · Jeff Beck · Joe Satriani · Guthrie Govan · Paul Gilbert</span></div>
+          <div class="info-row"><span class="info-key">Joe Satriani에 대해</span><span class="info-val">"그가 테크닉, 톤, 멜로디, 프로덕션의 균형을 완전히 파악한 사람이라는 걸 깨달았다." (Total Guitar 인터뷰)</span></div>
+          <div class="info-row"><span class="info-key">협업</span><span class="info-val">Paul Gilbert · Guthrie Govan · Marco Minnemann · Bryan Beller · Intervals · Polyphia · Periphery</span></div>
+        </div>
+      </div>
+
+      <!-- GUITAR -->
+      <div id="nick-guitar" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">메인 기타 — Schecter Nick Johnston Signature</div>
+          <div class="info-row"><span class="info-key">모델</span><span class="info-val">Schecter USA Nick Johnston Traditional (2016~)</span></div>
+          <div class="info-row"><span class="info-key">바디</span><span class="info-val">알더 — 밝고 균형잡힌 중역</span></div>
+          <div class="info-row"><span class="info-key">넥</span><span class="info-val">메이플 / 메이플 지판 — 밝고 타이트한 어택</span></div>
+          <div class="info-row"><span class="info-key">픽업</span><span class="info-val">Seymour Duncan Antiquity Texas Hot (SSS) — 알니코 5 빈티지 싱글코일. Remarkably Human 녹음에 사용</span></div>
+          <div class="info-row"><span class="info-key">픽업 성격</span><span class="info-val">낮은 출력, 투명하고 에어리, 빈티지 60년대 Strat 성격 — DSH+ 험버커와 다름</span></div>
+          <div class="info-row"><span class="info-key">컨피규레이션</span><span class="info-val">H/S/S 또는 S/S/S — 브릿지 험버커 + 미들/넥 싱글 (모델에 따라 다름)</span></div>
+          <div class="info-row"><span class="info-key">줄 게이지</span><span class="info-val">.010-.046 Elixir NanoWeb</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">Schecter 시그니처 라인업</div>
+          <div class="info-row"><span class="info-key">Traditional SSS</span><span class="info-val">싱글코일 3개 — Nick의 클린/크런치 톤 메인</span></div>
+          <div class="info-row"><span class="info-key">Traditional H/S/S</span><span class="info-val">브릿지 험버커 + 미들/넥 싱글 — 다용도</span></div>
+          <div class="info-row"><span class="info-key">USA Traditional</span><span class="info-val">미국 제조 하이엔드 버전</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">내 기타 vs Nick 기타 비교</div>
+          <div class="info-row"><span class="info-key" style="color:var(--warn)">핵심 차이</span><span class="info-val" style="color:var(--warn)">Nick = Antiquity Texas Hot 싱글코일 / 나 = DSH+ 험버커 → 고음 성격 근본적 차이</span></div>
+          <div class="info-row"><span class="info-key">해결책</span><span class="info-val">Suhr Standard Push-pull 코일스플릿 → SSS 모드로 싱글코일 성격 근접</span></div>
+        </div>
+      </div>
+
+      <!-- TECHNIQUE -->
+      <div id="nick-technique" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">핵심 연주 테크닉</div>
+          <div class="info-row"><span class="info-key">레가토</span><span class="info-val">대표 테크닉 — 해머링/풀오프로 매끄럽게 연결. String skipping + 크로매틱 + 다양한 마이너 스케일 블렌딩</span></div>
+          <div class="info-row"><span class="info-key">Palm Muted Legato</span><span class="info-val">팜뮤트 상태에서 레가토 — Nick만의 독특한 질감. Tapping과 조합</span></div>
+          <div class="info-row"><span class="info-key">Hybrid Picking</span><span class="info-val">피크 + 손가락 동시 사용 — 아르페지오 라인에 자연스러운 다이나믹</span></div>
+          <div class="info-row"><span class="info-key">Tapping</span><span class="info-val">속주 아르페지오와 레가토에 결합 — 음표 밀도 극대화</span></div>
+          <div class="info-row"><span class="info-key">블루 노트</span><span class="info-val">b5를 5로 벤딩 — "키 밖의 노트로 텐션 주고 해결" (MusicRadar 인터뷰)</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">작곡 철학</div>
+          <div class="info-row"><span class="info-key">멜로디 우선</span><span class="info-val">"90%는 어쿠스틱 기타로 앉아서 멜로디를 노래함. 멜로디는 대부분 매우 단순하고 팝 구조"</span></div>
+          <div class="info-row"><span class="info-key">팝 감수성</span><span class="info-val">테크닉적이지만 대중적 — Joe Satriani처럼 멜로디와 기술의 균형 추구</span></div>
+          <div class="info-row"><span class="info-key">스케일 접근</span><span class="info-val">내추럴 마이너 + 하모닉 마이너 + 멜로딕 마이너 블렌딩 — 다양한 감성</span></div>
+        </div>
+        <div class="quote-block">
+          "I like to take a note that's not in key, just so there's a bit of tension, then bend it up."
+          <span class="quote-source">— Nick Johnston / MusicRadar 인터뷰</span>
+        </div>
+      </div>
+
+      <!-- 장비 INFO -->
+      <div id="nick-info" class="artist-tab-content">
         <div class="info-block">
           <div class="info-header">사운드 철학 & 핵심 장비</div>
           <div class="info-row"><span class="info-key">앰프 (리드)</span><span class="info-val">Friedman BE100/HBE — Remarkably Human 앨범 사용</span></div>
@@ -1552,17 +1631,134 @@
     <div id="mayer" class="page-section">
       <div class="section-header">
         <div class="section-title">John Mayer</div>
-        <div class="section-sub">TWO-ROCK / DUMBLE / FENDER</div>
+        <div class="section-sub">BLUES · POP · DEAD & COMPANY</div>
       </div>
-      <div class="info-block">
-        <div class="info-header">사운드 철학 & 핵심 장비</div>
-        <div class="info-row"><span class="info-key">앰프 (핵심)</span><span class="info-val">Two-Rock JM Signature (Dumble 계열) + Fender Deluxe Reverb 블렌딩</span></div>
-        <div class="info-row"><span class="info-key">Fractal 모델</span><span class="info-val">Two Stone J35 / Deluxe Verb Nrm / ODS-100 계열</span></div>
-        <div class="info-row"><span class="info-key">기타</span><span class="info-val">Fender Strat / PRS Silver Sky — 싱글코일 SSS</span></div>
-        <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">TS808 (게인 낮게/레벨 높게), Klon Centaur, Keeley Katana Boost</span></div>
-        <div class="info-row"><span class="info-key">딜레이</span><span class="info-val">Dotted 8th note 싱크 — 그루브의 핵심</span></div>
-        <div class="info-row"><span class="info-key">사운드 철학</span><span class="info-val">Dumble 하이헤드룸 클린 + TS 부스트. 터치 다이나믹 — 피킹 세기로 클린↔크런치 전환</span></div>
-        <div class="info-row"><span class="info-key">EQ</span><span class="info-val">Bass 4~5 / Mid 6~7 / Treble 5~6</span></div>
+
+      <div class="artist-tabs">
+        <button class="artist-tab active" onclick="switchArtistTab('mayer','bio',this)">바이오</button>
+        <button class="artist-tab" onclick="switchArtistTab('mayer','guitar',this)">기타</button>
+        <button class="artist-tab" onclick="switchArtistTab('mayer','amp',this)">앰프 & 장비</button>
+        <button class="artist-tab" onclick="switchArtistTab('mayer','technique',this)">연주 테크닉</button>
+        <button class="artist-tab" onclick="switchArtistTab('mayer','fractal',this)">Fractal 적용</button>
+        <button class="artist-tab" onclick="switchArtistTab('mayer','sources',this)">출처</button>
+      </div>
+
+      <!-- BIO -->
+      <div id="mayer-bio" class="artist-tab-content active">
+        <div class="info-block">
+          <div class="info-header">프로필</div>
+          <div class="info-row"><span class="info-key">생년월일</span><span class="info-val">1977년 10월 16일 / 코네티컷주 페어필드 출생</span></div>
+          <div class="info-row"><span class="info-key">학력</span><span class="info-val">Berklee College of Music 입학 후 중퇴 → 애틀랜타 독립 활동</span></div>
+          <div class="info-row"><span class="info-key">장르</span><span class="info-val">팝, 블루스, 소울, 컨트리 록</span></div>
+          <div class="info-row"><span class="info-key">활동</span><span class="info-val">솔로 (2001~현재) · John Mayer Trio · Dead & Company (2015~현재)</span></div>
+          <div class="info-row"><span class="info-key">Grammy</span><span class="info-val">3회 수상 — Song of the Year(Daughters), Best Male Pop(Your Body/Continuum), Best Pop Album(Continuum)</span></div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-year">1990</div><div class="timeline-content">13세. 이웃에게서 Stevie Ray Vaughan 카세트 테이프를 듣고 블루스에 빠짐. 기타 시작.</div></div>
+          <div class="timeline-item"><div class="timeline-year">1997</div><div class="timeline-content">Berklee 입학 후 조기 중퇴. Clay Cook과 듀오 Lo-Fi Masters 결성 → 애틀랜타 클럽 씬.</div></div>
+          <div class="timeline-item"><div class="timeline-year">1999</div><div class="timeline-content">자비로 EP <em>Inside Wants Out</em> 발표.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2001</div><div class="timeline-content">데뷔 앨범 <em>Room for Squares</em> — "Your Body Is a Wonderland" 히트. Grammy 수상.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2003</div><div class="timeline-content"><em>Heavier Things</em> Billboard 200 1위. "Daughters" Grammy Song of the Year.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2005</div><div class="timeline-content">John Mayer Trio 결성 (Steve Jordan, Pino Palladino). 블루스 정체성 확립.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2006</div><div class="timeline-content"><em>Continuum</em> 발표 — 가장 블루스적인 앨범. Grammy Best Pop Album + Best Male Pop.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2012</div><div class="timeline-content">성대 수술 후 컴백. <em>Born and Raised</em> — 컨트리/포크 방향으로 전환.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2015</div><div class="timeline-content">Grateful Dead 멤버들과 Dead & Company 결성. 재즈/록 즉흥 세계 확장.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2017</div><div class="timeline-content"><em>The Search for Everything</em> 발표.</div></div>
+          <div class="timeline-item"><div class="timeline-year">2021</div><div class="timeline-content"><em>Sob Rock</em> — 80년대 팝 레트로 컨셉. 신시사이저 중심.</div></div>
+        </div>
+      </div>
+
+      <!-- GUITAR -->
+      <div id="mayer-guitar" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">메인 기타 — PRS Silver Sky (2018~현재)</div>
+          <div class="info-row"><span class="info-key">설계 철학</span><span class="info-val">1963~1964년 Fender Strat 특성 재현 — Paul Reed Smith과 공동 설계</span></div>
+          <div class="info-row"><span class="info-key">픽업</span><span class="info-val">635JM 싱글코일 SSS — 빈티지 Strat 성격. 낮은 출력, 투명하고 에어리</span></div>
+          <div class="info-row"><span class="info-key">넥</span><span class="info-val">635JM 프로파일 — 매우 슬림. Mayer 맞춤 설계</span></div>
+          <div class="info-row"><span class="info-key">브릿지</span><span class="info-val">2점 트레몰로 — 빈티지 Strat 행동 방식</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">역대 주요 기타</div>
+          <div class="info-row"><span class="info-key">Black1 Strat</span><span class="info-val">Fender Custom Shop — 가장 아이코닉한 기타. SRV 스타일 블랙 레릭드. John Cruz 제작</span></div>
+          <div class="info-row"><span class="info-key">Fender Signature Strat</span><span class="info-val">2005년~ 다수 커스텀 시리즈. Stevie Ray Vaughan Signature Strat도 초기 메인</span></div>
+          <div class="info-row"><span class="info-key">PRS Super Eagle</span><span class="info-val">2016년 한정 Private Stock — Dead & Company 전용</span></div>
+          <div class="info-row"><span class="info-key">Martin OM-28 JM</span><span class="info-val">2003년 한정 404대 — 애틀랜타 지역번호 기념</span></div>
+          <div class="info-row"><span class="info-key">컬렉션</span><span class="info-val">기타 200여 대 보유</span></div>
+        </div>
+      </div>
+
+      <!-- AMP -->
+      <div id="mayer-amp" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">앰프</div>
+          <div class="info-row"><span class="info-key">메인 앰프</span><span class="info-val">Two-Rock John Mayer Signature (Dumble 계열) — 매우 희귀하고 비쌈</span></div>
+          <div class="info-row"><span class="info-key">보조 앰프</span><span class="info-val">Fender Deluxe Reverb / Fender Vibro-King — 블렌딩</span></div>
+          <div class="info-row"><span class="info-key">Dumble</span><span class="info-val">SRV가 Texas Flood에 사용한 것과 동일 모델 보유. 극소수 연주자만 사용 (Robben Ford, Carlos Santana)</span></div>
+          <div class="info-row"><span class="info-key">앰프 세팅</span><span class="info-val">Bass 4~5 / Mid 6~7 / Treble 5~6. 하이 헤드룸 클린 유지</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">주요 페달</div>
+          <div class="info-row"><span class="info-key">Klon Centaur</span><span class="info-val">투명한 오버드라이브/부스터 — 클린 톤 향상</span></div>
+          <div class="info-row"><span class="info-key">Ibanez TS808</span><span class="info-val">Tube Screamer — Drive 낮게/Level 높게. 미드 부스트로 앰프 밀어주기</span></div>
+          <div class="info-row"><span class="info-key">Keeley Katana Boost</span><span class="info-val">클린 레벨 부스트 — 솔로 레벨 확보</span></div>
+          <div class="info-row"><span class="info-key">Dunlop Cry Baby</span><span class="info-val">와와 페달</span></div>
+          <div class="info-row"><span class="info-key">딜레이</span><span class="info-val">Dotted 8th note 싱크 — 그루브와 공간감의 핵심</span></div>
+        </div>
+      </div>
+
+      <!-- TECHNIQUE -->
+      <div id="mayer-technique" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">핵심 연주 테크닉</div>
+          <div class="info-row"><span class="info-key">Thumb Fretting</span><span class="info-val">왼손 엄지로 노트를 프렛 — Jimi Hendrix에서 계승. 다른 손가락으로 나머지 줄 뮤트하며 공격적으로 스트럼</span></div>
+          <div class="info-row"><span class="info-key">Double Stops</span><span class="info-val">두 줄 동시 프렛 — SRV 계승. R&B/소울 분위기 생성. 코드 진행에 하모닉 컬러 추가</span></div>
+          <div class="info-row"><span class="info-key">터치 다이나믹</span><span class="info-val">피킹 세기로 클린 ↔ 크런치 전환. 앰프 완전 클린 → 손이 게인 컨트롤</span></div>
+          <div class="info-row"><span class="info-key">블루스 벤딩</span><span class="info-val">광폭 컨트롤드 벤딩 — b5를 5로 벤드. SRV 스타일 블루 노트 활용</span></div>
+          <div class="info-row"><span class="info-key">Ghost Notes</span><span class="info-val">뮤트된 퍼커시브 노트로 리듬 그루브 형성 — R&B/Soul 기타 어법</span></div>
+          <div class="info-row"><span class="info-key">멜로딕 솔로잉</span><span class="info-val">스케일 런보다 노래하는 멜로디 라인 — "lyrical, singable lines"</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">영향을 받은 연주자</div>
+          <div class="info-row"><span class="info-key">핵심 영향</span><span class="info-val">Stevie Ray Vaughan — 블루스 기초, 벤딩, 터치 다이나믹 전부 SRV에서 출발</span></div>
+          <div class="info-row"><span class="info-key">블루스</span><span class="info-val">B.B. King / Freddie King / Albert King / Buddy Guy / Otis Rush</span></div>
+          <div class="info-row"><span class="info-key">록</span><span class="info-val">Jimi Hendrix (thumb fretting, 코드 어프로치)</span></div>
+          <div class="info-row"><span class="info-key">팝/소울</span><span class="info-val">70년대 Laurel Canyon 팝, 80년대 소프트 록</span></div>
+        </div>
+        <div class="quote-block">
+          "I sound like a mix between SRV and a pop record I'm afraid to admit I love."
+          <span class="quote-source">— John Mayer</span>
+        </div>
+      </div>
+
+      <!-- FRACTAL -->
+      <div id="mayer-fractal" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">Fractal 매핑</div>
+          <div class="info-row"><span class="info-key">앰프 모델</span><span class="info-val">Two Stone J35 (Two-Rock 계열) / Deluxe Verb Nrm (Fender Deluxe Reverb)</span></div>
+          <div class="info-row"><span class="info-key">기본 원칙</span><span class="info-val">Dumble 계열 하이 헤드룸 클린 → TS808 부스트 → 터치 다이나믹</span></div>
+          <div class="info-row"><span class="info-key">기타</span><span class="info-val">Strat 싱글코일 SSS → Suhr 코일스플릿 SSS 모드 사용 권장</span></div>
+          <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">T808 OD (TS808) — Drive 낮게/Level 높게. Esoteric RCB (RC Booster)</span></div>
+          <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">York Audio VLUX 210 P10R — Vox/Fender 계열 알니코 스피커 (Two-Rock 근사치)</span></div>
+          <div class="info-row"><span class="info-key">딜레이</span><span class="info-val">Dotted 8th 템포 싱크 — 그루브가 살아있는 딜레이</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-header">세팅 포인트</div>
+          <div class="info-row"><span class="info-key">Bass</span><span class="info-val">4~5 — Two-Rock 저역 풍성함 유지</span></div>
+          <div class="info-row"><span class="info-key">Mid</span><span class="info-val">6~7 — Dumble 계열 미드 포워드 특성</span></div>
+          <div class="info-row"><span class="info-key">Treble</span><span class="info-val">5~6 — 싱글코일 자연스러운 고역</span></div>
+          <div class="info-row"><span class="info-key">Presence</span><span class="info-val">5~6</span></div>
+          <div class="info-row"><span class="info-key">Master Volume</span><span class="info-val">낮게 — 클린 헤드룸 최대 확보</span></div>
+        </div>
+      </div>
+
+      <!-- SOURCES -->
+      <div id="mayer-sources" class="artist-tab-content">
+        <div class="source-list">
+          <div class="source-item"><span class="source-type official">공식</span><div class="source-info"><div class="source-title"><a href="https://www.johnmayer.com" target="_blank">John Mayer 공식 사이트</a></div><div class="source-desc">공식 디스코그래피, 투어 정보</div></div></div>
+          <div class="source-item"><span class="source-type magazine">잡지</span><div class="source-info"><div class="source-title"><a href="https://www.guitarworld.com/features/john-mayer-12-playing-tips" target="_blank">Guitar World — 12 Playing Tips</a></div><div class="source-desc">연주 테크닉 12가지 상세 분석</div></div></div>
+          <div class="source-item"><span class="source-type magazine">잡지</span><div class="source-info"><div class="source-title"><a href="https://www.musicradar.com/how-to/john-mayer-guitar-lesson" target="_blank">MusicRadar — Guitar Lesson</a></div><div class="source-desc">Thumb fretting, double stops, 블루스 어프로치</div></div></div>
+          <div class="source-item"><span class="source-type official">공식</span><div class="source-info"><div class="source-title"><a href="https://en.wikipedia.org/wiki/John_Mayer" target="_blank">Wikipedia — John Mayer</a></div><div class="source-desc">경력, 앨범, Grammy, 협업 전체 기록</div></div></div>
+        </div>
       </div>
     </div>
 
