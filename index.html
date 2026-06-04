@@ -1732,23 +1732,85 @@
 
       <!-- FRACTAL -->
       <div id="mayer-fractal" class="artist-tab-content">
+
         <div class="info-block">
-          <div class="info-header">Fractal 매핑</div>
-          <div class="info-row"><span class="info-key">앰프 모델</span><span class="info-val">Two Stone J35 (Two-Rock 계열) / Deluxe Verb Nrm (Fender Deluxe Reverb)</span></div>
-          <div class="info-row"><span class="info-key">기본 원칙</span><span class="info-val">Dumble 계열 하이 헤드룸 클린 → TS808 부스트 → 터치 다이나믹</span></div>
-          <div class="info-row"><span class="info-key">기타</span><span class="info-val">Strat 싱글코일 SSS → Suhr 코일스플릿 SSS 모드 사용 권장</span></div>
-          <div class="info-row"><span class="info-key">드라이브</span><span class="info-val">T808 OD (TS808) — Drive 낮게/Level 높게. Esoteric RCB (RC Booster)</span></div>
-          <div class="info-row"><span class="info-key">캐비넷</span><span class="info-val">York Audio VLUX 210 P10R — Vox/Fender 계열 알니코 스피커 (Two-Rock 근사치)</span></div>
-          <div class="info-row"><span class="info-key">딜레이</span><span class="info-val">Dotted 8th 템포 싱크 — 그루브가 살아있는 딜레이</span></div>
+          <div class="info-header">기기 & 기본 원칙 — AX8 (Quantum)</div>
+          <div class="info-row"><span class="info-key">기기</span><span class="info-val">AX8 (FW 10.01 Quantum)</span></div>
+          <div class="info-row"><span class="info-key">핵심 원칙</span><span class="info-val">하이 헤드룸 클린 → TS808 미드 부스트 → 볼륨 페달로 다이나믹 컨트롤</span></div>
+          <div class="info-row"><span class="info-key">기타</span><span class="info-val"><strong style="color:var(--warn)">반드시 코일스플릿(Push-pull) SSS 모드</strong> — 싱글코일이 Mayer 톤의 전부</span></div>
         </div>
+
         <div class="info-block">
-          <div class="info-header">세팅 포인트</div>
-          <div class="info-row"><span class="info-key">Bass</span><span class="info-val">4~5 — Two-Rock 저역 풍성함 유지</span></div>
-          <div class="info-row"><span class="info-key">Mid</span><span class="info-val">6~7 — Dumble 계열 미드 포워드 특성</span></div>
-          <div class="info-row"><span class="info-key">Treble</span><span class="info-val">5~6 — 싱글코일 자연스러운 고역</span></div>
-          <div class="info-row"><span class="info-key">Presence</span><span class="info-val">5~6</span></div>
+          <div class="info-header">시그널 체인</div>
+          <div class="signal-chain">
+            <span class="signal-node guitar">Suhr (코일스플릿)</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node pedal">VOL 블록 (익스프레션)</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node pedal">T808 OD</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node amp">Two Stone J35</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node cab">VLUX 210 P10R</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node pedal">Delay (Dotted 8th)</span>
+            <span class="signal-arrow">→</span>
+            <span class="signal-node pedal">Medium Plate Reverb</span>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Two Stone J35 — 세팅값</div>
+          <div class="info-row"><span class="info-key">Input Drive</span><span class="info-val">5.00 → <strong style="color:var(--accent)">4.0</strong> — 하이 헤드룸 클린 유지</span></div>
+          <div class="info-row"><span class="info-key">Bass</span><span class="info-val">5.00 → <strong style="color:var(--accent)">6.0</strong> — Two-Rock 풍성한 저역 (Mayer: "Bass 6시 방향")</span></div>
+          <div class="info-row"><span class="info-key">Mid</span><span class="info-val">5.00 → <strong style="color:var(--accent)">4.5</strong> — 스쿱드 미드 (Mayer 특성: 미드 낮게)</span></div>
+          <div class="info-row"><span class="info-key">Treble</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.5</strong> — 자연스러운 고역</span></div>
+          <div class="info-row"><span class="info-key">Presence</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.0</strong> — 중간 유지</span></div>
           <div class="info-row"><span class="info-key">Master Volume</span><span class="info-val">낮게 — 클린 헤드룸 최대 확보</span></div>
+          <div class="info-row"><span class="info-key">Bright Switch</span><span class="info-val"><strong style="color:var(--success)">ON</strong> — 싱글코일 공기감</span></div>
         </div>
+
+        <div class="info-block">
+          <div class="info-header">T808 OD — Drive 세팅</div>
+          <div class="info-row"><span class="info-key">Drive</span><span class="info-val">5.00 → <strong style="color:var(--accent)">1.5</strong> — 매우 낮게. 미드 부스터 역할만</span></div>
+          <div class="info-row"><span class="info-key">Tone</span><span class="info-val">5.00 → <strong style="color:var(--accent)">5.0</strong> — 중립</span></div>
+          <div class="info-row"><span class="info-key">Level</span><span class="info-val">5.00 → <strong style="color:var(--accent)">7.0</strong> — 높게. TS-808의 본질은 레벨 부스트</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">딜레이 — Dotted 8th 싱크 (핵심)</div>
+          <div class="info-row"><span class="info-key">TYPE</span><span class="info-val"><strong style="color:var(--accent)">Digital Stereo</strong></span></div>
+          <div class="info-row"><span class="info-key">Tempo Sync</span><span class="info-val"><strong style="color:var(--accent)">ON</strong> — 곡 BPM에 맞게 자동</span></div>
+          <div class="info-row"><span class="info-key">Time</span><span class="info-val"><strong style="color:var(--accent)">3/8 (Dotted 8th)</strong> — Mayer 그루브의 핵심. 수동: 120BPM=375ms</span></div>
+          <div class="info-row"><span class="info-key">Feedback</span><span class="info-val"><strong style="color:var(--accent)">25%</strong> — 2~3회 반복</span></div>
+          <div class="info-row"><span class="info-key">Mix</span><span class="info-val"><strong style="color:var(--accent)">18%</strong> — 존재감 있게</span></div>
+          <div class="info-row"><span class="info-key">EQ High Cut</span><span class="info-val"><strong style="color:var(--accent)">5000 Hz</strong> — 따뜻하게</span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">리버브 — Medium Plate</div>
+          <div class="info-row"><span class="info-key">TYPE</span><span class="info-val"><strong style="color:var(--accent)">Medium Plate</strong></span></div>
+          <div class="info-row"><span class="info-key">Time</span><span class="info-val"><strong style="color:var(--accent)">2.0 sec</strong></span></div>
+          <div class="info-row"><span class="info-key">Pre-Delay</span><span class="info-val"><strong style="color:var(--accent)">20ms</strong></span></div>
+          <div class="info-row"><span class="info-key">Mix</span><span class="info-val"><strong style="color:var(--accent)">15%</strong></span></div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">🦶 볼륨 페달 세팅 — AX8</div>
+          <div class="info-row"><span class="info-key">연결</span><span class="info-val">익스프레션 페달 → TRS 케이블 → AX8 PEDAL 1 잭</span></div>
+          <div class="info-row"><span class="info-key">캘리브레이션</span><span class="info-val">SETUP → Switch 2 → PAGE → PEDAL → PEDAL 1 CAL → ENTER → 최소/최대 밟기</span></div>
+          <div class="info-row" style="padding-top:8px"><span class="info-key" style="color:var(--accent)">방식 A (권장)</span><span class="info-val" style="color:var(--accent)">글로벌 볼륨 — 블록 불필요, 모든 프리셋 자동 적용</span></div>
+          <div class="info-row"><span class="info-key">설정 경로</span><span class="info-val">SETUP → Switch 2 → PAGE → CTRL → OUT 1 [MAIN] VOLUME → PEDAL 1</span></div>
+          <div class="info-row" style="padding-top:8px"><span class="info-key" style="color:var(--text-dim)">방식 B</span><span class="info-val">VOL 블록을 그리드에 추가 → Modifier로 PEDAL 1 연결</span></div>
+          <div class="info-row"><span class="info-key">VOL 위치</span><span class="info-val">앰프 앞(Pre) 배치 — 볼륨 내리면 드라이브도 줄어 자연스럽게 클린 (Mayer 방식)</span></div>
+          <div class="info-row" style="padding-top:8px"><span class="info-key" style="color:var(--danger)">⚠️ 주의</span><span class="info-val">VOL 블록 사용 시 초기값 0% → 소리 없음! SETUP → I/O → CTRL → EXT 1 Initial Value = <strong>100%</strong></span></div>
+        </div>
+
+        <div class="quote-block">
+          "볼륨 페달을 Pre-Amp 위치에 두면 볼륨을 내릴 때 T808의 출력이 줄어 앰프가 덜 밀립니다. 이게 Mayer의 터치 다이나믹 — 볼륨 페달 하나로 클린 ↔ 크런치 전환."
+          <span class="quote-source">— AX8 운용 원칙</span>
+        </div>
+
       </div>
 
       <!-- SOURCES -->
