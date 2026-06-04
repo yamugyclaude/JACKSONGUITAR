@@ -1642,6 +1642,7 @@
         <button class="artist-tab" onclick="switchArtistTab('mayer','fractal_ax8',this)">Fractal — AX8</button>
         <button class="artist-tab" onclick="switchArtistTab('mayer','fractal_fx2',this)">Fractal — FX2</button>
         <button class="artist-tab" onclick="switchArtistTab('mayer','sources',this)">출처</button>
+        <button class="artist-tab" onclick="switchArtistTab('mayer','journal',this)">톤 일지</button>
       </div>
 
       <!-- BIO -->
@@ -1826,6 +1827,10 @@
       </div>
 
       <!-- SOURCES -->
+      <div id="mayer-journal" class="artist-tab-content">
+        <div id="mayer-journal-entries"></div>
+      </div>
+
       <div id="mayer-sources" class="artist-tab-content">
         <div class="source-list">
           <div class="source-item"><span class="source-type official">공식</span><div class="source-info"><div class="source-title"><a href="https://www.johnmayer.com" target="_blank">John Mayer 공식 사이트</a></div><div class="source-desc">공식 디스코그래피, 투어 정보</div></div></div>
@@ -4173,6 +4178,56 @@
 
   /* ── 톤 일지 데이터 ── */
   const TONE_JOURNAL = {
+    mayer: [
+      {
+        version: 'v1',
+        date: '2026-06-04',
+        title: 'John Mayer — 기준 세팅 (AX8 Quantum)',
+        status: 'testing',
+        device: 'AX8 (FW 10.01 Quantum) · 프리셋 번호 미정 · Suhr Standard (코일스플릿 SSS)',
+        changes: [
+          // ── AMP: Two Stone J35 ──
+          ['Two Stone J35 / Input Drive',  '4.00',   '3.5',    '하이 헤드룸 클린 — 게인 최소화'],
+          ['Two Stone J35 / Bass',         '6.00',   '6.5',    'Two-Rock 풍성한 저역 살리기 (Mayer: Bass 높게)'],
+          ['Two Stone J35 / Mid',          '4.50',   '3.5',    '스쿱드 미드 강조 — Mayer 특성 "Mid 낮게"'],
+          ['Two Stone J35 / Treb',         '5.50',   '5.5',    '유지'],
+          ['Two Stone J35 / Presence',     '0.00',   '4.0',    'Strat 싱글코일 공기감 추가'],
+          ['Two Stone J35 / Bright Switch','OFF',    'ON',     'Silver Sky / Strat 성격'],
+          // ── DRIVE ──
+          ['T808 OD / Drive',              '5.00',   '1.5',    'TS-808 미드 부스터 역할만 — 게인 최소'],
+          ['T808 OD / Tone',               '5.00',   '5.0',    '중립 유지'],
+          ['T808 OD / Level',              '5.00',   '7.0',    '앰프 밀어주기 — 레벨이 핵심'],
+          // ── COMPRESSOR ──
+          ['Optical 1 / Comp',             '5.00',   '2.0',    'Mayer는 컴프 거의 안 씀 — 터치 다이나믹 최우선'],
+          ['Optical 1 / Level',            '0.0 dB', '+1.0 dB','최소 레벨 보강'],
+          // ── VOLUME PEDAL ──
+          ['Vol/Pan / Source',             '-',      'Extern 1','볼륨 페달 (PEDAL 1 잭 연결)'],
+          ['Vol/Pan / 위치',               '-',      'Pre-Amp', '앰프 앞 배치 — 볼륨 = 클린/크런치 전환'],
+          // ── DELAY ──
+          ['Delay / TYPE',                 '-',      'Digital Stereo','깔끔한 스테레오'],
+          ['Delay / Tempo Sync',           '-',      'ON (Dotted 8th)','그루브의 핵심 — 120BPM=375ms'],
+          ['Delay / Feedback',             '-',      '25%',    '2~3회 반복'],
+          ['Delay / Mix',                  '-',      '18%',    '존재감 있게'],
+          ['Delay / EQ High Cut',          '-',      '5000Hz', '따뜻하게'],
+          // ── REVERB ──
+          ['Reverb / TYPE',                '-',      'Medium Plate','플레이트 계열'],
+          ['Reverb / Time',                '-',      '2.0 sec',''],
+          ['Reverb / Pre-Delay',           '-',      '20ms',   '원음 먼저'],
+          ['Reverb / Mix',                 '-',      '15%',    '자연스럽게'],
+          // ── CABINET ──
+          ['Cabinet / IR',                 '-',      'York Audio VLUX 210 P10R','Vox/Fender 계열 알니코 — Two-Rock 근사치'],
+        ],
+        feedback: null,
+        analysis: null,
+        next: [
+          'Deluxe Verb Nrm 스크린샷 업로드 + 파라미터 추출',
+          '두 앰프 병렬 구성 테스트 (Two Stone + Deluxe Verb 블렌딩)',
+          '볼륨 페달 캘리브레이션 확인',
+          '코일스플릿 SSS 모드에서 피킹 다이나믹 확인',
+          '프리셋 번호 저장 후 기록',
+        ],
+      },
+    ],
     nick: [
       {
         version: 'v1',
@@ -4445,6 +4500,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     renderJournal('timmons');
     renderJournal('nick');
+    renderJournal('mayer');
   });
 
   function switchArtistTab(artist, tab, btn) {
