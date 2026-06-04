@@ -2884,6 +2884,141 @@
         ]
       },
     ],
+
+    // ── TWO STONE J35 (AX8 Quantum FW 10.01 기본값) ──────────────
+    two_stone: [
+      {
+        page: 'Basic',
+        rows: [
+          ['Input Drive',      '4.00'],
+          ['Overdrive',        '7.50'],
+          ['Bass',             '6.00'],
+          ['Mid',              '4.50'],
+          ['Treb',             '5.50'],
+          ['Bright',           '0.00 dB'],
+          ['Presence',         '0.00'],
+          ['Depth',            '0.00'],
+          ['Master Volume',    '4.00'],
+          ['Input Trim',       '1.000'],
+          ['Boost',            'OFF'],
+          ['Cut',              'OFF'],
+          ['Fat',              'OFF'],
+          ['Bright Switch',    'OFF'],
+          ['Saturation',       'Ideal'],
+          ['Saturation Drive', '4.000'],
+          ['Master Vol Trim',  '1.000'],
+          ['Level (Mixer)',    '-17.0 dB'],
+          ['Bypass Mode',      'Mute'],
+        ]
+      },
+      {
+        page: 'GEQ',
+        type: 'geq',
+        meta: [
+          ['EQ Type',     '8 Band Var Q'],
+          ['EQ Location', 'Post P.A.'],
+        ],
+        bands: [
+          { freq: '63',  val: 0.00 },
+          { freq: '125', val: 0.00 },
+          { freq: '250', val: 0.00 },
+          { freq: '500', val: 0.00 },
+          { freq: '1K',  val: 0.00 },
+          { freq: '2K',  val: 0.00 },
+          { freq: '4K',  val: 0.00 },
+          { freq: '8K',  val: 0.00 },
+        ]
+      },
+      {
+        page: 'Preamp',
+        rows: [
+          ['Preamp Tube Type',    '12AX7A Syl'],
+          ['Preamp Bias',         '-0.100'],
+          ['Preamp Hardness',     '8.40'],
+          ['Triode 1 Plate Freq', '4999 Hz'],
+          ['Triode 2 Plate Freq', '4999 Hz'],
+          ['Crunch',              '0.5 %'],
+          ['Tonestack Type',      'Default'],
+          ['Tone Location',       'PRE'],
+          ['Tone Freq',           '650.0 Hz'],
+          ['Low Cut Freq',        '478.0 Hz'],
+          ['Hi Cut Freq',         '8000 Hz'],
+          ['Definition',          '0.00'],
+          ['Harmonics',           '0.000'],
+        ]
+      },
+      {
+        page: 'Power Amp',
+        rows: [
+          ['Power Tube Type',    '6L6/5881'],
+          ['Negative Feedback',  '2.50'],
+          ['PI Bias Shift',      '67.0 %'],
+          ['Pwr Tube Grid Bias', '0.600'],
+          ['Bias Excursion',     '51.0 %'],
+          ['Cathode Resistance', '0.0 %'],
+          ['Pwr Amp Hardness',   '5.80'],
+          ['Pwr Amp Bias',       '-0.100'],
+          ['Presence Freq',      '1.000'],
+          ['Depth Freq',         '250.0 Hz'],
+          ['MV Location',        'Pre-PI'],
+          ['MV Cap',             '1.0 pF'],
+        ]
+      },
+      {
+        page: 'Power Sply',
+        rows: [
+          ['Supply Sag',       '1.30'],
+          ['AC Line Freq',     '60 Hz'],
+          ['B+ Time Constant', '10.00 ms'],
+          ['Variac',           '100.0 %'],
+          ['Preamp Sag',       'ON'],
+          ['Power Type',       'DC'],
+        ]
+      },
+      {
+        page: 'Speaker',
+        rows: [
+          ['Low Res Freq',     '110.0 Hz'],
+          ['Low Res Q',        '1.787'],
+          ['Low Resonance',    '5.83'],
+          ['Hi Freq',          '1200 Hz'],
+          ['Hi Freq Slope',    '3.680'],
+          ['Hi Resonance',     '6.67'],
+          ['XFormer Low Freq', '65.0 Hz'],
+          ['XFormer Hi Freq',  '8200 Hz'],
+          ['XFormer Match',    '1.000'],
+          ['XFormer Drive',    '1.00'],
+        ]
+      },
+      {
+        page: 'Spkr Drv',
+        rows: [
+          ['Speaker Drive',    '0.00'],
+          ['Speaker Comp',     '0.00'],
+          ['Motor Time Const', '200.0 ms'],
+        ]
+      },
+      {
+        page: 'Dynamics',
+        rows: [
+          ['Dynamic Presence',    '0.00'],
+          ['Dynamic Depth',       '0.00'],
+          ['Preamp Dynamics',     '0.00'],
+          ['Pick Attack',         '0.0 %'],
+          ['Preamp CF Compress',  '0.0 %'],
+          ['Preamp CF Grid Clip', '0.0 %'],
+          ['Preamp CF Hardness',  '0.400'],
+          ['Out Comp Type',       'OUTPUT'],
+          ['Out Comp Amount',     '0.00'],
+          ['Out Comp Threshold',  '-40.0 dB'],
+          ['Out Comp Clarity',    '6.51'],
+          ['Character Type',      'Peaking'],
+          ['Character Freq',      '1000 Hz'],
+          ['Character Q',         '0.707'],
+          ['Character Amt',       '0.00'],
+        ]
+      },
+    ],
   };
 
   // 컴프/드라이브 탭 제거됨 — FX DB로 통합
