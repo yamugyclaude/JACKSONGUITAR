@@ -1639,7 +1639,8 @@
         <button class="artist-tab" onclick="switchArtistTab('mayer','guitar',this)">기타</button>
         <button class="artist-tab" onclick="switchArtistTab('mayer','amp',this)">앰프 & 장비</button>
         <button class="artist-tab" onclick="switchArtistTab('mayer','technique',this)">연주 테크닉</button>
-        <button class="artist-tab" onclick="switchArtistTab('mayer','fractal',this)">Fractal 적용</button>
+        <button class="artist-tab" onclick="switchArtistTab('mayer','fractal_ax8',this)">Fractal — AX8</button>
+        <button class="artist-tab" onclick="switchArtistTab('mayer','fractal_fx2',this)">Fractal — FX2</button>
         <button class="artist-tab" onclick="switchArtistTab('mayer','sources',this)">출처</button>
       </div>
 
@@ -1731,7 +1732,7 @@
       </div>
 
       <!-- FRACTAL -->
-      <div id="mayer-fractal" class="artist-tab-content">
+      <div id="mayer-fractal_ax8" class="artist-tab-content">
 
         <div class="info-block">
           <div class="info-header">기기 & 기본 원칙 — AX8 (Quantum)</div>
@@ -1811,6 +1812,17 @@
           <span class="quote-source">— AX8 운용 원칙</span>
         </div>
 
+      </div>
+
+
+      <div id="mayer-fractal_fx2" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">Fractal — FX2 XL+ (Ares v2.0) 세팅 예정</div>
+          <div class="info-row"><span class="info-key">기기</span><span class="info-val">Axe-Fx II XL+ (Ares v2.0)</span></div>
+          <div class="info-row"><span class="info-key">앰프 모델</span><span class="info-val">Two Stone J35 / Deluxe Verb Nrm</span></div>
+          <div class="info-row"><span class="info-key">상태</span><span class="info-val" style="color:var(--warn)">스크린샷 촬영 후 파라미터 추출 예정</span></div>
+        </div>
+        <div class="no-params">Axe-Fx II XL+ 세팅은 스크린샷 업로드 후 여기에 기록됩니다</div>
       </div>
 
       <!-- SOURCES -->
@@ -2267,11 +2279,11 @@
         <button class="amp-tab" onclick="switchAmpTab('two_stone','params',this)">앰프 파라미터</button>
       </div>
       <div id="tab_screenshots_two_stone" class="amp-tab-content active">
-        <div class="upload-hint">각 칸을 <strong>클릭</strong>하여 PNG 파일을 선택하면 업로드됩니다</div>
+        <div class="upload-hint"><strong style="color:#4a9eff">AX8 (Quantum FW 10.01)</strong> — Two Stone J35 기본값 스크린샷 8장을 클릭하여 업로드합니다</div>
         <div class="page-grid" id="grid_two_stone"></div>
       </div>
       <div id="tab_params_two_stone" class="amp-tab-content">
-        <div class="no-params">스크린샷 업로드 후 파라미터 분석이 완료되면 여기에 표시됩니다</div>
+        <div id="params_two_stone" class="no-params">스크린샷 업로드 후 파라미터가 여기에 표시됩니다</div>
       </div>
     </div>
 
@@ -2282,11 +2294,11 @@
         <button class="amp-tab" onclick="switchAmpTab('deluxe_verb','params',this)">앰프 파라미터</button>
       </div>
       <div id="tab_screenshots_deluxe_verb" class="amp-tab-content active">
-        <div class="upload-hint">각 칸을 <strong>클릭</strong>하여 PNG 파일을 선택하면 업로드됩니다</div>
+        <div class="upload-hint"><strong style="color:#4a9eff">AX8 (Quantum FW 10.01)</strong> — Deluxe Verb Nrm 기본값 스크린샷 8장을 클릭하여 업로드합니다</div>
         <div class="page-grid" id="grid_deluxe_verb"></div>
       </div>
       <div id="tab_params_deluxe_verb" class="amp-tab-content">
-        <div class="no-params">스크린샷 업로드 후 파라미터 분석이 완료되면 여기에 표시됩니다</div>
+        <div id="params_deluxe_verb" class="no-params">스크린샷 업로드 후 파라미터가 여기에 표시됩니다</div>
       </div>
     </div>
 
