@@ -1209,6 +1209,7 @@
       <div class="artist-tabs">
         <button class="artist-tab active" onclick="switchArtistTab('fx','comp',this)">컴프레서</button>
         <button class="artist-tab" onclick="switchArtistTab('fx','drive',this)">드라이브</button>
+        <button class="artist-tab" onclick="switchArtistTab('fx','fuzz',this)">퍼즈</button>
         <button class="artist-tab" onclick="switchArtistTab('fx','delay',this)">딜레이</button>
         <button class="artist-tab" onclick="switchArtistTab('fx','reverb',this)">리버브</button>
         <button class="artist-tab" onclick="switchArtistTab('fx','manual',this)">매뉴얼 다운로드</button>
@@ -1295,6 +1296,131 @@
           <strong style="color:var(--text)">Andy Timmons 드라이브 설정:</strong><br>
           Drive 1 → <strong style="color:var(--accent)">Tube Drv 3-knob</strong> (BK Butler Tube Driver / JHS AT Drive) — DRIVE 낮게, LEVEL 높게<br>
           Drive 2 → <strong style="color:var(--accent)">T808 OD</strong> (Ibanez TS-808) — DRIVE 낮게, LEVEL 높게, TONE 12시
+        </div>
+      </div>
+
+      <!-- 퍼즈 -->
+      <div id="fx-fuzz" class="artist-tab-content">
+        <div class="info-block">
+          <div class="info-header">퍼즈 회로 계보 — 6종</div>
+        </div>
+        <div class="ir-pack-grid">
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">Maestro Fuzz-Tone FZ-1</div>
+              <div class="ir-pack-sub">Gibson · 1962 · 최초의 상업용 퍼즈</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>개발</td><td>Glenn Snoddy & Revis V. Hobbs. Marty Robbins "Don't Worry" 세션 중 베이스 프리앰프 고장으로 우연히 발견된 톤에서 착안</td></tr>
+                <tr><td>회로</td><td>트랜지스터 기반 단순 클리핑 회로. 원래 바이올린·첼로·오르간 음색 모방 의도</td></tr>
+                <tr><td>사운드</td><td>거칠고 원초적인 초기형 퍼즈 톤</td></tr>
+                <tr><td>대표 사용자</td><td>Keith Richards — "(I Can't Get No) Satisfaction" (1965)</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">Tone Bender</div>
+              <div class="ir-pack-sub">Sola Sound/Colorsound · 영국 · 1965~</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>MKI/1.5</td><td>게르마늄 2트랜지스터(OC75) — 부드럽고 음악적</td></tr>
+                <tr><td>MKII</td><td>게르마늄 3트랜지스터 — 두껍고 공격적, 헤비하고 컴프레션 강함</td></tr>
+                <tr><td>MKIII</td><td>톤 컨트롤 추가, 실리콘 전환, 달링턴 구성</td></tr>
+                <tr><td>사운드</td><td>강한 게이트감, 두꺼운 미드/로우</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">Fuzz Face</div>
+              <div class="ir-pack-sub">Dallas Arbiter · 영국 · 1966</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>회로</td><td>Tone Bender MK1.5 기반 2트랜지스터 shunt-series-feedback 토폴로지</td></tr>
+                <tr><td>게르마늄</td><td>따뜻하고 부드러운 새추레이션, 게인 70~120. 기타 볼륨 낮추면 자연 클린업. 개체 편차·온도 민감</td></tr>
+                <tr><td>실리콘</td><td>게인 400 이상, 어택 날카롭고 밝음(harsh). 환경 안정적</td></tr>
+                <tr><td>대표 사용자</td><td>Jimi Hendrix, David Gilmour, Stevie Ray Vaughan, Eric Johnson</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">Big Muff Pi</div>
+              <div class="ir-pack-sub">Electro-Harmonix · 미국 · 1969~</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>Triangle (V1)</td><td>명료한 어택, 강한 서스테인, 핀치 하모닉스·팜뮤트 반응 좋음</td></tr>
+                <tr><td>Ram's Head</td><td>스쿱된 미드 — David Gilmour가 가장 즐겨쓴 리비전</td></tr>
+                <tr><td>Russian/Civil War</td><td>두껍고 거친 로우엔드, 모던 헤비 사운드</td></tr>
+                <tr><td>사운드</td><td>매끄럽고 다크한 톤, 긴 서스테인</td></tr>
+                <tr><td>대표 사용자</td><td>David Gilmour, Billy Corgan, Jack White, Dan Auerbach</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">Octavia</div>
+              <div class="ir-pack-sub">Roger Mayer 오리지널 / Tycobrahe 상업판</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>개발</td><td>1967년 Roger Mayer가 Hendrix 전속 설계. 회로 유출 후 Tycobrahe가 1973년 무단 상업 판매</td></tr>
+                <tr><td>회로</td><td>링 모듈레이션 + 주파수 배가 방식으로 1옥타브 위 하모닉스 생성 후 원음/퍼즈와 믹스</td></tr>
+                <tr><td>사운드</td><td>퍼즈 위에 옥타브업 하모닉스, "찢어지는" 배음. 넥 픽업 + 톤 낮춤에서 가장 잘 걸림</td></tr>
+                <tr><td>대표 사용자</td><td>Jimi Hendrix — "Purple Haze", "Fire" 솔로</td></tr>
+              </table>
+            </div>
+          </div>
+          <div class="ir-pack-card">
+            <div class="ir-pack-header">
+              <div class="ir-pack-name">ProCo Rat</div>
+              <div class="ir-pack-sub">미국 · 1978/1979 · 엄밀히는 디스토션</div>
+            </div>
+            <div class="ir-pack-body">
+              <table class="ir-mic-table">
+                <tr><td>개발</td><td>Scott Burnham, Steve Kiraly (Kalamazoo, Michigan)</td></tr>
+                <tr><td>회로</td><td>LM308 오피앰프 기반 게인 스테이지 + 다이오드 클리핑. 느린 슬루 레이트가 자연 컴프레션 유발</td></tr>
+                <tr><td>사운드</td><td>하이엔드가 부드럽게 눌리는 스무스한 고게인 — 아이스픽 같은 날카로움 덜함</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">추천곡 — 퍼즈 페달이 확인된 대표곡 10곡</div>
+          <table class="ir-mic-table" style="width:100%">
+            <tr><td style="width:auto; color:var(--text-dim)"><strong>"(I Can't Get No) Satisfaction" — The Rolling Stones</strong></td><td>Maestro FZ-1 Fuzz-Tone — 곡 전체를 관통하는 상징적 리프 톤</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>"Purple Haze" — Jimi Hendrix Experience</strong></td><td>Roger Mayer Octavia — 솔로 파트의 옥타브업 하모닉스</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>"Fire" — Jimi Hendrix Experience</strong></td><td>Roger Mayer Octavia — 솔로에서 옥타브 하모닉스 강조</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>Hendrix 다수 곡 (Electric Ladyland 등)</strong></td><td>Dallas Arbiter Fuzz Face (게르마늄/실리콘 혼용) — 전반적 리드·리프 톤의 근간</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>"Dogs" — Pink Floyd (Animals, 1977)</strong></td><td>Big Muff Pi (Ram's Head) — 곡 전반의 리드 기타 톤</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>"Comfortably Numb" — Pink Floyd (The Wall, 1979)</strong></td><td>Big Muff Pi (Ram's Head) — 유명한 소울풀 기타 솔로</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>"Cherub Rock" 등 — Smashing Pumpkins (Siamese Dream)</strong></td><td>Op-Amp Big Muff Pi (V4) — 겹겹이 쌓은 월오브파즈 기타 톤</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>"Seven Nation Army" — The White Stripes</strong></td><td>DigiTech Whammy(옥타브 다운) + Big Muff Pi — Whammy로 저음 리프, Big Muff로 두께감</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>The Black Keys 초기 앨범</strong></td><td>Big Muff Pi — Dan Auerbach 초기작 기타 톤</td></tr>
+            <tr><td style="color:var(--text-dim)"><strong>The Black Keys 후기작 (Brothers~Turn Blue)</strong></td><td>빈티지 Shin-ei Companion (FY-6 회로, 옥타브 퍼즈) — 모던 시기 리드 톤</td></tr>
+          </table>
+        </div>
+
+        <div class="info-block">
+          <div class="info-header">Fractal AX8 퍼즈 계열 Drive 모델 매핑 (펌웨어 10.01 기준)</div>
+          <div class="info-row"><span class="info-key">Master</span><span class="info-val">→ Maestro FZ-1 — 최초의 트랜지스터 퍼즈 회로 모델링. 파라미터: Drive, Level</span></div>
+          <div class="info-row"><span class="info-key">Bender Fuzz</span><span class="info-val">→ Sola Sound Tone Bender — 게르마늄 3트랜지스터 계열, 두껍고 게이트감. 파라미터: Drive, Tone, Level, Clip Type</span></div>
+          <div class="info-row"><span class="info-key">Face Fuzz</span><span class="info-val">→ Dallas-Arbiter Fuzz Face — 2트랜지스터, Bender Fuzz보다 저음 풍부. 파라미터: Fuzz(Drive), Volume(Level), Clip Type(게르마늄/실리콘), Low Cut(과도하게 조절 시 비인가적)</span></div>
+          <div class="info-row"><span class="info-key">Pi Fuzz</span><span class="info-val">→ Electro-Harmonix Big Muff Pi — 다크하고 스무스한 서스테인형 퍼즈. 파라미터: Drive(Sustain), Tone, Level(Volume)</span></div>
+          <div class="info-row"><span class="info-key">Octave Dist</span><span class="info-val">→ Tycobrahe Octavia — 링 모듈레이션 기반 옥타브업 퍼즈. 파라미터: Drive, Level — 넥 픽업 + 기타 톤 낮춤 세팅 권장</span></div>
+        </div>
+
+        <div class="quote-block">
+          ⚠️ <strong style="color:var(--text)">버전 차이 주의</strong><br>
+          Big Muff의 3가지 리비전(Triangle/Ram's Head/Russian) 세분화는 <strong style="color:var(--accent)">Axe-Fx III 펌웨어 27.03</strong>에서 추가된 것으로, AX8(2019년 단종, 마지막 펌웨어 10.01)에는 <strong style="color:var(--accent)">해당 리비전 구분이 없다</strong> — AX8에는 단일 "Pi Fuzz" 모델만 존재한다.<br>
+          개발자 코멘트(Cliff Chase, Fractal Audio CEO): Axe-Fx의 Fuzz 모델링은 항상 버퍼가 앞에 있는 것처럼 반응하도록 소스 저항값 약 100K옴을 가정해 설계됨 — 실물 퍼즈처럼 다이렉트로 물렸을 때의 임피던스 반응(볼륨 노브로 클린업 등)은 AX8에서 완전히 재현되지 않을 수 있다.
+          <span class="quote-source">출처: Fractal Audio Wiki(Drive block), Fractal Forum(Face Fuzz/Octave Dist/Pi Fuzz 모델 설명), EHX 공식(Big Muff Versions and Tone Differences)</span>
         </div>
       </div>
 
