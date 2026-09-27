@@ -3687,9 +3687,11 @@
       }
     }
     if (amp.wiki?.dev_notes?.length) {
-      parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">개발자 코멘트${wikiNote}</div>${amp.wiki.dev_notes.map(n => `<div>"${ampDictEsc(n)}"</div>`).join('')}</div>`);
+      parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">개발자 코멘트${wikiNote}</div>${amp.wiki.dev_notes.map(n => `<div>${ampDictEsc(n)}</div>`).join('')}</div>`);
     }
-    const presetKey = AMPDICT_PRESET_MAP[ampDictNorm(amp.model)];
+    // 데이터가 'Dirty Shirley 1' 처럼 끝에 번호를 달고 있는 경우도 프리셋에 연결한다
+    const presetKey = AMPDICT_PRESET_MAP[ampDictNorm(amp.model)]
+      || AMPDICT_PRESET_MAP[ampDictNorm(amp.model).replace(/\s+\d+$/, '')];
     if (presetKey) parts.push(`<a class="ampdict-preset-link" onclick="ampDictGoToPreset('${presetKey}')">→ 기존 프리셋 페이지로 이동</a>`);
     const src = [];
     if (amp.yek?.page_printed) src.push(`Yek 가이드 p.${amp.yek.page_printed}`);
