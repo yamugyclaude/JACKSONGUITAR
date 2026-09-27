@@ -692,6 +692,47 @@
   .bottom-nav-item svg { width: 20px; height: 20px; }
   .bottom-nav-item.active { color: var(--accent); }
 
+  /* ── AMP DICTIONARY ── */
+  .ampdict-search {
+    width: 100%; background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); color: var(--text); font-family: var(--font-body);
+    font-size: 13px; padding: 10px 14px; margin-bottom: 14px;
+  }
+  .ampdict-search:focus { outline: none; border-color: var(--accent); }
+  .ampdict-filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+  .ampdict-filter-group { display: flex; gap: 6px; }
+  .ampdict-chip {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--card); color: var(--text-dim); cursor: pointer; transition: all 0.15s;
+  }
+  .ampdict-chip:hover { color: var(--text-mid); }
+  .ampdict-chip.active { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+  .ampdict-select {
+    font-family: var(--font-mono); font-size: 11px; background: var(--card);
+    color: var(--text); border: 1px solid var(--border); border-radius: var(--radius); padding: 6px 10px;
+  }
+  .ampdict-count { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 10px; }
+  .ampdict-list { display: flex; flex-direction: column; gap: 8px; }
+  .ampdict-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .ampdict-item.ares-only { border-color: var(--warn); }
+  .ampdict-item-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; flex-wrap: wrap; }
+  .ampdict-item-name { font-size: 13px; font-weight: 500; }
+  .ampdict-item-based { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); }
+  .ampdict-item-brand { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--text-mid); padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px; }
+  .ampdict-item-power { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); margin-left: auto; }
+  .ampdict-ares-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--warn); border: 1px solid rgba(240,165,0,0.4); background: rgba(240,165,0,0.1); padding: 2px 6px; border-radius: 3px; }
+  .ampdict-item-detail { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.7; }
+  .ampdict-item.open .ampdict-item-detail { display: block; }
+  .ampdict-detail-block { margin-top: 12px; }
+  .ampdict-detail-title { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 6px; }
+  .ampdict-parent-note { color: var(--warn); text-transform: none; letter-spacing: 0.02em; }
+  .ampdict-tips { background: rgba(200,169,110,0.08); border: 1px solid var(--accent-dim); border-radius: var(--radius); padding: 10px 12px; color: var(--text); }
+  .ampdict-preset-link { display: inline-block; margin-top: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--accent); border: 1px solid var(--accent); border-radius: var(--radius); padding: 6px 10px; cursor: pointer; }
+  .ampdict-source { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); }
+  .ampdict-meta { margin-top: 24px; padding-top: 16px; border-top: 1px dashed var(--border); font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); line-height: 1.8; }
+  .ampdict-meta strong { color: var(--text-mid); }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .bottom-nav { display: block; }
@@ -711,6 +752,8 @@
     .source-item { grid-template-columns: 60px 1fr; }
     .top-nav { display: none; }
     .section-title { font-size: 17px; }
+    .ampdict-item-power { margin-left: 0; }
+    .ampdict-filters { gap: 8px; }
   }
 
   @media (max-width: 480px) {
@@ -2372,6 +2415,36 @@
 
     </div>
 
+    <!-- AMP MODEL DICTIONARY -->
+    <div id="amp_dictionary" class="page-section">
+      <div class="section-header"><div class="section-title">앰프 모델 사전</div><div class="section-sub">AX8 · AXE-FX II XL+ 전체 앰프 모델</div></div>
+
+      <div id="ampdict-loading" class="no-params">불러오는 중...</div>
+      <div id="ampdict-error" class="no-params" style="display:none;color:var(--danger);border-color:var(--danger)"></div>
+
+      <div id="ampdict-body" style="display:none">
+        <input id="ampdict-search" class="ampdict-search" type="text" placeholder="모델명 · 원본 앰프 · 설명 검색" oninput="renderAmpDictList()">
+
+        <div class="ampdict-filters">
+          <div class="ampdict-filter-group" id="ampdict-device-filters">
+            <button class="ampdict-chip active" onclick="setAmpDeviceFilter('all',this)">전체</button>
+            <button class="ampdict-chip" onclick="setAmpDeviceFilter('ax8',this)">AX8</button>
+            <button class="ampdict-chip" onclick="setAmpDeviceFilter('axefx2',this)">Axe-Fx II XL+</button>
+          </div>
+          <select id="ampdict-brand" class="ampdict-select" onchange="renderAmpDictList()"><option value="">브랜드 전체</option></select>
+          <select id="ampdict-power" class="ampdict-select" onchange="renderAmpDictList()"><option value="">파워관 전체</option></select>
+        </div>
+
+        <div id="ampdict-count" class="ampdict-count"></div>
+        <div id="ampdict-list" class="ampdict-list"></div>
+
+        <div class="ampdict-meta">
+          <div id="ampdict-caveats"></div>
+          <div id="ampdict-sources" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- AMP PAGES (no data yet) -->
     <div id="amp_friedman_hbe" class="page-section">
       <div class="section-header"><div class="section-title">Friedman HBE <span class="device-badge fx2">Axe-Fx II XL+</span></div><div class="section-sub">Hairy Brown Eye · Nick Johnston</div></div>
@@ -2614,6 +2687,7 @@
       { id: 'timmons', label: 'Andy Timmons' },
     ]},
     ampdb:   { label: 'Amp DB',  items: [
+      { id: 'amp_dictionary',    label: '📖 모델 사전' },
       { id: 'amp_friedman_hbe',  label: 'Friedman HBE' },
       { id: 'amp_dirty_shirley', label: 'Dirty Shirley' },
       { id: 'amp_two_stone',     label: 'Two Stone J35' },
@@ -2667,7 +2741,7 @@
   const BNAV_GROUPS = {
     system:  ['gear','ir_library','fx_guide','guide'],
     artists: ['nick','mayer','timmons'],
-    ampdb:   ['amp_friedman_hbe','amp_dirty_shirley','amp_two_stone','amp_deluxe_verb','amp_tx_star_clean','amp_tx_star_lead'],
+    ampdb:   ['amp_dictionary','amp_friedman_hbe','amp_dirty_shirley','amp_two_stone','amp_deluxe_verb','amp_tx_star_clean','amp_tx_star_lead'],
     fxdb:    ['fx_comp','fx_drive','fx_delay','fx_reverb'],
   };
 
@@ -3435,6 +3509,7 @@
     document.getElementById(id).classList.add('active');
     if (el) el.classList.add('active');
     if (id.startsWith('amp_')) updateUrlBox(id.replace('amp_', ''));
+    if (id === 'amp_dictionary') loadAmpDictionary();
     // 모바일에서 사이드바 닫기
     if (window.innerWidth <= 768) closeSidebar();
   }
@@ -3445,6 +3520,193 @@
     // 모든 amp-tab-content 비활성화
     btn.parentElement.parentElement.querySelectorAll('.amp-tab-content').forEach(c => c.classList.remove('active'));
     document.getElementById(`tab_${tab}_${amp}`).classList.add('active');
+  }
+
+  /* ── AMP MODEL DICTIONARY (amps.json lazy fetch) ── */
+  let ampDictData = null;
+  let ampDictLoading = false;
+  let ampDictDeviceFilter = 'all';
+  const AMPDICT_TUBE_CODES = ['6L6','EL34','EL84','6V6','KT88','KT66','6550','EL86','6BQ5'];
+  const AMPDICT_SPEC_LABELS = {
+    power: '파워', master_volume: '마스터 볼륨', negative_feedback: '네거티브 피드백',
+    preamp_tubes: '프리앰프 진공관', power_amp_tubes: '파워앰프 진공관', tonestack_location: '톤스택 위치',
+  };
+  const AMPDICT_PRESET_MAP = {
+    'friedman hbe': 'amp_friedman_hbe',
+    'dirty shirley': 'amp_dirty_shirley',
+    'two stone j35': 'amp_two_stone',
+    'deluxe verb nrm': 'amp_deluxe_verb',
+    'tx star clean': 'amp_tx_star_clean',
+    'tx star lead': 'amp_tx_star_lead',
+  };
+
+  function loadAmpDictionary() {
+    if (ampDictData || ampDictLoading) return;
+    ampDictLoading = true;
+    fetch('amps.json')
+      .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+      .then(json => {
+        ampDictData = json;
+        ampDictLoading = false;
+        document.getElementById('ampdict-loading').style.display = 'none';
+        document.getElementById('ampdict-body').style.display = 'block';
+        buildAmpDictFilterOptions();
+        renderAmpDictList();
+        renderAmpDictMeta();
+      })
+      .catch(err => {
+        ampDictLoading = false;
+        document.getElementById('ampdict-loading').style.display = 'none';
+        const errEl = document.getElementById('ampdict-error');
+        errEl.textContent = '데이터를 불러오지 못했습니다 (' + err.message + ')';
+        errEl.style.display = 'block';
+      });
+  }
+
+  function ampDictNorm(s) { return (s || '').toLowerCase(); }
+
+  function ampDictPowerTubeTags(amp) {
+    const text = [amp.wiki?.power_tubes, amp.yek?.specs?.power_amp_tubes].filter(Boolean).join(' ').toUpperCase();
+    return AMPDICT_TUBE_CODES.filter(code => text.includes(code));
+  }
+
+  function ampDictEsc(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[c]));
+  }
+
+  function buildAmpDictFilterOptions() {
+    const amps = ampDictData.amps || [];
+    const brands = new Set();
+    const tubes = new Set();
+    amps.forEach(a => {
+      brands.add(a.brand || '미분류');
+      ampDictPowerTubeTags(a).forEach(t => tubes.add(t));
+    });
+    const brandSel = document.getElementById('ampdict-brand');
+    Array.from(brands).sort().forEach(b => {
+      const opt = document.createElement('option');
+      opt.value = b; opt.textContent = b;
+      brandSel.appendChild(opt);
+    });
+    const powerSel = document.getElementById('ampdict-power');
+    AMPDICT_TUBE_CODES.filter(t => tubes.has(t)).forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t; opt.textContent = t;
+      powerSel.appendChild(opt);
+    });
+  }
+
+  function setAmpDeviceFilter(device, btn) {
+    ampDictDeviceFilter = device;
+    document.querySelectorAll('#ampdict-device-filters .ampdict-chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderAmpDictList();
+  }
+
+  function getAmpDictFiltered() {
+    const amps = ampDictData?.amps || [];
+    const q = ampDictNorm(document.getElementById('ampdict-search').value);
+    const brand = document.getElementById('ampdict-brand').value;
+    const power = document.getElementById('ampdict-power').value;
+    return amps.filter(a => {
+      if (ampDictDeviceFilter !== 'all' && !a.devices?.[ampDictDeviceFilter]) return false;
+      if (brand && (a.brand || '미분류') !== brand) return false;
+      if (power && !ampDictPowerTubeTags(a).includes(power)) return false;
+      if (q) {
+        const hay = ampDictNorm(a.model) + ' ' + ampDictNorm(a.based_on) + ' ' + ampDictNorm(a.description);
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }
+
+  function renderAmpDictList() {
+    if (!ampDictData) return;
+    const filtered = getAmpDictFiltered();
+    const total = (ampDictData.amps || []).length;
+    document.getElementById('ampdict-count').textContent = `${total}개 중 ${filtered.length}개`;
+    document.getElementById('ampdict-list').innerHTML =
+      filtered.map(ampDictItemHtml).join('') || '<div class="no-params">일치하는 모델이 없습니다</div>';
+  }
+
+  function ampDictItemHtml(amp) {
+    const aresOnly = !!(amp.devices?.axefx2 && !amp.devices?.ax8);
+    const brand = amp.brand || '미분류';
+    const tubes = ampDictPowerTubeTags(amp);
+    const badges = [];
+    if (amp.devices?.ax8) badges.push('<span class="device-badge ax8">AX8</span>');
+    if (amp.devices?.axefx2) badges.push('<span class="device-badge fx2">Axe-Fx II XL+</span>');
+    return `
+    <div class="ampdict-item${aresOnly ? ' ares-only' : ''}">
+      <div class="ampdict-item-head" onclick="toggleAmpDictItem(this)">
+        <div>
+          <div class="ampdict-item-name">${ampDictEsc(amp.model)}${aresOnly ? ' <span class="ampdict-ares-tag">ARES 전용</span>' : ''}</div>
+          ${amp.based_on ? `<div class="ampdict-item-based">${ampDictEsc(amp.based_on)}</div>` : ''}
+        </div>
+        <span class="ampdict-item-brand">${ampDictEsc(brand)}</span>
+        ${badges.join('')}
+        ${tubes.length ? `<span class="ampdict-item-power">${tubes.join(' / ')}</span>` : ''}
+      </div>
+      <div class="ampdict-item-detail">${ampDictDetailHtml(amp)}</div>
+    </div>`;
+  }
+
+  function toggleAmpDictItem(headEl) {
+    headEl.parentElement.classList.toggle('open');
+  }
+
+  function ampDictGoToPreset(pageId) {
+    const items = NAV_GROUPS[currentGroup]?.items || [];
+    const idx = items.findIndex(it => it.id === pageId);
+    const subNav = document.getElementById('subNav');
+    if (idx >= 0 && subNav?.children[idx]) subNav.children[idx].click();
+    else showPage(pageId, null);
+  }
+
+  function ampDictParentNote(section) {
+    if (section?.match_type !== 'parent') return '';
+    return ` <span class="ampdict-parent-note">↳ 상위 앰프 "${ampDictEsc(section.parent_of)}" 기준 해설 — 이 채널 전용 설명 아님</span>`;
+  }
+
+  function ampDictDetailHtml(amp) {
+    const parts = [];
+    const yekNote = ampDictParentNote(amp.yek);
+    const wikiNote = ampDictParentNote(amp.wiki);
+    if (amp.description) parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">설명</div>${ampDictEsc(amp.description)}</div>`);
+    if (amp.yek?.synopsis) parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">개요${yekNote}</div>${ampDictEsc(amp.yek.synopsis)}</div>`);
+    if (amp.yek?.tips) parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">세팅 팁${yekNote}</div><div class="ampdict-tips">${ampDictEsc(amp.yek.tips)}</div></div>`);
+    if (amp.wiki?.controls) parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">노브 구성${wikiNote}</div>${ampDictEsc(amp.wiki.controls)}</div>`);
+    const cab = [amp.wiki?.cab_original, amp.wiki?.cab_dynacab].filter(Boolean).join(' · ');
+    if (cab) parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">캐비넷 · DynaCab${wikiNote}</div>${ampDictEsc(cab)}</div>`);
+    if (amp.yek?.specs) {
+      const rows = Object.entries(amp.yek.specs).filter(([,v]) => v);
+      if (rows.length) {
+        const rowsHtml = rows.map(([k,v]) => `<div class="info-row"><div class="info-key">${ampDictEsc(AMPDICT_SPEC_LABELS[k] || k)}</div><div class="info-val">${ampDictEsc(v)}</div></div>`).join('');
+        parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">스펙${yekNote}</div><div class="info-block">${rowsHtml}</div></div>`);
+      }
+    }
+    if (amp.wiki?.dev_notes?.length) {
+      parts.push(`<div class="ampdict-detail-block"><div class="ampdict-detail-title">개발자 코멘트${wikiNote}</div>${amp.wiki.dev_notes.map(n => `<div>"${ampDictEsc(n)}"</div>`).join('')}</div>`);
+    }
+    const presetKey = AMPDICT_PRESET_MAP[ampDictNorm(amp.model)];
+    if (presetKey) parts.push(`<a class="ampdict-preset-link" onclick="ampDictGoToPreset('${presetKey}')">→ 기존 프리셋 페이지로 이동</a>`);
+    const src = [];
+    if (amp.yek?.page_printed) src.push(`Yek 가이드 p.${amp.yek.page_printed}`);
+    if (amp.wiki?.matched_heading) src.push(`Wiki: ${amp.wiki.matched_heading}`);
+    if (src.length) parts.push(`<div class="ampdict-source">출처: ${ampDictEsc(src.join(' · '))}</div>`);
+    return parts.join('') || '<div class="ampdict-source">상세 정보 없음</div>';
+  }
+
+  function renderAmpDictMeta() {
+    const meta = ampDictData.meta || {};
+    if (meta.caveats?.length) {
+      document.getElementById('ampdict-caveats').innerHTML = '<strong>⚠️ 데이터 한계</strong><br>' + meta.caveats.map(ampDictEsc).join('<br>');
+    }
+    if (meta.sources?.length) {
+      document.getElementById('ampdict-sources').innerHTML = '<strong>출처</strong><br>' +
+        meta.sources.map(s => ampDictEsc([s.name, s.detail].filter(Boolean).join(' — '))).join('<br>');
+    }
   }
 
   /* ── FX PARAM DATA (Axe-Fx II XL+ 실측값) ── */
